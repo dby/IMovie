@@ -9,7 +9,7 @@
 import Foundation
 import Moya
 
-public enum APIConstant {
+public enum IMovieService {
     
     /// 获得榜豆瓣榜单前250的电影
     case movie_top_250(Int)
@@ -18,7 +18,25 @@ public enum APIConstant {
     
 }
 
-extension APIConstant: TargetType {
+let endpointClosure = { (target: IMovieService) -> Endpoint<IMovieService> in
+    
+    var URL = target.baseURL.appendingPathComponent(target.path).absoluteString
+    let endpoint = Endpoint<IMovieService>(URL: URL,
+                                           sampleResponseClosure: {.networkResponse(200, target.sampleData)},
+                                           method: target.method,
+                                           parameters: target.parameters)
+    
+    return endpoint.endpointByAddingHTTPHeaderFields(["Host": "frodo.douban.com",
+                                                      "Accept": "*/*",
+                                                      "If-None-Match": "W/\"42a017ab004ecdfb200a45bd5d61a5c5\"",
+                                                      "Cookie": "bid=RN2KdUxJiao",
+                                                      "User-Agent": "api-client/0.1.3 com.douban.frodo/4.7.0 iOS/10.1.1 iPhone6,2",
+                                                      "Accept-Language": "zh-cn"])
+}
+
+let iMovieProvider: MoyaProvider<IMovieService> = MoyaProvider<IMovieService>(endpointClosure: endpointClosure)
+
+extension IMovieService: TargetType {
     public var task: Task {
         return .request;
     }
@@ -56,7 +74,7 @@ extension APIConstant: TargetType {
     public var path: String {
         switch self {
         case .movie_top_250(_):
-            return "movie_top250/items?"
+            return "movie_top250/items"
         default:
             return ""
         }
