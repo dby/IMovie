@@ -15,7 +15,7 @@ struct UIConstant {
     static let SCREEN_HEIGHT: CGFloat = UIScreen.main.bounds.height
     
     // 海报宽、高
-    static let IMAGE_WIDTH = (SCREEN_WIDTH - 50) / 2
+    static let IMAGE_WIDTH = (SCREEN_WIDTH - 75) / 2
     static let IMAGE_HEIGHT = IMAGE_WIDTH * 2993.0 / 2000.0
     
 }

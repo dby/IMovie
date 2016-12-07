@@ -24,6 +24,7 @@
 		43AD2ECB1DF460B90073C26E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD2ECA1DF460B90073C26E /* Constant.swift */; };
 		43AD2ECD1DF460D90073C26E /* IMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD2ECC1DF460D90073C26E /* IMovieService.swift */; };
 		43AD2ED11DF469900073C26E /* IMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD2ED01DF469900073C26E /* IMovie.swift */; };
+		43B3D6181DF862EF00789A9E /* UIImageView+iMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3D6171DF862EF00789A9E /* UIImageView+iMovie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		43AD2ECA1DF460B90073C26E /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constant.swift; path = Constants/Constant.swift; sourceTree = "<group>"; };
 		43AD2ECC1DF460D90073C26E /* IMovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMovieService.swift; sourceTree = "<group>"; };
 		43AD2ED01DF469900073C26E /* IMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMovie.swift; path = Services/IMovie.swift; sourceTree = "<group>"; };
+		43B3D6171DF862EF00789A9E /* UIImageView+iMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImageView+iMovie.swift"; path = "Extension/UIImageView+iMovie.swift"; sourceTree = "<group>"; };
+		43B3D6191DF8640400789A9E /* iMovie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iMovie-Bridging-Header.h"; sourceTree = "<group>"; };
 		ADCE2CC35F35FE9B74E0F4FE /* Pods_iMovie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMovie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,6 +145,7 @@
 				433864A11DF3F8D7000F58E3 /* Assets.xcassets */,
 				433864A31DF3F8D7000F58E3 /* LaunchScreen.storyboard */,
 				433864A61DF3F8D7000F58E3 /* Info.plist */,
+				43B3D6191DF8640400789A9E /* iMovie-Bridging-Header.h */,
 			);
 			path = iMovie;
 			sourceTree = "<group>";
@@ -189,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				43AA926E1DF7100400102486 /* Reusable.swift */,
+				43B3D6171DF862EF00789A9E /* UIImageView+iMovie.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -475,6 +480,7 @@
 				4338649B1DF3F8D7000F58E3 /* AppDelegate.swift in Sources */,
 				43AA92661DF6E56200102486 /* FilmController.swift in Sources */,
 				43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */,
+				43B3D6181DF862EF00789A9E /* UIImageView+iMovie.swift in Sources */,
 				43AA92611DF6E00D00102486 /* SearchController.swift in Sources */,
 				43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */,
 				43AD2ECB1DF460B90073C26E /* Constant.swift in Sources */,
@@ -543,6 +549,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -593,6 +600,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -622,12 +630,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 33245A8CD45427BE5AAA5CC9 /* Pods-iMovie.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = FT3RY85KVZ;
 				INFOPLIST_FILE = iMovie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iMovie/iMovie-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -636,12 +646,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1C41A368BF90047E16353DD7 /* Pods-iMovie.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = FT3RY85KVZ;
 				INFOPLIST_FILE = iMovie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iMovie/iMovie-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
