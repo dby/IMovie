@@ -19,6 +19,8 @@
 		43AA92661DF6E56200102486 /* FilmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA92651DF6E56200102486 /* FilmController.swift */; };
 		43AA92681DF6E58500102486 /* CinecismController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA92671DF6E58500102486 /* CinecismController.swift */; };
 		43AA926A1DF6E5A700102486 /* BoxOfficeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA92691DF6E5A700102486 /* BoxOfficeController.swift */; };
+		43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA926C1DF70DAE00102486 /* MovieViewCell.swift */; };
+		43AA926F1DF7100400102486 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA926E1DF7100400102486 /* Reusable.swift */; };
 		43AD2ECB1DF460B90073C26E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD2ECA1DF460B90073C26E /* Constant.swift */; };
 		43AD2ECD1DF460D90073C26E /* IMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD2ECC1DF460D90073C26E /* IMovieService.swift */; };
 		43AD2ED11DF469900073C26E /* IMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD2ED01DF469900073C26E /* IMovie.swift */; };
@@ -61,6 +63,8 @@
 		43AA92651DF6E56200102486 /* FilmController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilmController.swift; path = Controllers/FilmController/FilmController.swift; sourceTree = "<group>"; };
 		43AA92671DF6E58500102486 /* CinecismController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CinecismController.swift; path = Controllers/CinecismController/CinecismController.swift; sourceTree = "<group>"; };
 		43AA92691DF6E5A700102486 /* BoxOfficeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoxOfficeController.swift; path = Controllers/BoxOfficeController/BoxOfficeController.swift; sourceTree = "<group>"; };
+		43AA926C1DF70DAE00102486 /* MovieViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieViewCell.swift; path = Views/FilmController/MovieViewCell.swift; sourceTree = "<group>"; };
+		43AA926E1DF7100400102486 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reusable.swift; path = Extension/Reusable.swift; sourceTree = "<group>"; };
 		43AD2ECA1DF460B90073C26E /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constant.swift; path = Constants/Constant.swift; sourceTree = "<group>"; };
 		43AD2ECC1DF460D90073C26E /* IMovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMovieService.swift; sourceTree = "<group>"; };
 		43AD2ED01DF469900073C26E /* IMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMovie.swift; path = Services/IMovie.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 		43480B631DF40F1700169DD7 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				43AA926E1DF7100400102486 /* Reusable.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 		43480B671DF40F5100169DD7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43AA926B1DF6F54600102486 /* FilmController */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -254,6 +260,14 @@
 			isa = PBXGroup;
 			children = (
 				43AA92651DF6E56200102486 /* FilmController.swift */,
+			);
+			name = FilmController;
+			sourceTree = "<group>";
+		};
+		43AA926B1DF6F54600102486 /* FilmController */ = {
+			isa = PBXGroup;
+			children = (
+				43AA926C1DF70DAE00102486 /* MovieViewCell.swift */,
 			);
 			name = FilmController;
 			sourceTree = "<group>";
@@ -453,12 +467,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43AA926F1DF7100400102486 /* Reusable.swift in Sources */,
 				43AD2ECD1DF460D90073C26E /* IMovieService.swift in Sources */,
 				43AA926A1DF6E5A700102486 /* BoxOfficeController.swift in Sources */,
 				43AA925E1DF659D700102486 /* MovieModel.swift in Sources */,
 				43AA92681DF6E58500102486 /* CinecismController.swift in Sources */,
 				4338649B1DF3F8D7000F58E3 /* AppDelegate.swift in Sources */,
 				43AA92661DF6E56200102486 /* FilmController.swift in Sources */,
+				43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */,
 				43AA92611DF6E00D00102486 /* SearchController.swift in Sources */,
 				43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */,
 				43AD2ECB1DF460B90073C26E /* Constant.swift in Sources */,
