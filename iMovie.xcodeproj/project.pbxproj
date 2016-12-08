@@ -14,6 +14,23 @@
 		433864B01DF3F8D7000F58E3 /* iMovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433864AF1DF3F8D7000F58E3 /* iMovieTests.swift */; };
 		433864BB1DF3F8D7000F58E3 /* iMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433864BA1DF3F8D7000F58E3 /* iMovieUITests.swift */; };
 		434027DA1DF8FB0C00C2D733 /* FilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027D91DF8FB0C00C2D733 /* FilmTableViewCell.swift */; };
+		434027DC1DF9327000C2D733 /* ControllerResuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027DB1DF9327000C2D733 /* ControllerResuable.swift */; };
+		434027DF1DF932EB00C2D733 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027DE1DF932EB00C2D733 /* MainHeaderView.swift */; };
+		434027E11DF9334200C2D733 /* UIFont+iMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027E01DF9334200C2D733 /* UIFont+iMovie.swift */; };
+		434027E31DF9338900C2D733 /* UIView+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027E21DF9338900C2D733 /* UIView+Frame.swift */; };
+		434027E51DF9343D00C2D733 /* PullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027E41DF9343D00C2D733 /* PullToRefreshView.swift */; };
+		434027E81DF934A300C2D733 /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027E71DF934A300C2D733 /* LoadMoreView.swift */; };
+		434027EA1DF934D900C2D733 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027E91DF934D900C2D733 /* ActivityIndicatorView.swift */; };
+		434027ED1DF9362F00C2D733 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027EC1DF9362F00C2D733 /* MenuViewController.swift */; };
+		434027F01DF936C300C2D733 /* MenuHeaaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027EF1DF936C300C2D733 /* MenuHeaaderView.swift */; };
+		434027F21DF9371400C2D733 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027F11DF9371400C2D733 /* MenuTableViewCell.swift */; };
+		434027F41DF9379800C2D733 /* MenuTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027F31DF9379800C2D733 /* MenuTabModel.swift */; };
+		434027F71DF93AB800C2D733 /* BasePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027F61DF93AB800C2D733 /* BasePageController.swift */; };
+		434027F91DF93AF500C2D733 /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027F81DF93AF500C2D733 /* BaseNavController.swift */; };
+		434028001DF93DA700C2D733 /* DINPro-Medium.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 434027FD1DF93DA700C2D733 /* DINPro-Medium.TTF */; };
+		434028011DF93DA700C2D733 /* FZLTXIHJW--GB1-0.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 434027FE1DF93DA700C2D733 /* FZLTXIHJW--GB1-0.TTF */; };
+		434028021DF93DA700C2D733 /* FZLTZCHJW--GB1-0.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 434027FF1DF93DA700C2D733 /* FZLTZCHJW--GB1-0.TTF */; };
+		434028061DF93DD000C2D733 /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 434028051DF93DD000C2D733 /* YYFPSLabel.m */; };
 		43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43480B691DF4101A00169DD7 /* MainViewController.swift */; };
 		43AA925E1DF659D700102486 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA925D1DF659D700102486 /* MovieModel.swift */; };
 		43AA92611DF6E00D00102486 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA92601DF6E00D00102486 /* SearchController.swift */; };
@@ -60,6 +77,24 @@
 		433864BA1DF3F8D7000F58E3 /* iMovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMovieUITests.swift; sourceTree = "<group>"; };
 		433864BC1DF3F8D7000F58E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		434027D91DF8FB0C00C2D733 /* FilmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilmTableViewCell.swift; path = Views/FilmController/FilmTableViewCell.swift; sourceTree = "<group>"; };
+		434027DB1DF9327000C2D733 /* ControllerResuable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllerResuable.swift; path = Extension/ControllerResuable.swift; sourceTree = "<group>"; };
+		434027DE1DF932EB00C2D733 /* MainHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainHeaderView.swift; path = Views/MainView/MainHeaderView.swift; sourceTree = "<group>"; };
+		434027E01DF9334200C2D733 /* UIFont+iMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+iMovie.swift"; path = "Extension/UIFont+iMovie.swift"; sourceTree = "<group>"; };
+		434027E21DF9338900C2D733 /* UIView+Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Frame.swift"; path = "Extension/UIView+Frame.swift"; sourceTree = "<group>"; };
+		434027E41DF9343D00C2D733 /* PullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PullToRefreshView.swift; path = Views/PullToRefresh/PullToRefreshView.swift; sourceTree = "<group>"; };
+		434027E71DF934A300C2D733 /* LoadMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadMoreView.swift; path = Views/PullToRefresh/LoadMoreView.swift; sourceTree = "<group>"; };
+		434027E91DF934D900C2D733 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityIndicatorView.swift; path = Views/PullToRefresh/ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		434027EC1DF9362F00C2D733 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = Controllers/MenuController/MenuViewController.swift; sourceTree = "<group>"; };
+		434027EF1DF936C300C2D733 /* MenuHeaaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuHeaaderView.swift; path = Views/MenuView/MenuHeaaderView.swift; sourceTree = "<group>"; };
+		434027F11DF9371400C2D733 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewCell.swift; path = Controllers/MenuController/MenuTableViewCell.swift; sourceTree = "<group>"; };
+		434027F31DF9379800C2D733 /* MenuTabModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTabModel.swift; path = Models/MenuTabModel.swift; sourceTree = "<group>"; };
+		434027F61DF93AB800C2D733 /* BasePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasePageController.swift; path = Controllers/BaseController/BasePageController.swift; sourceTree = "<group>"; };
+		434027F81DF93AF500C2D733 /* BaseNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseNavController.swift; path = Controllers/BaseController/BaseNavController.swift; sourceTree = "<group>"; };
+		434027FD1DF93DA700C2D733 /* DINPro-Medium.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DINPro-Medium.TTF"; path = "Other/Font/DINPro-Medium.TTF"; sourceTree = "<group>"; };
+		434027FE1DF93DA700C2D733 /* FZLTXIHJW--GB1-0.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FZLTXIHJW--GB1-0.TTF"; path = "Other/Font/FZLTXIHJW--GB1-0.TTF"; sourceTree = "<group>"; };
+		434027FF1DF93DA700C2D733 /* FZLTZCHJW--GB1-0.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FZLTZCHJW--GB1-0.TTF"; path = "Other/Font/FZLTZCHJW--GB1-0.TTF"; sourceTree = "<group>"; };
+		434028041DF93DD000C2D733 /* YYFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YYFPSLabel.h; path = Other/Lib/YYFPSLabel/YYFPSLabel.h; sourceTree = "<group>"; };
+		434028051DF93DD000C2D733 /* YYFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YYFPSLabel.m; path = Other/Lib/YYFPSLabel/YYFPSLabel.m; sourceTree = "<group>"; };
 		43480B691DF4101A00169DD7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainController/MainViewController.swift; sourceTree = "<group>"; };
 		43AA925D1DF659D700102486 /* MovieModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieModel.swift; path = Models/MovieModel.swift; sourceTree = "<group>"; };
 		43AA92601DF6E00D00102486 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchController.swift; path = Controllers/SearchController/SearchController.swift; sourceTree = "<group>"; };
@@ -140,6 +175,7 @@
 				43480B611DF40EF300169DD7 /* Controllers */,
 				43480B631DF40F1700169DD7 /* Extension */,
 				43480B641DF40F2800169DD7 /* Models */,
+				434027FA1DF93CF000C2D733 /* Other */,
 				43480B651DF40F3B00169DD7 /* Resources */,
 				43480B661DF40F4600169DD7 /* Services */,
 				43480B671DF40F5100169DD7 /* Views */,
@@ -170,14 +206,96 @@
 			path = iMovieUITests;
 			sourceTree = "<group>";
 		};
+		434027DD1DF932C000C2D733 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				434027DE1DF932EB00C2D733 /* MainHeaderView.swift */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		434027E61DF9348300C2D733 /* PullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				434027E41DF9343D00C2D733 /* PullToRefreshView.swift */,
+				434027E71DF934A300C2D733 /* LoadMoreView.swift */,
+				434027E91DF934D900C2D733 /* ActivityIndicatorView.swift */,
+			);
+			name = PullToRefresh;
+			sourceTree = "<group>";
+		};
+		434027EB1DF935EE00C2D733 /* MenuController */ = {
+			isa = PBXGroup;
+			children = (
+				434027EC1DF9362F00C2D733 /* MenuViewController.swift */,
+			);
+			name = MenuController;
+			sourceTree = "<group>";
+		};
+		434027EE1DF9369B00C2D733 /* MenuView */ = {
+			isa = PBXGroup;
+			children = (
+				434027EF1DF936C300C2D733 /* MenuHeaaderView.swift */,
+				434027F11DF9371400C2D733 /* MenuTableViewCell.swift */,
+			);
+			name = MenuView;
+			sourceTree = "<group>";
+		};
+		434027F51DF93A7200C2D733 /* BaseController */ = {
+			isa = PBXGroup;
+			children = (
+				434027F61DF93AB800C2D733 /* BasePageController.swift */,
+				434027F81DF93AF500C2D733 /* BaseNavController.swift */,
+			);
+			name = BaseController;
+			sourceTree = "<group>";
+		};
+		434027FA1DF93CF000C2D733 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				434027FB1DF93D2600C2D733 /* Font */,
+				434027FC1DF93D3500C2D733 /* Lib */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		434027FB1DF93D2600C2D733 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				434027FD1DF93DA700C2D733 /* DINPro-Medium.TTF */,
+				434027FE1DF93DA700C2D733 /* FZLTXIHJW--GB1-0.TTF */,
+				434027FF1DF93DA700C2D733 /* FZLTZCHJW--GB1-0.TTF */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
+		434027FC1DF93D3500C2D733 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				434028031DF93DBB00C2D733 /* YYFPSLabel */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		434028031DF93DBB00C2D733 /* YYFPSLabel */ = {
+			isa = PBXGroup;
+			children = (
+				434028041DF93DD000C2D733 /* YYFPSLabel.h */,
+				434028051DF93DD000C2D733 /* YYFPSLabel.m */,
+			);
+			name = YYFPSLabel;
+			sourceTree = "<group>";
+		};
 		43480B611DF40EF300169DD7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				434027F51DF93A7200C2D733 /* BaseController */,
 				43AA92621DF6E47C00102486 /* BoxOfficeController */,
 				43AA92631DF6E4E900102486 /* CinecismController */,
 				43AA92641DF6E52400102486 /* FilmController */,
-				43AA925F1DF6DFBE00102486 /* SearchController */,
 				43480B681DF40FD600169DD7 /* MainController */,
+				434027EB1DF935EE00C2D733 /* MenuController */,
+				43AA925F1DF6DFBE00102486 /* SearchController */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -196,6 +314,9 @@
 			children = (
 				43AA926E1DF7100400102486 /* Reusable.swift */,
 				43B3D6171DF862EF00789A9E /* UIImageView+iMovie.swift */,
+				434027DB1DF9327000C2D733 /* ControllerResuable.swift */,
+				434027E01DF9334200C2D733 /* UIFont+iMovie.swift */,
+				434027E21DF9338900C2D733 /* UIView+Frame.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -204,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				43AA925D1DF659D700102486 /* MovieModel.swift */,
+				434027F31DF9379800C2D733 /* MenuTabModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -226,6 +348,9 @@
 		43480B671DF40F5100169DD7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				434027EE1DF9369B00C2D733 /* MenuView */,
+				434027E61DF9348300C2D733 /* PullToRefresh */,
+				434027DD1DF932C000C2D733 /* MainView */,
 				43AA926B1DF6F54600102486 /* FilmController */,
 			);
 			name = Views;
@@ -402,7 +527,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				433864A51DF3F8D7000F58E3 /* LaunchScreen.storyboard in Resources */,
+				434028021DF93DA700C2D733 /* FZLTZCHJW--GB1-0.TTF in Resources */,
+				434028001DF93DA700C2D733 /* DINPro-Medium.TTF in Resources */,
 				433864A21DF3F8D7000F58E3 /* Assets.xcassets in Resources */,
+				434028011DF93DA700C2D733 /* FZLTXIHJW--GB1-0.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,18 +605,32 @@
 			files = (
 				43AA926F1DF7100400102486 /* Reusable.swift in Sources */,
 				43AD2ECD1DF460D90073C26E /* IMovieService.swift in Sources */,
+				434027F21DF9371400C2D733 /* MenuTableViewCell.swift in Sources */,
 				43AA926A1DF6E5A700102486 /* BoxOfficeController.swift in Sources */,
+				434027F91DF93AF500C2D733 /* BaseNavController.swift in Sources */,
+				434027E81DF934A300C2D733 /* LoadMoreView.swift in Sources */,
+				434027E51DF9343D00C2D733 /* PullToRefreshView.swift in Sources */,
 				43AA925E1DF659D700102486 /* MovieModel.swift in Sources */,
+				434027EA1DF934D900C2D733 /* ActivityIndicatorView.swift in Sources */,
 				43AA92681DF6E58500102486 /* CinecismController.swift in Sources */,
 				4338649B1DF3F8D7000F58E3 /* AppDelegate.swift in Sources */,
 				43AA92661DF6E56200102486 /* FilmController.swift in Sources */,
+				434027E11DF9334200C2D733 /* UIFont+iMovie.swift in Sources */,
+				434027DC1DF9327000C2D733 /* ControllerResuable.swift in Sources */,
+				434028061DF93DD000C2D733 /* YYFPSLabel.m in Sources */,
+				434027DF1DF932EB00C2D733 /* MainHeaderView.swift in Sources */,
 				43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */,
 				434027DA1DF8FB0C00C2D733 /* FilmTableViewCell.swift in Sources */,
+				434027ED1DF9362F00C2D733 /* MenuViewController.swift in Sources */,
+				434027F01DF936C300C2D733 /* MenuHeaaderView.swift in Sources */,
 				43B3D6181DF862EF00789A9E /* UIImageView+iMovie.swift in Sources */,
 				43AA92611DF6E00D00102486 /* SearchController.swift in Sources */,
+				434027E31DF9338900C2D733 /* UIView+Frame.swift in Sources */,
 				43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */,
 				43AD2ECB1DF460B90073C26E /* Constant.swift in Sources */,
+				434027F71DF93AB800C2D733 /* BasePageController.swift in Sources */,
 				43AD2ED11DF469900073C26E /* IMovie.swift in Sources */,
+				434027F41DF9379800C2D733 /* MenuTabModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

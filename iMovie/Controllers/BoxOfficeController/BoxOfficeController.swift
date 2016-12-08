@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BoxOfficeController: UIViewController {
+class BoxOfficeController: BasePageController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

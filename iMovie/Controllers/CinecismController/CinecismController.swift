@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CinecismController: UIViewController {
+class CinecismController: BasePageController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -27,14 +27,14 @@ enum CollectionViewType: Int {
     case boxOfficeList = 5
 }
 
-class FilmController: UIViewController, Reusable {
+class FilmController: BasePageController, Reusable {
 
     //MARK: --- life cycle ---
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.white
-        self.view.addSubview(tableView)
+        self.view.addSubview(filmTableView)
         
         setupLayout()
         
@@ -56,7 +56,7 @@ class FilmController: UIViewController, Reusable {
             }
             
             debugPrint("GETDATA...SUCCESS")
-            self?.tableView.reloadData()
+            self?.filmTableView.reloadData()
             
             }, errorHandle: { (error) in
                 
@@ -64,7 +64,7 @@ class FilmController: UIViewController, Reusable {
     }
     
     func setupLayout() {
-        tableView.snp.makeConstraints { (make) in
+        filmTableView.snp.makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
     }
@@ -77,13 +77,13 @@ class FilmController: UIViewController, Reusable {
     var newMovieListMovieModelArray  = Array<MovieModel>()
     var boxOfficeListMovieModelArray = Array<MovieModel>()
     
-    fileprivate lazy var tableView: UITableView = {
-        let tableView: UITableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
+    fileprivate lazy var filmTableView: UITableView = {
+        let filmTableView: UITableView = UITableView()
+        filmTableView.delegate = self
+        filmTableView.dataSource = self
+        filmTableView.separatorStyle = .none
         
-        return tableView
+        return filmTableView
     }()
 }
 
@@ -185,6 +185,7 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+/*
 extension FilmController: UIScrollViewDelegate {
     
     func nearestTargetOffsetForOffset(offset: CGPoint) -> CGPoint {
@@ -210,3 +211,4 @@ extension FilmController: UIScrollViewDelegate {
         //self.snapToNearestItem()
     }
 }
+*/
