@@ -8,10 +8,6 @@
 
 import UIKit
 
-let MovieLabelHeight: Int = 30
-let MovieRatingHeight: Int = 20
-
-
 class MovieViewCell: UICollectionViewCell, Reusable {
     
     class func cellWithCollectionView(_ collectionView: UICollectionView, indexPath: IndexPath) -> MovieViewCell {
@@ -42,47 +38,38 @@ class MovieViewCell: UICollectionViewCell, Reusable {
     func setupLayout() {
         moviePoster.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView)
-            make.left.equalTo(self.contentView).offset(10)
-            make.height.equalTo(UIConstant.IMAGE_HEIGHT)
-            make.width.equalTo(UIConstant.IMAGE_WIDTH)
+            make.left.equalTo(self.contentView)
+            make.height.equalTo(MovieConstant.IMAGE_HEIGHT)
+            make.width.equalTo(MovieConstant.IMAGE_WIDTH)
         }
         
         movieLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.contentView)
             make.top.equalTo(self.moviePoster.snp.bottom)
-            make.height.equalTo(MovieLabelHeight)
+            make.height.equalTo(MovieConstant.MovieTitleHeight)
         }
         
         ratingLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.contentView)
             make.top.equalTo(self.movieLabel.snp.bottom)
-            make.height.equalTo(MovieRatingHeight)
+            make.height.equalTo(MovieConstant.MovieRatingHeight)
         }
     }
     
     //MARK:--- Getter or Setter ---
     var model: MovieModel! {
         didSet {
-            do {
-                self.ratingLabel.text = String(model.rating.value)
-                self.movieLabel.text  = model.title
+            self.ratingLabel.text = String(model.rating.value)
+            self.movieLabel.text  = model.title
                 
-                let strs:[String] = model.cover.url.components(separatedBy: "?")
-                //let data = try Data(contentsOf: URL.init(string: strs[0])!)
-                //let newImage = UIImage(data: data)
-                
-                //self.moviePoster.image = newImage
-                
-                self.moviePoster.if_setImage(URL(string: strs[0]))
-                
-            } catch {
-                debugPrint("ERROR ERROR")
-            }
+            let strs:[String] = model.cover.url.components(separatedBy: "?")
+
+            self.moviePoster.if_setImage(URL(string: strs[0]))
         }
     }
     
     fileprivate lazy var moviePoster: UIImageView = {
-        let moviePoster: UIImageView = UIImageView(image: UIImage(named: "ic_about"))
+        let moviePoster: UIImageView = UIImageView()
         moviePoster.backgroundColor = UIColor.cyan
         return moviePoster
     }()

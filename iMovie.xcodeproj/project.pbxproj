@@ -13,6 +13,7 @@
 		433864A51DF3F8D7000F58E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 433864A31DF3F8D7000F58E3 /* LaunchScreen.storyboard */; };
 		433864B01DF3F8D7000F58E3 /* iMovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433864AF1DF3F8D7000F58E3 /* iMovieTests.swift */; };
 		433864BB1DF3F8D7000F58E3 /* iMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433864BA1DF3F8D7000F58E3 /* iMovieUITests.swift */; };
+		434027DA1DF8FB0C00C2D733 /* FilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027D91DF8FB0C00C2D733 /* FilmTableViewCell.swift */; };
 		43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43480B691DF4101A00169DD7 /* MainViewController.swift */; };
 		43AA925E1DF659D700102486 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA925D1DF659D700102486 /* MovieModel.swift */; };
 		43AA92611DF6E00D00102486 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA92601DF6E00D00102486 /* SearchController.swift */; };
@@ -58,6 +59,7 @@
 		433864B61DF3F8D7000F58E3 /* iMovieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iMovieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		433864BA1DF3F8D7000F58E3 /* iMovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMovieUITests.swift; sourceTree = "<group>"; };
 		433864BC1DF3F8D7000F58E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		434027D91DF8FB0C00C2D733 /* FilmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilmTableViewCell.swift; path = Views/FilmController/FilmTableViewCell.swift; sourceTree = "<group>"; };
 		43480B691DF4101A00169DD7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainController/MainViewController.swift; sourceTree = "<group>"; };
 		43AA925D1DF659D700102486 /* MovieModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieModel.swift; path = Models/MovieModel.swift; sourceTree = "<group>"; };
 		43AA92601DF6E00D00102486 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchController.swift; path = Controllers/SearchController/SearchController.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				43AA926C1DF70DAE00102486 /* MovieViewCell.swift */,
+				434027D91DF8FB0C00C2D733 /* FilmTableViewCell.swift */,
 			);
 			name = FilmController;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				4338649B1DF3F8D7000F58E3 /* AppDelegate.swift in Sources */,
 				43AA92661DF6E56200102486 /* FilmController.swift in Sources */,
 				43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */,
+				434027DA1DF8FB0C00C2D733 /* FilmTableViewCell.swift in Sources */,
 				43B3D6181DF862EF00789A9E /* UIImageView+iMovie.swift in Sources */,
 				43AA92611DF6E00D00102486 /* SearchController.swift in Sources */,
 				43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */,

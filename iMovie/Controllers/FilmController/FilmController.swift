@@ -13,10 +13,18 @@ let BUBBLE_DIAMETER: CGFloat = 60.0
 let BUBBLE_PADDING: CGFloat = 10.0
 
 enum CollectionViewType: Int {
-    // 豆瓣电影前250名
-    case Top250  = 1
-    case NowHotShow = 2
-    case SoonShow = 3
+    // 正在热映
+    case NowHotShow = 0
+    // 即将上映
+    case SoonShow = 1
+    // 豆瓣口碑榜前250
+    case Top250  = 2
+    // 本周口碑榜
+    case praiseList = 3
+    // 新片榜
+    case newMovieList = 4
+    // 票房榜
+    case boxOfficeList = 5
 }
 
 class FilmController: UIViewController, Reusable {
@@ -39,16 +47,16 @@ class FilmController: UIViewController, Reusable {
         IMovie.shareInstance.getMovieTop250(target: IMovieService.movie_top_250(num), successHandle: { [weak self] (data) in
             
             for item in data.subject_collection_items {
+                self?.newMovieListMovieModelArray.append(item)
+                self?.soonShowMovieModelArray.append(item)
                 self?.top250MovieModelArray.append(item)
+                self?.praiseListMovieModelArray.append(item)
+                self?.newMovieListMovieModelArray.append(item)
+                self?.boxOfficeListMovieModelArray.append(item)
             }
             
+            debugPrint("GETDATA...SUCCESS")
             self?.tableView.reloadData()
-            self?.nowHotShowCollectionView.reloadData()
-            self?.soonShowCollectionView.reloadData()
-            self?.top250CollectionView.reloadData()
-            self?.praiseListWeek.reloadData()
-            self?.newMovieListCollectionView.reloadData()
-            self?.boxOfficeListCollectionView.reloadData()
             
             }, errorHandle: { (error) in
                 
@@ -62,134 +70,41 @@ class FilmController: UIViewController, Reusable {
     }
     
     //MARK: --- Getter and Setter ---
-    
-    var top250MovieModelArray = Array<MovieModel>()
+    var nowHotShowMovieModelArray = Array<MovieModel>()
+    var soonShowMovieModelArray = Array<MovieModel>()
+    var top250MovieModelArray   = Array<MovieModel>()
+    var praiseListMovieModelArray = Array<MovieModel>()
+    var newMovieListMovieModelArray  = Array<MovieModel>()
+    var boxOfficeListMovieModelArray = Array<MovieModel>()
     
     fileprivate lazy var tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         
         return tableView
     }()
-    
-    /// 正在热映 CollectionView
-    fileprivate lazy var nowHotShowCollectionView: UICollectionView = {
-        
-        var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let nowHotShowCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        nowHotShowCollectionView.bounces = false
-        nowHotShowCollectionView.delegate = self
-        nowHotShowCollectionView.dataSource = self
-        nowHotShowCollectionView.tag = CollectionViewType.NowHotShow.rawValue
-        nowHotShowCollectionView.isPagingEnabled = false
-        nowHotShowCollectionView.backgroundColor = UIColor.white
-        
-        return nowHotShowCollectionView
-    }()
-    
-    /// 即将上映 CollectionView
-    fileprivate lazy var soonShowCollectionView: UICollectionView = {
-        
-        var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let soonShowCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        soonShowCollectionView.bounces = false
-        soonShowCollectionView.delegate = self
-        soonShowCollectionView.dataSource = self
-        soonShowCollectionView.tag = CollectionViewType.NowHotShow.rawValue
-        soonShowCollectionView.isPagingEnabled = false
-        soonShowCollectionView.backgroundColor = UIColor.white
-        
-        return soonShowCollectionView
-
-    }()
-    
-    /// 豆瓣口碑榜250名 CollectionView
-    fileprivate lazy var top250CollectionView: UICollectionView = {
-        
-        var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let top250CollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        top250CollectionView.bounces = false
-        top250CollectionView.delegate = self
-        top250CollectionView.dataSource = self
-        top250CollectionView.tag = CollectionViewType.Top250.rawValue
-        top250CollectionView.isPagingEnabled = false
-        top250CollectionView.backgroundColor = UIColor.white
-        
-        return top250CollectionView
-    }()
-    
-    /// 本周口碑榜 CollectionView
-    fileprivate lazy var praiseListWeek: UICollectionView = {
-        var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let praiseListWeek: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        praiseListWeek.bounces = false
-        praiseListWeek.delegate = self
-        praiseListWeek.dataSource = self
-        praiseListWeek.tag = CollectionViewType.Top250.rawValue
-        praiseListWeek.isPagingEnabled = false
-        praiseListWeek.backgroundColor = UIColor.white
-        
-        return praiseListWeek
-    }()
-    
-    /// 新片榜 CollectionView
-    fileprivate lazy var newMovieListCollectionView: UICollectionView = {
-        var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let newMovieListCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        newMovieListCollectionView.bounces = false
-        newMovieListCollectionView.delegate = self
-        newMovieListCollectionView.dataSource = self
-        newMovieListCollectionView.tag = CollectionViewType.Top250.rawValue
-        newMovieListCollectionView.isPagingEnabled = false
-        newMovieListCollectionView.backgroundColor = UIColor.white
-        
-        return newMovieListCollectionView
-    }()
-
-    /// 本周票房榜 CollectionView
-    fileprivate lazy var boxOfficeListCollectionView: UICollectionView = {
-        var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let boxOfficeListCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        boxOfficeListCollectionView.bounces = false
-        boxOfficeListCollectionView.delegate = self
-        boxOfficeListCollectionView.dataSource = self
-        boxOfficeListCollectionView.tag = CollectionViewType.Top250.rawValue
-        boxOfficeListCollectionView.isPagingEnabled = false
-        boxOfficeListCollectionView.backgroundColor = UIColor.white
-        
-        return boxOfficeListCollectionView
-    }()
-    
 }
 
 extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if (collectionView.tag == CollectionViewType.Top250.rawValue) {
-            // 最多显示6个item
-            return top250MovieModelArray.count > 6 ? 6 : top250MovieModelArray.count
-        } else if (collectionView.tag == CollectionViewType.NowHotShow.rawValue) {
-            
+        if (collectionView.tag == CollectionViewType.NowHotShow.rawValue) {
+            return newMovieListMovieModelArray.count > 6 ? 6 : newMovieListMovieModelArray.count
         } else if (collectionView.tag == CollectionViewType.SoonShow.rawValue) {
-            
-        } else {
-            
+            return soonShowMovieModelArray.count > 6 ? 6 : soonShowMovieModelArray.count
+        } else if (collectionView.tag == CollectionViewType.Top250.rawValue) {
+            return top250MovieModelArray.count > 6 ? 6 : top250MovieModelArray.count
+        } else if (collectionView.tag == CollectionViewType.praiseList.rawValue) {
+            return praiseListMovieModelArray.count > 6 ? 6 : praiseListMovieModelArray.count
+        } else if (collectionView.tag == CollectionViewType.newMovieList.rawValue) {
+            return newMovieListMovieModelArray.count > 6 ? 6 : newMovieListMovieModelArray.count
+        } else if (collectionView.tag == CollectionViewType.boxOfficeList.rawValue) {
+            return boxOfficeListMovieModelArray.count > 6 ? 6 : boxOfficeListMovieModelArray.count
         }
         
-        return top250MovieModelArray.count > 6 ? 6 : top250MovieModelArray.count
+        return 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -207,7 +122,8 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIConstant.IMAGE_WIDTH, height: UIConstant.IMAGE_HEIGHT)
+        let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.MovieTitleHeight + MovieConstant.MovieRatingHeight
+        return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
     }
 }
 
@@ -216,71 +132,50 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            
-        } else if indexPath.row == 1 {
         
-        } else if indexPath.row == 2 {
-            // 豆瓣Top250
-            return UIConstant.IMAGE_HEIGHT + 100
-            
-        } else if indexPath.row == 3 {
-            
-        } else if indexPath.row == 4 {
-            
-        } else if indexPath.row == 5 {
-            
-        } else if indexPath.row == 6 {
-            
+        if indexPath.row == 6 {
+            return 0
+        } else {
+            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.MovieTitleHeight + MovieConstant.MovieRatingHeight + MovieConstant.MovieTitleHeight
+
+            return height
         }
-        
-        return UIConstant.IMAGE_HEIGHT + 100
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "FilmTableViewIdentifier") as UITableViewCell?
-        if (cell == nil) {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "FilmTableViewIdentifier")
+        let cell: FilmTableViewCell = FilmTableViewCell.cellWithTableView(tableView)
+        cell.dataCollectionView.delegate = self
+        cell.dataCollectionView.dataSource = self
+        
+        switch indexPath.row {
+        case 0:
+            cell.titleLabel.text = "正在热映的电影"
+            break
+        case 1:
+            cell.titleLabel.text = "即将上映的电影"
+            break
+        case 2:
+            cell.titleLabel.text = "TOP250电影"
+            break
+        case 3:
+            cell.titleLabel.text = "本周口碑榜"
+            break
+        case 4:
+            cell.titleLabel.text = "新片榜"
+            break
+        case 5:
+            cell.titleLabel.text = "本周票房榜"
+            break
+        case 6:
+            break
+        default:
+            break
         }
         
-        if (indexPath.row == 0) {
-            // 正在上映
-            nowHotShowCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: "MovieViewCell")
-            cell?.contentView.addSubview(nowHotShowCollectionView)
-            nowHotShowCollectionView.frame = (cell?.contentView.frame)!
-
-        } else if (indexPath.row == 1) {
-            // 即将上映
-            soonShowCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: "MovieViewCell")
-            cell?.contentView.addSubview(soonShowCollectionView)
-            soonShowCollectionView.frame = (cell?.contentView.frame)!
-        } else if (indexPath.row == 2) {
-            // 豆瓣Top250
-            top250CollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: "MovieViewCell")
-            cell?.contentView.addSubview(self.top250CollectionView)
-            self.top250CollectionView.frame = (cell?.contentView.frame)!
-        } else if (indexPath.row == 3) {
-            // 本周口碑榜
-            praiseListWeek.register(MovieViewCell.self, forCellWithReuseIdentifier: "MovieViewCell")
-            cell?.contentView.addSubview(self.praiseListWeek)
-            self.praiseListWeek.frame = (cell?.contentView.frame)!
-        } else if (indexPath.row == 4) {
-            // 新片榜
-            newMovieListCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: "MovieViewCell")
-            cell?.contentView.addSubview(self.newMovieListCollectionView)
-            self.newMovieListCollectionView.frame = (cell?.contentView.frame)!
-
-        } else if (indexPath.row == 5) {
-            // 票房榜
-            boxOfficeListCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: "MovieViewCell")
-            cell?.contentView.addSubview(self.boxOfficeListCollectionView)
-            self.boxOfficeListCollectionView.frame = (cell?.contentView.frame)!
-
-        } else if (indexPath.row == 6) {
-            // 推荐
-        }
+        cell.tag = indexPath.row
+        cell.dataCollectionView.reloadData()
         
-        return cell!
+        return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -301,8 +196,8 @@ extension FilmController: UIScrollViewDelegate {
     }
     
     func snapToNearestItem() {
-        let targetOffset: CGPoint = self.nearestTargetOffsetForOffset(offset: self.top250CollectionView.contentOffset)
-        self.top250CollectionView.setContentOffset(targetOffset, animated: true)
+        //let targetOffset: CGPoint = self.nearestTargetOffsetForOffset(offset: self.top250CollectionView.contentOffset)
+        //self.top250CollectionView.setContentOffset(targetOffset, animated: true)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
