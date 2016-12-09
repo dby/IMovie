@@ -13,6 +13,7 @@
 		433864A51DF3F8D7000F58E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 433864A31DF3F8D7000F58E3 /* LaunchScreen.storyboard */; };
 		433864B01DF3F8D7000F58E3 /* iMovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433864AF1DF3F8D7000F58E3 /* iMovieTests.swift */; };
 		433864BB1DF3F8D7000F58E3 /* iMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433864BA1DF3F8D7000F58E3 /* iMovieUITests.swift */; };
+		433E1E361DFA505000D8E190 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */; };
 		434027DA1DF8FB0C00C2D733 /* FilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027D91DF8FB0C00C2D733 /* FilmTableViewCell.swift */; };
 		434027DC1DF9327000C2D733 /* ControllerResuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027DB1DF9327000C2D733 /* ControllerResuable.swift */; };
 		434027DF1DF932EB00C2D733 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027DE1DF932EB00C2D733 /* MainHeaderView.swift */; };
@@ -76,6 +77,7 @@
 		433864B61DF3F8D7000F58E3 /* iMovieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iMovieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		433864BA1DF3F8D7000F58E3 /* iMovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMovieUITests.swift; sourceTree = "<group>"; };
 		433864BC1DF3F8D7000F58E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCollectionCell.swift; path = Views/FilmController/ImageCollectionCell.swift; sourceTree = "<group>"; };
 		434027D91DF8FB0C00C2D733 /* FilmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilmTableViewCell.swift; path = Views/FilmController/FilmTableViewCell.swift; sourceTree = "<group>"; };
 		434027DB1DF9327000C2D733 /* ControllerResuable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllerResuable.swift; path = Extension/ControllerResuable.swift; sourceTree = "<group>"; };
 		434027DE1DF932EB00C2D733 /* MainHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainHeaderView.swift; path = Views/MainView/MainHeaderView.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			children = (
 				43AA926C1DF70DAE00102486 /* MovieViewCell.swift */,
 				434027D91DF8FB0C00C2D733 /* FilmTableViewCell.swift */,
+				433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */,
 			);
 			name = FilmController;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				43AA92661DF6E56200102486 /* FilmController.swift in Sources */,
 				434027E11DF9334200C2D733 /* UIFont+iMovie.swift in Sources */,
 				434027DC1DF9327000C2D733 /* ControllerResuable.swift in Sources */,
+				433E1E361DFA505000D8E190 /* ImageCollectionCell.swift in Sources */,
 				434028061DF93DD000C2D733 /* YYFPSLabel.m in Sources */,
 				434027DF1DF932EB00C2D733 /* MainHeaderView.swift in Sources */,
 				43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */,

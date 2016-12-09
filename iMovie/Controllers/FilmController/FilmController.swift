@@ -93,7 +93,7 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
         if (collectionView.tag == CollectionViewType.NowHotShow.rawValue) {
             return newMovieListMovieModelArray.count > 6 ? 6 : newMovieListMovieModelArray.count
         } else if (collectionView.tag == CollectionViewType.SoonShow.rawValue) {
-            return soonShowMovieModelArray.count > 6 ? 6 : soonShowMovieModelArray.count
+            return soonShowMovieModelArray.count / 3
         } else if (collectionView.tag == CollectionViewType.Top250.rawValue) {
             return top250MovieModelArray.count > 6 ? 6 : top250MovieModelArray.count
         } else if (collectionView.tag == CollectionViewType.praiseList.rawValue) {
@@ -102,9 +102,9 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return newMovieListMovieModelArray.count > 6 ? 6 : newMovieListMovieModelArray.count
         } else if (collectionView.tag == CollectionViewType.boxOfficeList.rawValue) {
             return boxOfficeListMovieModelArray.count > 6 ? 6 : boxOfficeListMovieModelArray.count
+        } else {
+            return 0
         }
-        
-        return 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -116,14 +116,46 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell   = MovieViewCell.cellWithCollectionView(collectionView, indexPath: indexPath)
-        cell.model = top250MovieModelArray[indexPath.row]
-        return cell
+        if (CollectionViewType.NowHotShow.rawValue == collectionView.tag) {
+            let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num3)
+            cell.models = top250MovieModelArray
+            return cell
+        } else if (CollectionViewType.SoonShow.rawValue == collectionView.tag) {
+            let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num4)
+            cell.models = top250MovieModelArray
+            return cell
+        } else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
+            let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num6)
+            cell.models = top250MovieModelArray
+            return cell
+        } else if (CollectionViewType.praiseList.rawValue == collectionView.tag) {
+            let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num9)
+            cell.models = top250MovieModelArray
+            return cell
+        } else {
+            let cell   = MovieViewCell.cellWithCollectionView(collectionView, indexPath: indexPath)
+            cell.model = top250MovieModelArray[indexPath.row]
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
-        return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
+        if (CollectionViewType.NowHotShow.rawValue == collectionView.tag) {
+            let height = UIConstant.SCREEN_WIDTH * 2 / 3
+            return CGSize(width: UIConstant.SCREEN_WIDTH, height: height)
+        } else if (CollectionViewType.SoonShow.rawValue == collectionView.tag) {
+            let height = UIConstant.SCREEN_WIDTH * 2 / 5
+            return CGSize(width: UIConstant.SCREEN_WIDTH, height: height)
+        } else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
+            let height = UIConstant.SCREEN_WIDTH * 2 / 3
+            return CGSize(width: height, height: height)
+        } else if (CollectionViewType.praiseList.rawValue == collectionView.tag) {
+            let height = UIConstant.SCREEN_WIDTH * 3 / 6
+            return CGSize (width: height, height: height)
+        } else {
+            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
+            return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
+        }
     }
 }
 
@@ -136,7 +168,6 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 6 {
             return 0
         } else {
-            
             let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight + MovieConstant.BarHeight + MovieConstant.BottomSpace
             return height
         }
@@ -172,7 +203,7 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
             break
         }
         
-        cell.tag = indexPath.row
+        cell.dataCollectionView.tag = indexPath.row
         cell.dataCollectionView.reloadData()
         
         return cell

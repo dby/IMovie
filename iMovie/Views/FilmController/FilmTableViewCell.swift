@@ -84,7 +84,8 @@ class FilmTableViewCell: UITableViewCell, Reusable {
         let dataCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         dataCollectionView.bounces = false
         dataCollectionView.isPagingEnabled = false
-        dataCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: "MovieViewCell")
+        dataCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: String(describing: MovieViewCell.self))
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self))
         dataCollectionView.backgroundColor = UIColor.white
 
         return dataCollectionView
