@@ -62,7 +62,7 @@ protocol ScrollViewControllerReusable: ControllerReusable, PullToRefreshDataSour
 // MARK: - 返回一些下拉刷新的回调
 extension ScrollViewControllerReusable where Self: UIViewController {
     /**
-     首页，快讯，玩物志顶部标题
+     顶部标题
      */
     func titleHeaderView() -> MainHeaderView {
         return scrollViewReusableDataSource.titleHeaderView()

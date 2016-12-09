@@ -46,13 +46,13 @@ class MovieViewCell: UICollectionViewCell, Reusable {
         movieLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.contentView)
             make.top.equalTo(self.moviePoster.snp.bottom)
-            make.height.equalTo(MovieConstant.MovieTitleHeight)
+            make.height.equalTo(MovieConstant.TitleHeight)
         }
         
         ratingLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.contentView)
             make.top.equalTo(self.movieLabel.snp.bottom)
-            make.height.equalTo(MovieConstant.MovieRatingHeight)
+            make.height.equalTo(MovieConstant.RatingHeight)
         }
     }
     
@@ -70,17 +70,21 @@ class MovieViewCell: UICollectionViewCell, Reusable {
     
     fileprivate lazy var moviePoster: UIImageView = {
         let moviePoster: UIImageView = UIImageView()
-        moviePoster.backgroundColor = UIColor.cyan
+        moviePoster.contentMode = .scaleAspectFill
         return moviePoster
     }()
     
     fileprivate lazy var movieLabel: UILabel = {
         let movieLabel: UILabel = UILabel()
+        movieLabel.font = FontConstant.SYS_16
+        //movieLabel.backgroundColor = UIColor.red
         return movieLabel
     }()
     
     fileprivate lazy var ratingLabel: UILabel = {
         let ratingLabel: UILabel = UILabel()
+        ratingLabel.font = FontConstant.SYS_14
+        //ratingLabel.backgroundColor = UIColor.purple
         return ratingLabel
     }()
 }

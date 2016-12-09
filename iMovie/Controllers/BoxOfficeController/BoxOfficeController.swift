@@ -13,7 +13,7 @@ class BoxOfficeController: BasePageController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.cyan
+        self.view.backgroundColor = UIColor.white
     }
 
 }

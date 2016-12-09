@@ -122,7 +122,7 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.MovieTitleHeight + MovieConstant.MovieRatingHeight
+        let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
         return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
     }
 }
@@ -136,8 +136,8 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 6 {
             return 0
         } else {
-            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.MovieTitleHeight + MovieConstant.MovieRatingHeight + MovieConstant.MovieTitleHeight
-
+            
+            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight + MovieConstant.BarHeight + MovieConstant.BottomSpace
             return height
         }
     }
@@ -184,7 +184,6 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
         return 7
     }
 }
-
 /*
 extension FilmController: UIScrollViewDelegate {
     

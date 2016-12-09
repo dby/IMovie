@@ -27,6 +27,6 @@ extension UIFont {
      自定义字体 - 细体
      */
     class func customFont_FZLTXIHJW(fontSize size : CGFloat) -> UIFont {
-        return UIFont.systemFont(ofSize: size) //UIFont(name: "FZLanTingHeiS-L-GB", size: size)!
+        return UIFont(name: "FZLanTingHeiS-L-GB", size: size)!
     }
 }

@@ -14,6 +14,7 @@ class FilmTableViewCell: UITableViewCell, Reusable {
         var cell = tableView.dequeueReusableCell() as FilmTableViewCell?
         if cell == nil {
             cell = FilmTableViewCell(style: .default, reuseIdentifier: self.reuseIdentifier)
+            cell?.selectionStyle = .none
         }
         return cell!
     }
@@ -38,33 +39,39 @@ class FilmTableViewCell: UITableViewCell, Reusable {
     //MARK: --- Private Method ---
     func setupLayout() {
         titleLabel.snp.makeConstraints { (make) in
-            make.left.top.equalTo(self.contentView)
-            make.height.equalTo(30)
+            make.top.equalTo(self.contentView)
+            make.left.equalTo(self.contentView).offset(MovieConstant.LeftEdge)
+            make.height.equalTo(MovieConstant.BarHeight)
             make.width.equalTo(150)
         }
         moreButton.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView)
-            make.right.equalTo(self.contentView)
-            make.height.equalTo(30)
+            make.right.equalTo(self.contentView).offset(-1 * MovieConstant.LeftEdge)
+            make.height.equalTo(MovieConstant.BarHeight)
             make.width.equalTo(100)
         }
         dataCollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom)
             make.left.right.equalTo(self.contentView)
-            make.height.equalTo(MovieConstant.IMAGE_HEIGHT + MovieConstant.MovieTitleHeight + MovieConstant.MovieRatingHeight)
+            make.height.equalTo(MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight)
         }
     }
     
     //MARK: --- Getter and Setter ---
     public var titleLabel: UILabel = {
         let titleLabel: UILabel = UILabel()
+        //titleLabel.backgroundColor = UIColor.green
+        titleLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 20)
         return titleLabel
     }()
     
     public var moreButton: UIButton = {
         let moreButton: UIButton = UIButton()
-        moreButton.setTitle("查看全部", for: .normal)
+        moreButton.setTitle("查看全部>", for: .normal)
         moreButton.setTitleColor(UIColor.darkGray, for: .normal)
+        moreButton.contentHorizontalAlignment = .right
+        //moreButton.backgroundColor = UIColor.brown
+        moreButton.titleLabel?.font = FontConstant.SYS_14
         return moreButton
     }()
     
@@ -72,7 +79,7 @@ class FilmTableViewCell: UITableViewCell, Reusable {
         
         var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20)
+        layout.sectionInset = UIEdgeInsetsMake(0, MovieConstant.LeftEdge, 0, MovieConstant.LeftEdge)
         
         let dataCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         dataCollectionView.bounces = false

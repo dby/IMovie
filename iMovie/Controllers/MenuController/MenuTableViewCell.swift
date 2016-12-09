@@ -64,7 +64,7 @@ class MenuTableViewCell: UITableViewCell, Reusable {
     /// 标题
     fileprivate lazy var titleLabel: UILabel = {
         var titleLabel = UILabel()
-        titleLabel.font = UIConstant.UI_FONT_16
+        titleLabel.font = FontConstant.SYS_16
         titleLabel.textColor = UIConstant.UI_COLOR_GrayTheme
         return titleLabel
     }()
