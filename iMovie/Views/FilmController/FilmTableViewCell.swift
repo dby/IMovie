@@ -85,7 +85,17 @@ class FilmTableViewCell: UITableViewCell, Reusable {
         dataCollectionView.bounces = false
         dataCollectionView.isPagingEnabled = false
         dataCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: String(describing: MovieViewCell.self))
-        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self))
+        
+        let identifier3: String = String(describing: ImageCollectionCell.self).appending(String(describing: ImageCollCellType.Num3))
+        let identifier4: String = String(describing: ImageCollectionCell.self).appending(String(describing: ImageCollCellType.Num4))
+        let identifier6: String = String(describing: ImageCollectionCell.self).appending(String(describing: ImageCollCellType.Num6))
+        let identifier9: String = String(describing: ImageCollectionCell.self).appending(String(describing: ImageCollCellType.Num9))
+
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: identifier3)
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: identifier4)
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: identifier6)
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: identifier9)
+
         dataCollectionView.backgroundColor = UIColor.white
 
         return dataCollectionView

@@ -21,7 +21,8 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
     
     class func cellWithCollectionView(_ collectionView: UICollectionView, indexPath: IndexPath, type: ImageCollCellType) -> ImageCollectionCell {
         
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.reuseIdentifier, for: indexPath) as? ImageCollectionCell
+        let identifier: String = String(describing: ImageCollectionCell.self).appending(String(describing: type))
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? ImageCollectionCell
         if cell == nil {
             cell = ImageCollectionCell()
         }
@@ -86,48 +87,54 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
     fileprivate func setupLayout() {
         switch type {
         case .Num3:
+            let smallWidth: CGFloat = (self.width - GapConstant) / 3
+            let bigWidth: CGFloat = self.width - smallWidth - GapConstant
+            
             image1.snp.makeConstraints({ (make) in
-                make.left.top.bottom.equalTo(self.contentView).offset(5)
-                make.width.equalTo(image2.snp.width).multipliedBy(1.6)
+                make.left.top.equalTo(self.contentView)
+                make.width.height.equalTo(bigWidth)
             })
             
             image2.snp.makeConstraints({ (make) in
                 make.left.equalTo(image1.snp.right).offset(5)
-                make.top.right.equalTo(self.contentView).offset(5)
-                make.height.equalTo(image3.snp.height)
+                make.top.equalTo(self.contentView)
+                make.height.width.equalTo(smallWidth)
             })
             
             image3.snp.makeConstraints({ (make) in
-                make.bottom.right.equalTo(self.contentView).offset(5)
-                make.left.equalTo(image1.snp.right)
-                make.top.equalTo(image2.snp.bottom)
+                make.right.equalTo(self.contentView)
+                make.top.equalTo(image2.snp.bottom).offset(GapConstant)
+                make.width.height.equalTo(smallWidth)
             })
             break
+            
         case .Num4:
+            let smallWidth: CGFloat = (self.width - GapConstant * 2) / 5
+            let bigWidth: CGFloat = (self.width - smallWidth - GapConstant * 2)/2
+
             image1.snp.makeConstraints({ (make) in
-                make.top.left.bottom.equalTo(self.contentView).offset(5)
-                make.width.equalTo(image2.snp.width).multipliedBy(2)
+                make.top.left.equalTo(self.contentView)
+                make.width.height.equalTo(bigWidth)
             })
             image2.snp.makeConstraints({ (make) in
-                make.top.equalTo(self.contentView).offset(5)
-                make.left.equalTo(image1.snp.right).offset(5)
-                make.height.equalTo(image3.snp.height)
-                make.width.equalTo(image2.snp.height)
+                make.top.equalTo(self.contentView)
+                make.left.equalTo(image1.snp.right).offset(GapConstant)
+                make.width.height.equalTo(smallWidth)
             })
             image3.snp.makeConstraints({ (make) in
-                make.bottom.equalTo(self.contentView).offset(5)
-                make.left.equalTo(image1.snp.right).offset(5)
-                make.width.equalTo(image3.snp.height)
+                make.left.equalTo(image1.snp.right).offset(GapConstant)
+                make.top.equalTo(image2.snp.bottom).offset(GapConstant)
+                make.width.height.equalTo(smallWidth)
             })
             image4.snp.makeConstraints({ (make) in
-                make.right.top.bottom.equalTo(self.contentView).offset(5)
-                make.left.equalTo(image3.snp.right).offset(5)
-                make.width.equalTo(image3.snp.width).multipliedBy(2)
+                make.top.equalTo(self.contentView)
+                make.left.equalTo(image3.snp.right).offset(GapConstant)
+                make.width.height.equalTo(bigWidth)
             })
             
             break
-        case .Num6:
             
+        case .Num6:
             let smallWidth: CGFloat = (self.width - GapConstant * 2) / 3
             let bigWidth: CGFloat = self.width - GapConstant - smallWidth
             image1.snp.makeConstraints({ (make) in
@@ -145,22 +152,24 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
                 make.width.height.equalTo(smallWidth)
             })
             image4.snp.makeConstraints({ (make) in
-                make.left.bottom.equalTo(self.contentView)
+                make.left.equalTo(self.contentView)
+                make.top.equalTo(image1.snp.bottom).offset(GapConstant)
                 make.width.height.equalTo(smallWidth)
             })
             image5.snp.makeConstraints({ (make) in
-                make.bottom.equalTo(self.contentView)
+                make.top.equalTo(image1.snp.bottom).offset(GapConstant)
                 make.left.equalTo(image4.snp.right).offset(GapConstant)
                 make.width.height.equalTo(smallWidth)
             })
             image6.snp.makeConstraints({ (make) in
-                make.right.bottom.equalTo(self.contentView)
+                make.top.equalTo(image3.snp.bottom).offset(GapConstant)
+                make.right.equalTo(self.contentView)
                 make.width.height.equalTo(smallWidth)
             })
             
             break
-        case .Num9:
             
+        case .Num9:
             let smallWidth: CGFloat = (self.width - 4 * GapConstant) / 5
             let bigWidth: CGFloat = (self.width - 2 * GapConstant - smallWidth) / 2
             

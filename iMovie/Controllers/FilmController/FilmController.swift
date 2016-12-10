@@ -140,22 +140,22 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if (CollectionViewType.NowHotShow.rawValue == collectionView.tag) {
-            let height = UIConstant.SCREEN_WIDTH * 2 / 3
-            return CGSize(width: UIConstant.SCREEN_WIDTH, height: height)
-        } else if (CollectionViewType.SoonShow.rawValue == collectionView.tag) {
-            let height = UIConstant.SCREEN_WIDTH * 2 / 5
-            return CGSize(width: UIConstant.SCREEN_WIDTH, height: height)
-        } else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
-            let height = UIConstant.SCREEN_WIDTH * 2 / 3
-            return CGSize(width: height, height: height)
-        } else if (CollectionViewType.praiseList.rawValue == collectionView.tag) {
-            let height = UIConstant.SCREEN_WIDTH * 3 / 6
-            return CGSize (width: height, height: height)
-        } else {
+        //if (CollectionViewType.NowHotShow.rawValue == collectionView.tag) {
+          //  let height = UIConstant.SCREEN_WIDTH * 2 / 3
+            //return CGSize(width: UIConstant.SCREEN_WIDTH, height: height)
+        //} else if (CollectionViewType.SoonShow.rawValue == collectionView.tag) {
+         //   let height = UIConstant.SCREEN_WIDTH * 2 / 5
+           // return CGSize(width: UIConstant.SCREEN_WIDTH, height: height)
+        //} else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
+        //    let height = UIConstant.SCREEN_WIDTH * 2 / 3
+        //    return CGSize(width: height, height: height)
+        //} else if (CollectionViewType.praiseList.rawValue == collectionView.tag) {
+        //    let height = UIConstant.SCREEN_WIDTH * 3 / 6
+        //    return CGSize (width: height, height: height)
+        //} else {
             let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
             return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
-        }
+        //}
     }
 }
 
