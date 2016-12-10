@@ -8,26 +8,15 @@
 
 import Foundation
 
-class FilmTableViewCell: UITableViewCell, Reusable {
+class MovieInfoView: UIView {
     
-    class func cellWithTableView(_ tableView: UITableView) -> FilmTableViewCell {
-        var cell = tableView.dequeueReusableCell() as FilmTableViewCell?
-        if cell == nil {
-            cell = FilmTableViewCell(style: .default, reuseIdentifier: self.reuseIdentifier)
-            cell?.selectionStyle = .none
-        }
-        return cell!
-    }
-
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(frame: CGRect) {
         
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(frame: frame)
         
-        dataCollectionView.tag = self.tag
-        
-        self.contentView.addSubview(titleLabel)
-        self.contentView.addSubview(moreButton)
-        self.contentView.addSubview(dataCollectionView)
+        self.addSubview(titleLabel)
+        self.addSubview(moreButton)
+        self.addSubview(dataCollectionView)
         
         setupLayout()
     }
@@ -39,20 +28,20 @@ class FilmTableViewCell: UITableViewCell, Reusable {
     //MARK: --- Private Method ---
     func setupLayout() {
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView)
-            make.left.equalTo(self.contentView).offset(MovieConstant.LeftEdge)
+            make.top.equalTo(self)
+            make.left.equalTo(self).offset(MovieConstant.LeftEdge)
             make.height.equalTo(MovieConstant.BarHeight)
             make.width.equalTo(150)
         }
         moreButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView)
-            make.right.equalTo(self.contentView).offset(-1 * MovieConstant.LeftEdge)
+            make.top.equalTo(self)
+            make.right.equalTo(self).offset(-1 * MovieConstant.LeftEdge)
             make.height.equalTo(MovieConstant.BarHeight)
             make.width.equalTo(100)
         }
         dataCollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom)
-            make.left.right.equalTo(self.contentView)
+            make.left.right.equalTo(self)
             make.height.equalTo(MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight)
         }
     }
@@ -85,17 +74,7 @@ class FilmTableViewCell: UITableViewCell, Reusable {
         dataCollectionView.bounces = false
         dataCollectionView.isPagingEnabled = false
         dataCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: String(describing: MovieViewCell.self))
-        
-        let identifier3: String = String(describing: ImageCollectionCell.self).appending(String(describing: ImageCollCellType.Num3))
-        let identifier4: String = String(describing: ImageCollectionCell.self).appending(String(describing: ImageCollCellType.Num4))
-        let identifier6: String = String(describing: ImageCollectionCell.self).appending(String(describing: ImageCollCellType.Num6))
-        let identifier9: String = String(describing: ImageCollectionCell.self).appending(String(describing: ImageCollCellType.Num9))
-
-        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: identifier3)
-        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: identifier4)
-        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: identifier6)
-        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: identifier9)
-
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self))
         dataCollectionView.backgroundColor = UIColor.white
 
         return dataCollectionView

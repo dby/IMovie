@@ -21,8 +21,7 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
     
     class func cellWithCollectionView(_ collectionView: UICollectionView, indexPath: IndexPath, type: ImageCollCellType) -> ImageCollectionCell {
         
-        let identifier: String = String(describing: ImageCollectionCell.self).appending(String(describing: type))
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? ImageCollectionCell
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.reuseIdentifier, for: indexPath) as? ImageCollectionCell
         if cell == nil {
             cell = ImageCollectionCell()
         }
