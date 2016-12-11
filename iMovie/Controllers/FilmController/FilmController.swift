@@ -238,7 +238,7 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
         
         for item: UIView in (cell?.contentView.subviews)! {
             if item is MovieInfoView {
-                //item.removeFromSuperview()
+                item.removeFromSuperview()
             }
         }
         

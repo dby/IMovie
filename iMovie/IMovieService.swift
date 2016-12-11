@@ -13,8 +13,8 @@ public enum IMovieService {
     
     /// 获得榜豆瓣榜单前250的电影
     case movie_top_250(Int)
-    
-    case hot_
+    /// 影评
+    case movie_cincism(Int, Int)
     
 }
 
@@ -38,7 +38,7 @@ let iMovieProvider: MoyaProvider<IMovieService> = MoyaProvider<IMovieService>(en
 
 extension IMovieService: TargetType {
     public var task: Task {
-        return .request;
+        return .request
     }
     
     fileprivate var loc_id: String {
@@ -66,8 +66,8 @@ extension IMovieService: TargetType {
         switch self {
         case .movie_top_250(_):
             return URL.init(string: "https://frodo.douban.com/api/v2/subject_collection/")!
-        default:
-            return URL.init(string: "https://frodo.douban.com/api/")!
+        case .movie_cincism(_, _):
+            return URL.init(string: "https://frodo.douban.com/api/v2/")!
         }
     }
     
@@ -75,8 +75,8 @@ extension IMovieService: TargetType {
         switch self {
         case .movie_top_250(_):
             return "movie_top250/items"
-        default:
-            return ""
+        case .movie_cincism(_, _):
+            return "movie/best_reviews"
         }
     }
 
@@ -88,8 +88,12 @@ extension IMovieService: TargetType {
                     "apikey": apikey as AnyObject,
                     "_need_webp": _need_webp as AnyObject,
                     "start": num as AnyObject]
-        default:
-            return [:]
+        case let .movie_cincism(start, count):
+            return ["loc_id": loc_id as AnyObject,
+                    "count": count as AnyObject,
+                    "apikey": apikey as AnyObject,
+                    "_need_webp": _need_webp as AnyObject,
+                    "start": start as AnyObject]
         }
     }
 

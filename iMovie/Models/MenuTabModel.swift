@@ -16,5 +16,5 @@ struct MenuTabModel {
 let MenuTabItems = [
     MenuTabModel(image: UIImage(named: "ic_login")!, title: "马上登录"),
     MenuTabModel(image: UIImage(named: "ic_report")!, title: "寻求报道"),
-    MenuTabModel(image: UIImage(named: "ic_about")!, title: "关于爱范儿")
+    MenuTabModel(image: UIImage(named: "ic_about")!, title: "关于爱电影")
 ]

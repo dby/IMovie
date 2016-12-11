@@ -13,6 +13,8 @@
 		433864A51DF3F8D7000F58E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 433864A31DF3F8D7000F58E3 /* LaunchScreen.storyboard */; };
 		433864B01DF3F8D7000F58E3 /* iMovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433864AF1DF3F8D7000F58E3 /* iMovieTests.swift */; };
 		433864BB1DF3F8D7000F58E3 /* iMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433864BA1DF3F8D7000F58E3 /* iMovieUITests.swift */; };
+		433A854D1DFC345100B33AFC /* CinecismTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433A854C1DFC345100B33AFC /* CinecismTableViewCell.swift */; };
+		433A854F1DFC3CDC00B33AFC /* CincismModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433A854E1DFC3CDC00B33AFC /* CincismModel.swift */; };
 		433E1E361DFA505000D8E190 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */; };
 		434027DA1DF8FB0C00C2D733 /* MovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027D91DF8FB0C00C2D733 /* MovieInfoView.swift */; };
 		434027DC1DF9327000C2D733 /* ControllerResuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027DB1DF9327000C2D733 /* ControllerResuable.swift */; };
@@ -77,6 +79,8 @@
 		433864B61DF3F8D7000F58E3 /* iMovieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iMovieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		433864BA1DF3F8D7000F58E3 /* iMovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMovieUITests.swift; sourceTree = "<group>"; };
 		433864BC1DF3F8D7000F58E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		433A854C1DFC345100B33AFC /* CinecismTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CinecismTableViewCell.swift; path = Views/Cinecism/CinecismTableViewCell.swift; sourceTree = "<group>"; };
+		433A854E1DFC3CDC00B33AFC /* CincismModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CincismModel.swift; path = Models/CincismModel.swift; sourceTree = "<group>"; };
 		433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCollectionCell.swift; path = Views/FilmController/ImageCollectionCell.swift; sourceTree = "<group>"; };
 		434027D91DF8FB0C00C2D733 /* MovieInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieInfoView.swift; path = Views/FilmController/MovieInfoView.swift; sourceTree = "<group>"; };
 		434027DB1DF9327000C2D733 /* ControllerResuable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllerResuable.swift; path = Extension/ControllerResuable.swift; sourceTree = "<group>"; };
@@ -208,6 +212,14 @@
 			path = iMovieUITests;
 			sourceTree = "<group>";
 		};
+		433A854B1DFC340900B33AFC /* Cinecism */ = {
+			isa = PBXGroup;
+			children = (
+				433A854C1DFC345100B33AFC /* CinecismTableViewCell.swift */,
+			);
+			name = Cinecism;
+			sourceTree = "<group>";
+		};
 		434027DD1DF932C000C2D733 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,6 +340,7 @@
 			children = (
 				43AA925D1DF659D700102486 /* MovieModel.swift */,
 				434027F31DF9379800C2D733 /* MenuTabModel.swift */,
+				433A854E1DFC3CDC00B33AFC /* CincismModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -350,6 +363,7 @@
 		43480B671DF40F5100169DD7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				433A854B1DFC340900B33AFC /* Cinecism */,
 				434027EE1DF9369B00C2D733 /* MenuView */,
 				434027E61DF9348300C2D733 /* PullToRefresh */,
 				434027DD1DF932C000C2D733 /* MainView */,
@@ -626,7 +640,9 @@
 				43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */,
 				434027DA1DF8FB0C00C2D733 /* MovieInfoView.swift in Sources */,
 				434027ED1DF9362F00C2D733 /* MenuViewController.swift in Sources */,
+				433A854D1DFC345100B33AFC /* CinecismTableViewCell.swift in Sources */,
 				434027F01DF936C300C2D733 /* MenuHeaaderView.swift in Sources */,
+				433A854F1DFC3CDC00B33AFC /* CincismModel.swift in Sources */,
 				43B3D6181DF862EF00789A9E /* UIImageView+iMovie.swift in Sources */,
 				43AA92611DF6E00D00102486 /* SearchController.swift in Sources */,
 				434027E31DF9338900C2D733 /* UIView+Frame.swift in Sources */,
