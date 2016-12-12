@@ -45,34 +45,28 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
     func headerViewLayout() {
         //
         self.moviePosterImage.snp.makeConstraints { (make) in
-            make.left.equalTo(self.headerView).offset(30)
+            make.left.equalTo(self.headerView).offset(20)
             make.top.equalTo(self.headerView).offset(20)
             make.bottom.equalTo(self.headerView).offset(-20)
             make.width.equalTo(self.moviePosterImage.snp.height).multipliedBy(0.6666667)
         }
         self.movieRatingLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.moviePosterImage.snp.centerY)
-            make.left.equalTo(self.moviePosterImage.snp.right).offset(20)
-            make.right.equalTo(self.headerView).offset(-30)
+            make.left.equalTo(self.moviePosterImage.snp.right).offset(10)
+            make.right.equalTo(self.headerView).offset(-20)
             make.height.equalTo(30)
         }
         self.movieNameLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.movieRatingLabel.snp.top).offset(-5)
-            make.left.equalTo(self.moviePosterImage.snp.right).offset(20)
-            make.right.equalTo(self.headerView).offset(-30)
+            make.bottom.equalTo(self.movieRatingLabel.snp.top)
+            make.left.equalTo(self.moviePosterImage.snp.right).offset(10)
+            make.right.equalTo(self.headerView).offset(-20)
             make.height.equalTo(30)
         }
         self.movieInfoLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.movieRatingLabel.snp.bottom).offset(5)
-            make.left.equalTo(self.moviePosterImage.snp.right).offset(20)
-            make.right.equalTo(self.headerView).offset(-30)
+            make.top.equalTo(self.movieRatingLabel.snp.bottom)
+            make.left.equalTo(self.moviePosterImage.snp.right).offset(10)
+            make.right.equalTo(self.headerView).offset(-20)
             make.height.equalTo(30)
-        }
-        self.separateLineView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self).offset(-UIConstant.UI_MARGIN_5)
-            make.centerX.equalTo(self)
-            make.width.equalTo(20)
-            make.height.equalTo(2)
         }
     }
     
@@ -93,19 +87,57 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
             make.height.equalTo(20)
         }
         self.cincismTitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.cincismInfoLabel.snp.bottom).offset(3)
+            make.top.equalTo(self.cincismInfoLabel.snp.bottom)
             make.left.equalTo(self.contentView).offset(15)
             make.right.equalTo(self.contentView).offset(-15)
             make.height.equalTo(30)
         }
         self.cincismBriefLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.cincismTitleLabel.snp.bottom).offset(3)
+            make.top.equalTo(self.cincismTitleLabel.snp.bottom)
             make.left.equalTo(self.contentView).offset(15)
             make.right.equalTo(self.contentView).offset(-15)
-            make.height.equalTo(50)
+            make.bottom.equalTo(self.separateLineView.snp.top).offset(-30)
+        }
+        self.separateLineView.snp.makeConstraints { (make) in
+            make.bottom.centerX.equalTo(self)
+            make.width.equalTo(30)
+            make.height.equalTo(2)
         }
     }
     
+    // 计算CincismTableViewCell Height
+    class func estimateCellHeight(_ content : String, font: UIFont) -> CGFloat {
+        
+        let size    = CGSize(width: UIConstant.SCREEN_WIDTH - 30, height: 2000)
+        let attrs   = NSMutableAttributedString(string: content)
+        let paragphStyle = NSMutableParagraphStyle()
+        
+        paragphStyle.lineSpacing = 5.0;
+        paragphStyle.firstLineHeadIndent    = 0.0;
+        paragphStyle.hyphenationFactor      = 0.0;
+        paragphStyle.paragraphSpacingBefore = 0.0;
+        
+        let dic = [NSFontAttributeName : font,
+                   NSParagraphStyleAttributeName: paragphStyle,
+                   NSKernAttributeName : 1.0] as [String : Any]
+        
+        
+        attrs.addAttribute(NSFontAttributeName,
+                           value: font,
+                           range: NSMakeRange(0, (content.characters.count)))
+        attrs.addAttribute(NSParagraphStyleAttributeName, value: paragphStyle, range: NSMakeRange(0, (content.characters.count)))
+        attrs.addAttribute(NSKernAttributeName, value: 1.0, range: NSMakeRange(0, (content.characters.count)))
+        
+        let labelRect : CGRect = content.boundingRect(with: size,
+                                                      options: .usesLineFragmentOrigin,
+                                                      attributes: dic as [String : AnyObject],
+                                                      context: nil)
+        
+        // 96: 其他控件的高度 + 间隔
+        return UIConstant.SCREEN_WIDTH/2 + 90 + labelRect.height
+    }
+    
+    // 获得 “导演/演员” 的字符串
     func getMovieActorsInfo(model: ReviewModel) -> String {
         var str: String = ""
         
@@ -131,7 +163,7 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
             self.movieRatingLabel.text = String(model.rating.value)
             self.movieInfoLabel.text = getMovieActorsInfo(model: model)
             
-            self.cincismInfoLabel.text = model.user.name.appending("评价了").appending(model.subject.title)
+            self.cincismInfoLabel.text = model.user.name.appending(" 评论 《").appending(model.subject.title).appending("》")
             self.cincismTitleLabel.text = model.title
             self.cincismBriefLabel.text = model.abstract
             
@@ -161,11 +193,11 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
         movieRatingLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 15)
         return movieRatingLabel
     }()
-    // movieInfoLabel
+    // movieInfoLabel 导演/演员信息
     internal lazy var movieInfoLabel: UILabel = {
         let movieInfoLabel: UILabel = UILabel()
         movieInfoLabel.backgroundColor = UIColor.brown
-        movieInfoLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 15)
+        movieInfoLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 13)
         return movieInfoLabel
     }()
     // headView
@@ -186,7 +218,7 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
     internal lazy var cincismTitleLabel: UILabel = {
         let cincismTitleLabel = UILabel()
         cincismTitleLabel.backgroundColor = UIColor.blue
-        cincismTitleLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 14)
+        cincismTitleLabel.font = UIFont.customFont_FZLTZCHJW(fontSize: 16)
         return cincismTitleLabel
     }()
     // cincism brief

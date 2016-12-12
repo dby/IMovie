@@ -64,7 +64,10 @@ extension CinecismController: UITableViewDataSource, UITableViewDelegate {
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UIConstant.SCREEN_WIDTH * 0.5 + 150
+        
+        return CinecismTableViewCell.estimateCellHeight(self.cincismModel.reviews[indexPath.row].abstract,
+                                                        font: UIFont.customFont_FZLTXIHJW(fontSize: 14))
+        
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
