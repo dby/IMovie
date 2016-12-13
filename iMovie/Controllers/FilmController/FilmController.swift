@@ -44,7 +44,7 @@ class FilmController: BasePageController, Reusable {
     //MARK: --- Private Methods ---
     func getData(num: NSInteger) {
         
-        IMovie.shareInstance.getMovieTop250(target: IMovieService.movie_top_250(num), successHandle: { [weak self] (data) in
+        IMovie.shareInstance.getMovieTop250(target: IMovieService.movieTop250(num), successHandle: { [weak self] (data) in
             
             for item in data.subject_collection_items {
                 self?.newMovieListMovieModelArray.append(item)

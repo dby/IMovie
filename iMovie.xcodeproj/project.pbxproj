@@ -16,6 +16,13 @@
 		433A854D1DFC345100B33AFC /* CinecismTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433A854C1DFC345100B33AFC /* CinecismTableViewCell.swift */; };
 		433A854F1DFC3CDC00B33AFC /* CincismModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433A854E1DFC3CDC00B33AFC /* CincismModel.swift */; };
 		433E1E361DFA505000D8E190 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */; };
+		433F06E11DFE856C0055EF02 /* iMovieAPI.txt in Resources */ = {isa = PBXBuildFile; fileRef = 433F06E01DFE856C0055EF02 /* iMovieAPI.txt */; };
+		433F06E31DFE96AE0055EF02 /* DetailCincismController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433F06E21DFE96AE0055EF02 /* DetailCincismController.swift */; };
+		433F06E51DFED9890055EF02 /* HeaderBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433F06E41DFED9890055EF02 /* HeaderBackView.swift */; };
+		433F06E71DFEDCA40055EF02 /* BottomToolsBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433F06E61DFEDCA40055EF02 /* BottomToolsBar.swift */; };
+		433F06E91DFEDDD80055EF02 /* ShareResuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433F06E81DFEDDD80055EF02 /* ShareResuable.swift */; };
+		433F06EB1DFEDEDD0055EF02 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433F06EA1DFEDEDD0055EF02 /* ShareView.swift */; };
+		433F06ED1DFEE0460055EF02 /* UIViewController+iM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433F06EC1DFEE0460055EF02 /* UIViewController+iM.swift */; };
 		434027DA1DF8FB0C00C2D733 /* MovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027D91DF8FB0C00C2D733 /* MovieInfoView.swift */; };
 		434027DC1DF9327000C2D733 /* ControllerResuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027DB1DF9327000C2D733 /* ControllerResuable.swift */; };
 		434027DF1DF932EB00C2D733 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027DE1DF932EB00C2D733 /* MainHeaderView.swift */; };
@@ -82,6 +89,13 @@
 		433A854C1DFC345100B33AFC /* CinecismTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CinecismTableViewCell.swift; path = Views/Cinecism/CinecismTableViewCell.swift; sourceTree = "<group>"; };
 		433A854E1DFC3CDC00B33AFC /* CincismModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CincismModel.swift; path = Models/CincismModel.swift; sourceTree = "<group>"; };
 		433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCollectionCell.swift; path = Views/FilmController/ImageCollectionCell.swift; sourceTree = "<group>"; };
+		433F06E01DFE856C0055EF02 /* iMovieAPI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = iMovieAPI.txt; path = Resources/iMovieAPI.txt; sourceTree = "<group>"; };
+		433F06E21DFE96AE0055EF02 /* DetailCincismController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailCincismController.swift; path = Controllers/CinecismController/DetailCincismController.swift; sourceTree = "<group>"; };
+		433F06E41DFED9890055EF02 /* HeaderBackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderBackView.swift; path = Views/HeaderBackView.swift; sourceTree = "<group>"; };
+		433F06E61DFEDCA40055EF02 /* BottomToolsBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BottomToolsBar.swift; path = Views/BottomToolsBar.swift; sourceTree = "<group>"; };
+		433F06E81DFEDDD80055EF02 /* ShareResuable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareResuable.swift; path = Extension/ShareResuable.swift; sourceTree = "<group>"; };
+		433F06EA1DFEDEDD0055EF02 /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareView.swift; path = Views/ShareView.swift; sourceTree = "<group>"; };
+		433F06EC1DFEE0460055EF02 /* UIViewController+iM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+iM.swift"; path = "Extension/UIViewController+iM.swift"; sourceTree = "<group>"; };
 		434027D91DF8FB0C00C2D733 /* MovieInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieInfoView.swift; path = Views/FilmController/MovieInfoView.swift; sourceTree = "<group>"; };
 		434027DB1DF9327000C2D733 /* ControllerResuable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllerResuable.swift; path = Extension/ControllerResuable.swift; sourceTree = "<group>"; };
 		434027DE1DF932EB00C2D733 /* MainHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainHeaderView.swift; path = Views/MainView/MainHeaderView.swift; sourceTree = "<group>"; };
@@ -331,6 +345,8 @@
 				434027DB1DF9327000C2D733 /* ControllerResuable.swift */,
 				434027E01DF9334200C2D733 /* UIFont+iMovie.swift */,
 				434027E21DF9338900C2D733 /* UIView+Frame.swift */,
+				433F06E81DFEDDD80055EF02 /* ShareResuable.swift */,
+				433F06EC1DFEE0460055EF02 /* UIViewController+iM.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -348,6 +364,7 @@
 		43480B651DF40F3B00169DD7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				433F06E01DFE856C0055EF02 /* iMovieAPI.txt */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -368,6 +385,9 @@
 				434027E61DF9348300C2D733 /* PullToRefresh */,
 				434027DD1DF932C000C2D733 /* MainView */,
 				43AA926B1DF6F54600102486 /* FilmController */,
+				433F06E41DFED9890055EF02 /* HeaderBackView.swift */,
+				433F06E61DFEDCA40055EF02 /* BottomToolsBar.swift */,
+				433F06EA1DFEDEDD0055EF02 /* ShareView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -400,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				43AA92671DF6E58500102486 /* CinecismController.swift */,
+				433F06E21DFE96AE0055EF02 /* DetailCincismController.swift */,
 			);
 			name = CinecismController;
 			sourceTree = "<group>";
@@ -543,6 +564,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				433F06E11DFE856C0055EF02 /* iMovieAPI.txt in Resources */,
 				433864A51DF3F8D7000F58E3 /* LaunchScreen.storyboard in Resources */,
 				434028021DF93DA700C2D733 /* FZLTZCHJW--GB1-0.TTF in Resources */,
 				434028001DF93DA700C2D733 /* DINPro-Medium.TTF in Resources */,
@@ -624,6 +646,9 @@
 				43AD2ECD1DF460D90073C26E /* IMovieService.swift in Sources */,
 				434027F21DF9371400C2D733 /* MenuTableViewCell.swift in Sources */,
 				43AA926A1DF6E5A700102486 /* BoxOfficeController.swift in Sources */,
+				433F06E71DFEDCA40055EF02 /* BottomToolsBar.swift in Sources */,
+				433F06ED1DFEE0460055EF02 /* UIViewController+iM.swift in Sources */,
+				433F06E51DFED9890055EF02 /* HeaderBackView.swift in Sources */,
 				434027F91DF93AF500C2D733 /* BaseNavController.swift in Sources */,
 				434027E81DF934A300C2D733 /* LoadMoreView.swift in Sources */,
 				434027E51DF9343D00C2D733 /* PullToRefreshView.swift in Sources */,
@@ -640,7 +665,10 @@
 				43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */,
 				434027DA1DF8FB0C00C2D733 /* MovieInfoView.swift in Sources */,
 				434027ED1DF9362F00C2D733 /* MenuViewController.swift in Sources */,
+				433F06E91DFEDDD80055EF02 /* ShareResuable.swift in Sources */,
 				433A854D1DFC345100B33AFC /* CinecismTableViewCell.swift in Sources */,
+				433F06EB1DFEDEDD0055EF02 /* ShareView.swift in Sources */,
+				433F06E31DFE96AE0055EF02 /* DetailCincismController.swift in Sources */,
 				434027F01DF936C300C2D733 /* MenuHeaaderView.swift in Sources */,
 				433A854F1DFC3CDC00B33AFC /* CincismModel.swift in Sources */,
 				43B3D6181DF862EF00789A9E /* UIImageView+iMovie.swift in Sources */,

@@ -257,3 +257,92 @@ struct CincismModel {
         }
     }
 }
+
+struct DetailCincismModel {
+    var type_name: String!
+    var abstract: String!
+    var allow_donate: String!
+    var rtype: String!
+    var cover_url: String!
+    var donate_count: Int!
+    var is_recommended: Int!
+    var sharing_url: String!
+    var comments_count: Int!
+    var type: String!
+    var subject: SubjectModel!
+    var content: String!
+    var is_in_user_hot_module: Int!
+    var useful_count: Int!
+    var id: String!
+    var spoiler: Int!
+    var videos: Array<String>!
+    var title: String!
+    var likers_count: Int!
+    var url: String!
+    var create_time: String!
+    var copyright: String!
+    var user: UserModel!
+    var uri: String!
+    var platforms: Array<String>!
+    var rating: RatingModel!
+    var photos: Array<String>!
+    var vote_status: Int!
+    var liked: Int!
+    var is_original: Int!
+    var is_donated: Int!
+    var useless_count: Int!
+    
+    init(dic: NSDictionary?) {
+        if let dic = dic {
+            self.type_name = dic["type_name"] as? String ?? ""
+            self.abstract = dic["abstract"] as? String ?? ""
+            self.allow_donate = dic["allow_donate"] as? String ?? ""
+            self.rtype = dic["rtype"] as? String ?? ""
+            self.cover_url = dic["cover_url"] as? String ?? ""
+            self.donate_count = dic["donate_count"] as? Int ?? 0
+            self.is_recommended = dic["is_recommended"] as? Int ?? 0
+            self.sharing_url = dic["sharing_url"] as? String ?? ""
+            self.comments_count = dic["comments_count"] as? Int ?? 0
+            self.type = dic["type"] as? String ?? ""
+            
+            if let subjectDic: NSDictionary = dic["subject"] as? NSDictionary {
+                self.subject = SubjectModel(dic: subjectDic)
+            }
+
+            self.content = dic["content"] as? String ?? ""
+            self.is_in_user_hot_module = dic["is_in_user_hot_module"] as? Int ?? 0
+            self.useful_count = dic["useful_count"] as? Int ?? 0
+            self.id = dic["id"] as? String ?? ""
+            self.spoiler = dic["spoiler"] as? Int ?? 0
+            
+            self.videos = nil
+            
+            self.title = dic["title"] as? String ?? ""
+            self.likers_count = dic["likers_count"] as? Int ?? 0
+            self.url = dic["url"] as? String ?? ""
+            self.create_time = dic["create_time"] as? String ?? ""
+            self.copyright = dic["copyright"] as? String ?? ""
+            
+            if let userDic: NSDictionary = dic["user"] as? NSDictionary {
+                self.user = UserModel(dic: userDic)
+            }
+            
+            self.uri = dic["uri"] as? String ?? ""
+            
+            self.platforms = nil
+            
+            if let ratingDic: NSDictionary = dic["rating"] as? NSDictionary {
+                self.rating = RatingModel(dict: ratingDic)
+            }
+            
+            self.photos = nil
+            
+            self.vote_status = dic["vote_status"] as? Int ?? 0
+            self.liked = dic["liked"] as? Int ?? 0
+            self.is_original = dic["is_original"] as? Int ?? 0
+            self.is_donated = dic["is_donated"] as? Int ?? 0
+            self.useless_count = dic["useless_count"] as? Int ?? 0
+            
+        }
+    }
+}

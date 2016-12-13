@@ -24,7 +24,7 @@ class CinecismController: BasePageController {
     //MARK:--- Private Methods ---
     func getData(num: NSInteger) {
         
-        IMovie.shareInstance.getCineCism(target: IMovieService.movie_cincism(0, 20), successHandle: { [weak self] (data) in
+        IMovie.shareInstance.getBestCineCism(target: IMovieService.movieBestCincism(0, 20), successHandle: { [weak self] (data) in
             
             debugPrint("GET Cincism DATA...SUCCESS")
             //debugPrint(data)
@@ -61,7 +61,9 @@ class CinecismController: BasePageController {
 extension CinecismController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let detailController: DetailCincismController = DetailCincismController()
+        detailController.uid = self.cincismModel.reviews[indexPath.row].id
+        self.navigationController?.pushViewController(detailController, animated: true)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         

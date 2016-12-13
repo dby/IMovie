@@ -12,9 +12,11 @@ import Moya
 public enum IMovieService {
     
     /// 获得榜豆瓣榜单前250的电影
-    case movie_top_250(Int)
-    /// 影评
-    case movie_cincism(Int, Int)
+    case movieTop250(Int)
+    /// 最受欢迎 影评
+    case movieBestCincism(Int, Int)
+    /// 获得某一详细影评
+    case movieDetailCincism(String)
     
 }
 
@@ -57,6 +59,42 @@ extension IMovieService: TargetType {
         return "_need_webp"
     }
     
+    fileprivate var _sig: String {
+        return "kOnS6bgi9nF83VdaO//De1G6shE%3D"
+    }
+    
+    fileprivate var _ts: String {
+        return "1481528051"
+    }
+    
+    fileprivate var alt: String {
+        return "json"
+    }
+    
+    fileprivate var douban_udid: String {
+        return "021392124420da880d7e52af9cbf122d636d5fc5"
+    }
+    
+    fileprivate var event_loc_id: String {
+        return "118371"
+    }
+    
+    fileprivate var latitude: String {
+        return "0"
+    }
+    
+    fileprivate var longitude: String {
+        return "0"
+    }
+    
+    fileprivate var udid: String {
+        return "68b1196f23425bbc7ffe4714f9f59f47204dbeed"
+    }
+    
+    fileprivate var version: String {
+        return "4.7.0"
+    }
+    
     public var sampleData: Data {
         return "{}".data(using: String.Encoding.utf8)!
     }
@@ -64,36 +102,54 @@ extension IMovieService: TargetType {
     public var baseURL: URL {
         
         switch self {
-        case .movie_top_250(_):
+        case .movieTop250(_):
             return URL.init(string: "https://frodo.douban.com/api/v2/subject_collection/")!
-        case .movie_cincism(_, _):
-            return URL.init(string: "https://frodo.douban.com/api/v2/")!
+        case .movieBestCincism(_, _):
+            return URL(string: "https://frodo.douban.com/api/v2/")!
+        case .movieDetailCincism(_):
+            return URL(string: "https://frodo.douban.com/api/v2/")!
         }
     }
     
     public var path: String {
         switch self {
-        case .movie_top_250(_):
+        case .movieTop250(_):
             return "movie_top250/items"
-        case .movie_cincism(_, _):
+        case .movieBestCincism(_, _):
             return "movie/best_reviews"
+        case let .movieDetailCincism(uid):
+            return "review/\(uid)/"
         }
     }
 
     public var parameters: [String : Any]? {
         switch self {
-        case let .movie_top_250(num):
+        case let .movieTop250(num):
             return ["loc_id": loc_id as AnyObject,
                     "count": count as AnyObject,
                     "apikey": apikey as AnyObject,
                     "_need_webp": _need_webp as AnyObject,
                     "start": num as AnyObject]
-        case let .movie_cincism(start, count):
+        case let .movieBestCincism(start, count):
             return ["loc_id": loc_id as AnyObject,
                     "count": count as AnyObject,
                     "apikey": apikey as AnyObject,
                     "_need_webp": _need_webp as AnyObject,
                     "start": start as AnyObject]
+            
+        case .movieDetailCincism(_):
+            return ["_need_webp": _need_webp as AnyObject,
+                    "_sig": _sig as AnyObject,
+                    "_ts": _ts as AnyObject,
+                    "alt": alt as AnyObject,
+                    "apikey": apikey as AnyObject,
+                    "douban_udid": douban_udid as AnyObject,
+                    "event_loc_id": event_loc_id as AnyObject,
+                    "latitude": latitude as AnyObject,
+                    "loc_id": loc_id as AnyObject,
+                    "longitude": longitude as AnyObject,
+                    "udid": udid as AnyObject,
+                    "version": version as AnyObject]
         }
     }
 
