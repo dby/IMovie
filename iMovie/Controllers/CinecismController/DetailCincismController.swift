@@ -32,7 +32,18 @@ class DetailCincismController: UIViewController {
             
             debugPrint("GET Detail Cincism DATA...SUCCESS")
             self?.model = data
-            self?.wkWebView.loadHTMLString(data.content, baseURL: nil)
+            //self?.wkWebView.loadHTMLString(data.content, baseURL: nil)
+            //self?.wkWebView.load(URLRequest(url: URL(string: data.sharing_url)!))
+            
+            let dic: Dictionary<String, String> = [
+                "title": "title",
+                "authorID" : "authorID",
+                "authorName" : "authorName",
+                "timeInterval" : "timeInterval",
+                "content" : data.content
+            ]
+            
+            self?.wkWebView.loadHTMLString(data.content.HtmlWithData(data: dic as NSDictionary, templateName: "article"), baseURL: Bundle.main.resourceURL)
             
             }, errorHandle: { (error) in
                 

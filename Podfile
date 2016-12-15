@@ -8,6 +8,7 @@ target 'iMovie' do
     pod 'Moya/RxSwift', git: 'https://github.com/Moya/Moya.git', tag: '8.0.0-beta.1'
     pod 'MonkeyKing', '~> 1.1.0'
     pod 'YYWebImage'
+    pod 'GRMustache.swift'
 end
 
 post_install do |installer|

@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GRMustache.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MonkeyKing.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,12 +62,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>14F0F5918686E5C3813826A9BF2651FE</key>
+		<key>33FE70166DEA7EDD4CB1E3F276801037</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>33FE70166DEA7EDD4CB1E3F276801037</key>
+		<key>43592F20709D51A8002DC0F30F7F92C0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7390E4EA1566E398854EDA0C9ABD67F2</key>
+		<key>6C7F34267D5913634A9E623CD847E378</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6EAFB2261017DDFE127927B549152F4B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,22 +92,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>98FDE3C94A5BABC7F8F18DD7D1A80AB1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>998CB601BB602E32304A9981DAFF0FC4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>AA691A34C2489F4467C1F13FA615D956</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C26EB9D75B55A68636EC489C14664F69</key>
+		<key>B024B859DA1B67E9177AE3E81391CFD4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E838F50745888AD745BAB6763A30A812</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4DDB142FACEBD8784C51913B3704AD9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
