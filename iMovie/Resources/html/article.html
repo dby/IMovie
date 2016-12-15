@@ -1,25 +1,84 @@
-{{< html/base }}
-    {{$ body }}
-        <div id="title_div">
-            <b>{{title}}</b>
-            <div id="pub_info">
-                <a href="http://my.oschina.net/u/{{authorID}}" class="author">{{authorName}}</a> 发表于 {{timeInterval}}
-            </div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="detail.css" rel="stylesheet" type="text/css" />
+        
+        <link href="shCore.css" rel="stylesheet" type="text/css" />
+        <link href="shThemeDjango.css" rel="stylesheet" type="text/css" />
+        <link href="shThemeDefault.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="shCore.js"></script>
+        <script type="text/javascript" src="shLegacy.js"></script>
+        <script type="text/javascript" src="shAutoloader.js"></script>
+        <script type="text/javascript" src="shBrushAppleScript.js"></script>
+        <script type="text/javascript" src="shBrushAS3.js"></script>
+        <script type="text/javascript" src="shBrushBash.js"></script>
+        <script type="text/javascript" src="shBrushColdFusion.js"></script>
+        <script type="text/javascript" src="shBrushCpp.js"></script>
+        <script type="text/javascript" src="shBrushCSharp.js"></script>
+        <script type="text/javascript" src="shBrushCss.js"></script>
+        <script type="text/javascript" src="shBrushDelphi.js"></script>
+        <script type="text/javascript" src="shBrushDiff.js"></script>
+        <script type="text/javascript" src="shBrushErlang.js"></script>
+        <script type="text/javascript" src="shBrushGroovy.js"></script>
+        <script type="text/javascript" src="shBrushJava.js"></script>
+        <script type="text/javascript" src="shBrushJavaFX.js"></script>
+        <script type="text/javascript" src="shBrushJScript.js"></script>
+        <script type="text/javascript" src="shBrushPerl.js"></script>
+        <script type="text/javascript" src="shBrushPhp.js"></script>
+        <script type="text/javascript" src="shBrushPlain.js"></script>
+        <script type="text/javascript" src="shBrushPowerShell.js"></script>
+        <script type="text/javascript" src="shBrushPython.js"></script>
+        <script type="text/javascript" src="shBrushRuby.js"></script>
+        <script type="text/javascript" src="shBrushSass.js"></script>
+        <script type="text/javascript" src="shBrushScala.js"></script>
+        <script type="text/javascript" src="shBrushSql.js"></script>
+        <script type="text/javascript" src="shBrushVb.js"></script>
+        <script type="text/javascript" src="shBrushXml.js"></script>
+    </head>
+    
+    <div id="title_div">
+        <b>{{title}}</b>
+        <div id="pub_info">
+            <a href="http://my.oschina.net/u/{{authorID}}" class="author">{{authorName}}</a> 发表于 {{timeInterval}}
         </div>
+    </div>
+    
+    <body {{# night }}class="night"{{/}}>
+        {{$ body }}
+        {{/}}
         
+        <script type="text/javascript">
+            window.alert = function() {};
+            
+            SyntaxHighlighter.all()
+            
+            var img_list = document.getElementsByTagName("img");
+            
+            for (var i = 0; i < img_list.length; i++) {
+                var img = img_list[i];
+                
+                if (img.alt.length) {continue;}
+                
+                var wrapper = document.createElement("a");
+                wrapper.href = img.src;
+                wrapper.appendChild(img.parentNode.replaceChild(wrapper, img));
+            }
+        </script>
+
         <main>{{{content}}}</main>
-        
         {{#softwareName}}
             <div class="more_about">更多关于: <a href="{{softwareLink}}">{{softwareName}}</a> 的详细信息</div>
-        {{/}}
+            {{/}}
         
         {{#tags}}
             {{{tags}}}
-        {{/}}
+            {{/}}
         
         {{#relatedInfo}}
             <hr />
             <div>{{{relatedInfo}}}</div>
-        {{/}}
-    {{/}}
-{{/}}
+            {{/}}
+    </body>
+</html>
