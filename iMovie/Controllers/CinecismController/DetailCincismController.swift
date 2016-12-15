@@ -36,10 +36,10 @@ class DetailCincismController: UIViewController {
             //self?.wkWebView.load(URLRequest(url: URL(string: data.sharing_url)!))
             
             let dic: Dictionary<String, String> = [
-                "title": "title",
-                "authorID" : "authorID",
-                "authorName" : "authorName",
-                "timeInterval" : "timeInterval",
+                "title": data.title,
+                "authorID" : data.id,
+                "authorName" : data.subject.title,
+                "timeInterval" : data.create_time,
                 "content" : data.content
             ]
             
