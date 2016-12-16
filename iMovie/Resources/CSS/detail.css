@@ -1,9 +1,9 @@
 body {
-    font-size: 1em;
+    font-size: 1.2em;
     line-height: 1.5em;
-    background-color: #EBEBF3;
+    background-color: #FFFFFF;
     font-family: Arial;
-    margin: 10px 10px 60px 10px;
+    margin: 10px 10px 0px 10px;
     -webkit-text-size-adjust: 100%;
     -webkit-overflow-scrolling: touch;
 }

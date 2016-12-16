@@ -15,38 +15,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "101"
             endingLineNumber = "101">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Alamofire.ServerTrustPolicy.(certificates (in : __ObjC.Bundle) -&gt; Swift.Array&lt;__ObjC.SecCertificate&gt;).(default argument 0)"
-                  moduleName = "Alamofire"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503505138.474717"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Alamofire.ServerTrustPolicy.certificates (in : __ObjC.Bundle) -&gt; Swift.Array&lt;__ObjC.SecCertificate&gt;"
-                  moduleName = "Alamofire"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503505138.476238"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "123"
-                  endingLineNumber = "123"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -61,38 +29,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
             endingLineNumber = "88">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Alamofire.ServerTrustPolicy.(certificates (in : __ObjC.Bundle) -&gt; Swift.Array&lt;__ObjC.SecCertificate&gt;).(default argument 0)"
-                  moduleName = "Alamofire"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503505138.479524"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Alamofire.ServerTrustPolicy.certificates (in : __ObjC.Bundle) -&gt; Swift.Array&lt;__ObjC.SecCertificate&gt;"
-                  moduleName = "Alamofire"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503505138.481006"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "123"
-                  endingLineNumber = "123"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -16,7 +16,7 @@ class DetailCincismController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.white
-        self.view.addSubview(self.wkWebView)
+        self.view.addSubview(self.detailCincismTableView)
         self.view.addSubview(self.headerBackView)
         self.view.addSubview(self.toolBar)
         
@@ -32,30 +32,15 @@ class DetailCincismController: UIViewController {
             
             debugPrint("GET Detail Cincism DATA...SUCCESS")
             self?.model = data
-            //self?.wkWebView.loadHTMLString(data.content, baseURL: nil)
-            //self?.wkWebView.load(URLRequest(url: URL(string: data.sharing_url)!))
             
-            let dic: Dictionary<String, String> = [
-                "title": data.title,
-                "authorID" : data.id,
-                "authorName" : data.subject.title,
-                "timeInterval" : data.create_time,
-                "content" : data.content
-            ]
-            
-            self?.wkWebView.loadHTMLString(data.content.HtmlWithData(data: dic as NSDictionary, templateName: "article"), baseURL: Bundle.main.resourceURL)
+            self?.updateUI()
             
             }, errorHandle: { (error) in
-                
+                print(error)
         })
     }
     
     fileprivate func setupLayout() {
-        self.wkWebView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(self.view)
-            make.top.equalTo(self.headerBackView.snp.bottom)
-            make.bottom.equalTo(self.toolBar.snp.top)
-        }
         
         self.toolBar.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(self.view)
@@ -69,6 +54,23 @@ class DetailCincismController: UIViewController {
         }
     }
 
+    func updateUI() {
+        
+        if let model = self.model {
+            let dic: Dictionary<String, String> = [
+                "title": model.title,
+                "authorID" : model.id,
+                "authorName" : model.subject.title,
+                "timeInterval" : model.create_time,
+                "content" : model.content
+            ]
+            
+            self.wkWebView.loadHTMLString(model.content.HtmlWithData(data: dic as NSDictionary, templateName: "article"), baseURL: Bundle.main.resourceURL)
+            
+            self.tableHeaderView.model = model
+        }
+    }
+    
     override var prefersStatusBarHidden : Bool {
         return true
     }
@@ -79,17 +81,45 @@ class DetailCincismController: UIViewController {
     internal var shadowView: UIView?
     internal var shareView: ShareView?
     
-    fileprivate var lastPosition: CGFloat = 0
-    fileprivate var headerTopConstraint: Constraint? = nil
     fileprivate var naviTitle: String!
+    fileprivate var lastPosition: CGFloat = -50
+    fileprivate var headerTopConstraint: Constraint? = nil
     
     fileprivate var model: DetailCincismModel?
     
-    /// wkWebView
+    /// CincismHeaderView
+    fileprivate lazy var tableHeaderView: CincismHeaderView = {
+        let tableHeaderView: CincismHeaderView = CincismHeaderView(frame: CGRect.init(x: 0,
+                                                                                      y: 0,
+                                                                                      width: UIConstant.SCREEN_WIDTH,
+                                                                                      height: UIConstant.SCREEN_WIDTH*0.5))
+        
+        return tableHeaderView
+    }()
+    /// TableView
+    fileprivate lazy var detailCincismTableView: UITableView = {
+        let detailCincismTableView: UITableView = UITableView(frame: self.view.frame)
+        detailCincismTableView.delegate = self
+        detailCincismTableView.dataSource = self
+        detailCincismTableView.separatorStyle = .none
+        
+        detailCincismTableView.showsVerticalScrollIndicator = false
+        detailCincismTableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        detailCincismTableView.tableHeaderView = self.tableHeaderView
+        detailCincismTableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCellIdentifier")
+        
+        return detailCincismTableView
+    }()
+    /// WKWebView
     fileprivate lazy var wkWebView: WKWebView = {
-        let wkWebView: WKWebView = WKWebView()
+        let wkWebView: WKWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: UIConstant.SCREEN_WIDTH, height: 1))
         wkWebView.navigationDelegate    = self
         wkWebView.scrollView.delegate   = self
+        wkWebView.scrollView.bounces = false
+        wkWebView.scrollView.isScrollEnabled = false
+        wkWebView.scrollView.showsVerticalScrollIndicator = false
+        wkWebView.scrollView.showsHorizontalScrollIndicator = false
+        
         return wkWebView
     }()
     /// 底部工具栏
@@ -109,6 +139,38 @@ class DetailCincismController: UIViewController {
 extension DetailCincismController: HeaderViewDelegate {
     func backButtonDidClick() {
         _ = self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension DetailCincismController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //if indexPath.section == 0 {
+            // 此时为 WKWebview，，
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCellIdentifier", for: indexPath)
+            cell.selectionStyle = .none
+        
+            debugPrint("cell.height: \(cell.height)")
+            self.wkWebView.frame = CGRect(x: 0, y: 0, width: cell.width, height: cell.height)
+            cell.contentView.addSubview(self.wkWebView)
+        
+            return cell
+        //}
+        //else if indexPath.section == 1 {
+            // 此时加载评论
+        //}
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        debugPrint("heightForRowAt: \(self.wkWebView.height)")
+        return self.wkWebView.height
     }
 }
 
@@ -167,19 +229,38 @@ extension DetailCincismController: ToolBarDelegate {
 extension DetailCincismController: WKNavigationDelegate, UIScrollViewDelegate {
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.showProgress()
+        //self.showProgress()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.hiddenProgress()
+        //self.hiddenProgress()
+        
+        var frame: CGRect = webView.frame
+        frame.size.height = 1
+        webView.frame = frame
+        
+        /// 获取html动态高度
+        webView.evaluateJavaScript("document.body.offsetHeight") { (result, error) in
+            if error == nil {
+                var newFrame = webView.frame
+                newFrame.size.height = result as! CGFloat + 60
+                webView.frame = newFrame
+                
+                self.detailCincismTableView.reloadData()
+            }
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentPosition: CGFloat = scrollView.contentOffset.y
-        if currentPosition - self.lastPosition > 30 && currentPosition > 0 {
+        //debugPrint(currentPosition)
+        //debugPrint(currentPosition - self.lastPosition)
+        //debugPrint("")
+        
+        if currentPosition - self.lastPosition > 0 && currentPosition > 10 {
             self.headerTopConstraint?.update(offset: -50)
             
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 5, animations: {
                 self.headerBackView.layoutIfNeeded()
             })
             
@@ -187,7 +268,7 @@ extension DetailCincismController: WKNavigationDelegate, UIScrollViewDelegate {
             
         } else if self.lastPosition - currentPosition > 10 {
             self.headerTopConstraint?.update(offset: 0)
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 5, animations: {
                 self.headerBackView.layoutIfNeeded()
             })
             self.lastPosition = currentPosition

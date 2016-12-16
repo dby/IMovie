@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		38B82DE71277BBC01CF2C229 /* Pods_iMovie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCE2CC35F35FE9B74E0F4FE /* Pods_iMovie.framework */; };
+		431E0CD71E0397F800D0332D /* CincismHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E0CD61E0397F800D0332D /* CincismHeaderView.swift */; };
 		4338649B1DF3F8D7000F58E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338649A1DF3F8D7000F58E3 /* AppDelegate.swift */; };
 		433864A21DF3F8D7000F58E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 433864A11DF3F8D7000F58E3 /* Assets.xcassets */; };
 		433864A51DF3F8D7000F58E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 433864A31DF3F8D7000F58E3 /* LaunchScreen.storyboard */; };
@@ -124,6 +125,7 @@
 /* Begin PBXFileReference section */
 		1C41A368BF90047E16353DD7 /* Pods-iMovie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMovie.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMovie/Pods-iMovie.release.xcconfig"; sourceTree = "<group>"; };
 		33245A8CD45427BE5AAA5CC9 /* Pods-iMovie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMovie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMovie/Pods-iMovie.debug.xcconfig"; sourceTree = "<group>"; };
+		431E0CD61E0397F800D0332D /* CincismHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CincismHeaderView.swift; path = Views/Cinecism/CincismHeaderView.swift; sourceTree = "<group>"; };
 		433864971DF3F8D7000F58E3 /* iMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4338649A1DF3F8D7000F58E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		433864A11DF3F8D7000F58E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				433A854C1DFC345100B33AFC /* CinecismTableViewCell.swift */,
+				431E0CD61E0397F800D0332D /* CincismHeaderView.swift */,
 			);
 			name = Cinecism;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43AA926F1DF7100400102486 /* Reusable.swift in Sources */,
+				431E0CD71E0397F800D0332D /* CincismHeaderView.swift in Sources */,
 				43AD2ECD1DF460D90073C26E /* IMovieService.swift in Sources */,
 				434027F21DF9371400C2D733 /* MenuTableViewCell.swift in Sources */,
 				43AA926A1DF6E5A700102486 /* BoxOfficeController.swift in Sources */,

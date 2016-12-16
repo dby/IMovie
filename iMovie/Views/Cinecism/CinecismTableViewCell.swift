@@ -169,6 +169,7 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
             
             let strs:[String] = model.subject.pic.normal.components(separatedBy: "?")
             self.moviePosterImage.if_setImage(URL(string: strs[0]))
+            self.headerView.if_setImage(URL(string: strs[0]))
         }
     }
     // 海报
@@ -182,13 +183,15 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
     // 电影名称
     internal lazy var movieNameLabel: UILabel = {
         let movieNameLabel: UILabel = UILabel()
+        movieNameLabel.textColor = UIColor.white
         //movieNameLabel.backgroundColor = UIColor.red
-        movieNameLabel.font = UIFont.customFont_FZLTZCHJW(fontSize: 16)
+        movieNameLabel.font = UIFont.customFont_FZLTZCHJW(fontSize: 18)
         return movieNameLabel
     }()
     // 电影评分
     internal lazy var movieRatingLabel: UILabel = {
         let movieRatingLabel: UILabel = UILabel()
+        movieRatingLabel.textColor = UIColor.white
         //movieRatingLabel.backgroundColor = UIColor.orange
         movieRatingLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 15)
         return movieRatingLabel
@@ -196,14 +199,19 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
     // movieInfoLabel 导演/演员信息
     internal lazy var movieInfoLabel: UILabel = {
         let movieInfoLabel: UILabel = UILabel()
+        movieInfoLabel.textColor = UIColor.white
         //movieInfoLabel.backgroundColor = UIColor.brown
         movieInfoLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 13)
         return movieInfoLabel
     }()
     // headView
-    internal lazy var headerView: UIView = {
-        let headerView: UIView = UIView()
-        headerView.backgroundColor = UIColor.purple
+    internal lazy var headerView: UIImageView = {
+        let headerView: UIImageView = UIImageView()
+        headerView.contentMode = .scaleAspectFill
+        headerView.clipsToBounds = true
+        //headerView.backgroundColor = UIColor.purple
+        //headerView.backgroundColor = UIColor(patternImage: UIImage(named: "live_background")!)
+        headerView.image =  UIImage(named: "live_background")
         return headerView
     }()
     // cincism info 谁评价的电影
