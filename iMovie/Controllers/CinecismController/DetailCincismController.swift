@@ -22,11 +22,13 @@ class DetailCincismController: UIViewController {
         
         setupLayout()
         
-        getData(uid: self.uid)
+        getCinCismData(uid: self.uid)
+        getCincismComments(uid: self.uid)
     }
     
     //MARK:--- Private Methods ---
-    func getData(uid: String) {
+    /// 获得影评信息
+    func getCinCismData(uid: String) {
         
         IMovie.shareInstance.getDetailCineCism(target: IMovieService.movieDetailCincism(uid), successHandle: { [weak self] (data) in
             
@@ -38,6 +40,21 @@ class DetailCincismController: UIViewController {
             }, errorHandle: { (error) in
                 print(error)
         })
+    }
+    /// 获得影评评论信息
+    func getCincismComments(uid: String) {
+        IMovie.shareInstance.getCinCismConments(target: IMovieService.cincismComment(uid, 0, 10), successHandle: { [weak self] (data) in
+            
+            //debugPrint(data)
+            self?.commentsData.total = data.total
+            self?.commentsData.count = (self?.commentsData.count)! + data.count
+            data.comments.forEach({ (item) in
+                self?.commentsData.comments.append(item)
+            })
+            
+        }) { (error) in
+            print(error)
+        }
     }
     
     fileprivate func setupLayout() {
@@ -86,6 +103,12 @@ class DetailCincismController: UIViewController {
     fileprivate var headerTopConstraint: Constraint? = nil
     
     fileprivate var model: DetailCincismModel?
+    fileprivate lazy var commentsData: CommentsModel = {
+        var commentsData: CommentsModel = CommentsModel(dict: nil)
+        commentsData.start = 0
+        commentsData.count = 0
+        return commentsData
+    }()
     
     /// CincismHeaderView
     fileprivate lazy var tableHeaderView: CincismHeaderView = {
@@ -145,32 +168,47 @@ extension DetailCincismController: HeaderViewDelegate {
 extension DetailCincismController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return self.commentsData.comments.count
+        }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //if indexPath.section == 0 {
+        if indexPath.section == 0 {
             // 此时为 WKWebview，，
             let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCellIdentifier", for: indexPath)
             cell.selectionStyle = .none
         
-            debugPrint("cell.height: \(cell.height)")
+            //debugPrint("cell.height: \(cell.height)")
             self.wkWebView.frame = CGRect(x: 0, y: 0, width: cell.width, height: cell.height)
             cell.contentView.addSubview(self.wkWebView)
         
             return cell
-        //}
-        //else if indexPath.section == 1 {
+        }
+        else {
             // 此时加载评论
-        //}
+            let cell: CommentTableViewCell = CommentTableViewCell.cellWithTableView(tableView)
+            cell.model = self.commentsData.comments[indexPath.row]
+            return cell
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        debugPrint("heightForRowAt: \(self.wkWebView.height)")
-        return self.wkWebView.height
+        //debugPrint("heightForRowAt: \(self.wkWebView.height)")
+        if indexPath.section == 0 {
+            return self.wkWebView.height
+        } else {
+            return CommentTableViewCell.estimateCellHeight(self.commentsData.comments[indexPath.row],
+                                                           font: UIFont.customFont_DINPro(fontSize: 14),
+                                                           size: CGSize(width: UIConstant.SCREEN_WIDTH - 60, height: 2000))
+        }
     }
 }
 
@@ -229,11 +267,11 @@ extension DetailCincismController: ToolBarDelegate {
 extension DetailCincismController: WKNavigationDelegate, UIScrollViewDelegate {
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        //self.showProgress()
+        self.showProgress()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        //self.hiddenProgress()
+        self.hiddenProgress()
         
         var frame: CGRect = webView.frame
         frame.size.height = 1

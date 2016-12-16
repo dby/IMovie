@@ -165,7 +165,7 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
             
             self.cincismInfoLabel.text = model.user.name.appending(" 评论 《").appending(model.subject.title).appending("》")
             self.cincismTitleLabel.text = model.title
-            self.cincismBriefLabel.text = model.abstract
+            self.cincismBriefLabel.attributedText = UILabel.setAttributText(model.abstract, lineSpcae: 5.0)
             
             let strs:[String] = model.subject.pic.normal.components(separatedBy: "?")
             self.moviePosterImage.if_setImage(URL(string: strs[0]))

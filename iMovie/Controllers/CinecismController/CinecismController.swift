@@ -26,14 +26,14 @@ class CinecismController: BasePageController {
     }
     
     //MARK:--- Private Methods ---
-    func getData(num: NSInteger = 0) {
+    func getData(page: NSInteger = 0) {
         isRefreshing = true
         
-        IMovie.shareInstance.getBestCineCism(target: IMovieService.movieBestCincism(self.page*pageCount, pageCount), successHandle: { [weak self] (data) in
+        IMovie.shareInstance.getBestCineCism(target: IMovieService.movieBestCincism(page*pageCount, pageCount), successHandle: { [weak self] (data) in
             
             debugPrint("GET Cincism DATA...SUCCESS")
             
-            if self?.page == 0 {
+            if page == 0 {
                 self?.page = 0
                 self?.reviewModelArray.removeAll()
             }
@@ -48,7 +48,7 @@ class CinecismController: BasePageController {
             self?.pullToRefresh.endRefresh()
             
             }, errorHandle: { (error) in
-                
+                print(error)
         })
     }
     
@@ -99,7 +99,9 @@ extension CinecismController {
         if differY < happenY {
             if !isRefreshing {
                 // 这里处理上拉加载更多
-                getData(num: page)
+                if self.reviewModelArray.count != 0 {
+                    getData(page: self.page)
+                }
             }
         }
     }

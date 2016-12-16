@@ -103,4 +103,34 @@ class IMovie {
             }
         }
     }
+    
+    func getCinCismConments(target: IMovieService, successHandle: ((_ data: CommentsModel) -> Void)?, errorHandle: ((Swift.Error) -> Void)?) {
+        iMovieProvider.request(target) { (result) in
+            switch result {
+            case let .success(response):
+                do {
+                    // 获取json数据
+                    let json = try response.mapJSON() as? Dictionary<String, AnyObject>
+                    if let json = json {
+                        debugPrint(json)
+                        let data: CommentsModel = CommentsModel(dict: json as NSDictionary?)
+                        if let success = successHandle {
+                            success(data)
+                        }
+                    }
+                    
+                } catch {
+                    print("出现异常")
+                }
+                break
+                
+            case let .failure(error):
+                // 错误回调
+                if let handle = errorHandle {
+                    handle(error)
+                }
+                break
+            }
+        }
+    }
 }
