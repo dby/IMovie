@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="detail.css" rel="stylesheet" type="text/css" />
         
+        <!--
         <link href="shCore.css" rel="stylesheet" type="text/css" />
         <link href="shThemeDjango.css" rel="stylesheet" type="text/css" />
         <link href="shThemeDefault.css" rel="stylesheet" type="text/css" />
@@ -36,6 +37,7 @@
         <script type="text/javascript" src="shBrushSql.js"></script>
         <script type="text/javascript" src="shBrushVb.js"></script>
         <script type="text/javascript" src="shBrushXml.js"></script>
+         -->
     </head>
     
     <div id="title_div">
@@ -46,8 +48,6 @@
     </div>
     
     <body {{# night }}class="night"{{/}}>
-        {{$ body }}
-        {{/}}
         
         <script type="text/javascript">
             window.alert = function() {};
@@ -70,11 +70,11 @@
         <main>{{{content}}}</main>
         {{#softwareName}}
             <div class="more_about">更多关于: <a href="{{softwareLink}}">{{softwareName}}</a> 的详细信息</div>
-            {{/}}
+        {{/}}
         
         {{#tags}}
             {{{tags}}}
-            {{/}}
+        {{/}}
         
         {{#relatedInfo}}
             <hr />

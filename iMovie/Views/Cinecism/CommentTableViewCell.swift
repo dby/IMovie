@@ -81,6 +81,7 @@ class CommentTableViewCell:  UITableViewCell, Reusable {
         if (model.ref_comment == nil) {
             
             return commentRect.height + 60
+            
         } else {
             
             let refComment: CommentModel = CommentModel(dict: model.ref_comment)

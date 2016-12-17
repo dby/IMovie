@@ -43,14 +43,21 @@ class DetailCincismController: UIViewController {
     }
     /// 获得影评评论信息
     func getCincismComments(uid: String) {
-        IMovie.shareInstance.getCinCismConments(target: IMovieService.cincismComment(uid, 0, 10), successHandle: { [weak self] (data) in
+        
+        if self.commentsData.comments.count != 0 && self.commentsData.comments.count >= self.commentsData.total {
+            debugPrint("已经没有数据了...")
+            return
+        }
+        
+        IMovie.shareInstance.getCinCismConments(target: IMovieService.cincismComment(uid, self.commentsData.comments.count, 10), successHandle: { [weak self] (data) in
             
             //debugPrint(data)
             self?.commentsData.total = data.total
-            self?.commentsData.count = (self?.commentsData.count)! + data.count
+            self?.commentsData.count = (self?.commentsData.comments.count)! + data.count
             data.comments.forEach({ (item) in
                 self?.commentsData.comments.append(item)
             })
+            self?.detailCincismTableView.reloadData()
             
         }) { (error) in
             print(error)
@@ -74,17 +81,20 @@ class DetailCincismController: UIViewController {
     func updateUI() {
         
         if let model = self.model {
-            let dic: Dictionary<String, String> = [
-                "title": model.title,
-                "authorID" : model.id,
-                "authorName" : model.subject.title,
-                "timeInterval" : model.create_time,
-                "content" : model.content
-            ]
             
-            self.wkWebView.loadHTMLString(model.content.HtmlWithData(data: dic as NSDictionary, templateName: "article"), baseURL: Bundle.main.resourceURL)
+            if let _ = model.subject {
+                let dic: Dictionary<String, String> = [
+                    "title": model.title,
+                    "authorID" : model.id,
+                    "authorName" : model.subject.title,
+                    "timeInterval" : model.create_time,
+                    "content" : model.content
+                ]
             
-            self.tableHeaderView.model = model
+                self.wkWebView.loadHTMLString(model.content.HtmlWithData(data: dic as NSDictionary, templateName: "article"), baseURL: Bundle.main.resourceURL)
+            
+                self.tableHeaderView.model = model
+            }
         }
     }
     
@@ -107,6 +117,7 @@ class DetailCincismController: UIViewController {
         var commentsData: CommentsModel = CommentsModel(dict: nil)
         commentsData.start = 0
         commentsData.count = 0
+        commentsData.total = 0
         return commentsData
     }()
     
@@ -126,8 +137,7 @@ class DetailCincismController: UIViewController {
         detailCincismTableView.dataSource = self
         detailCincismTableView.separatorStyle = .none
         
-        detailCincismTableView.showsVerticalScrollIndicator = false
-        detailCincismTableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        detailCincismTableView.contentInset = UIEdgeInsetsMake(50, 0, 50, 0)
         detailCincismTableView.tableHeaderView = self.tableHeaderView
         detailCincismTableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCellIdentifier")
         
@@ -139,6 +149,9 @@ class DetailCincismController: UIViewController {
         wkWebView.navigationDelegate    = self
         wkWebView.scrollView.delegate   = self
         wkWebView.scrollView.bounces = false
+        wkWebView.scrollView.maximumZoomScale = 1.0
+        wkWebView.scrollView.minimumZoomScale = 1.0
+        wkWebView.scrollView.bouncesZoom = false
         wkWebView.scrollView.isScrollEnabled = false
         wkWebView.scrollView.showsVerticalScrollIndicator = false
         wkWebView.scrollView.showsHorizontalScrollIndicator = false
@@ -162,6 +175,13 @@ class DetailCincismController: UIViewController {
 extension DetailCincismController: HeaderViewDelegate {
     func backButtonDidClick() {
         _ = self.navigationController?.popViewController(animated: true)
+    }
+}
+
+//MARK:---下拉刷新更多---
+extension DetailCincismController : PullToRefreshDelegate {
+    func pullToRefreshViewDidRefresh(_ pulllToRefreshView: PullToRefreshView) {
+        getCincismComments(uid: self.uid)
     }
 }
 
@@ -266,6 +286,10 @@ extension DetailCincismController: ToolBarDelegate {
 //MARK:-----WebViewDelegate UIScrollViewDelegate-----
 extension DetailCincismController: WKNavigationDelegate, UIScrollViewDelegate {
     
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return nil
+    }
+    
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.showProgress()
     }
@@ -273,20 +297,35 @@ extension DetailCincismController: WKNavigationDelegate, UIScrollViewDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.hiddenProgress()
         
-        var frame: CGRect = webView.frame
-        frame.size.height = 1
-        webView.frame = frame
-        
-        /// 获取html动态高度
-        webView.evaluateJavaScript("document.body.offsetHeight") { (result, error) in
-            if error == nil {
-                var newFrame = webView.frame
-                newFrame.size.height = result as! CGFloat + 60
-                webView.frame = newFrame
-                
-                self.detailCincismTableView.reloadData()
+        webView.evaluateJavaScript("document.body.scrollWidth") { (result, error) in
+            let ratio: CGFloat = webView.frame.width / (result as! CGFloat)
+            
+            /// 获取html动态高度
+            webView.evaluateJavaScript("document.body.offsetHeight") { (result, error) in
+                if error == nil {
+                    debugPrint("result: \(result) ratio:\(ratio)")
+                    var newFrame = webView.frame
+                    newFrame.size.height = (result as! CGFloat) * ratio
+                    webView.frame = newFrame
+                    
+                    self.detailCincismTableView.reloadData()
+                    
+                    //KVO监听网页内容高度变化
+                    self.wkWebView.scrollView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+                }
             }
         }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        let newHeight = self.wkWebView.scrollView.contentSize.height
+        debugPrint("newHeight: \(newHeight)")
+        
+        var newFrame = self.wkWebView.frame
+        newFrame.size.height = newHeight
+        self.wkWebView.frame = newFrame
+        
+        self.detailCincismTableView.reloadData()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
