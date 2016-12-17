@@ -24,7 +24,7 @@
                   moduleName = "Alamofire"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503653880.55767"
+                  timestampString = "503669993.730311"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
@@ -39,7 +39,7 @@
                   moduleName = "Alamofire"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503653880.560203"
+                  timestampString = "503669993.73181"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
@@ -70,7 +70,7 @@
                   moduleName = "Alamofire"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503653880.565351"
+                  timestampString = "503669993.734989"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
@@ -85,7 +85,7 @@
                   moduleName = "Alamofire"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503653880.569223"
+                  timestampString = "503669993.736437"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
@@ -93,6 +93,22 @@
                   offsetFromSymbolStart = "28">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iMovie/Controllers/CinecismController/DetailCincismController.swift"
+            timestampString = "503668633.166227"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
+            landmarkName = "scrollViewDidScroll(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -22,11 +22,8 @@ class CommentTableViewCell:  UITableViewCell, Reusable {
             }
             
             if (model?.ref_comment == nil) {
-                
                 self.setupLayout(hasRefComment: false)
-            
             } else {
-                
                 self.setupLayout(hasRefComment: true)
                 let refCommentModel: CommentModel = CommentModel(dict: model?.ref_comment)
                 self.refCommentContentLabel.attributedText = UILabel.setAttributText(refCommentModel.text, lineSpcae: 5.0)
@@ -51,12 +48,22 @@ class CommentTableViewCell:  UITableViewCell, Reusable {
     }
     
     //MARK:-----Private Function-----
-    class func cellWithTableView(_ tableView : UITableView) -> CommentTableViewCell {
+    class func cellWithTableView(_ tableView : UITableView, hasRefComment: Bool) -> CommentTableViewCell {
         
         var cell: CommentTableViewCell? = tableView.dequeueReusableCell() as CommentTableViewCell?
         if cell == nil {
-            cell = CommentTableViewCell(style: .default, reuseIdentifier: self.reuseIdentifier)
+            
+            var identifier = self.reuseIdentifier
+            if !hasRefComment {
+                identifier = identifier.appending("NotHasRefComment")
+            } else {
+                identifier = identifier.appending("HasRefComment")
+            }
+            
+            cell = CommentTableViewCell(style: .default, reuseIdentifier: identifier)
             cell?.selectionStyle = .none
+            cell?.hasRefComment = hasRefComment
+
         }
         return cell!
     }
@@ -80,7 +87,7 @@ class CommentTableViewCell:  UITableViewCell, Reusable {
                                                           context: nil)
         if (model.ref_comment == nil) {
             
-            return commentRect.height + 60
+            return commentRect.height + 50
             
         } else {
             
@@ -146,10 +153,11 @@ class CommentTableViewCell:  UITableViewCell, Reusable {
     }
     
     //MARK:-----Getter Setter-----
+    internal var hasRefComment: Bool = false
     internal lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.contentMode = .scaleAspectFit
-        avatarImageView.layer.cornerRadius = 20
+        avatarImageView.layer.cornerRadius = 15
         avatarImageView.layer.masksToBounds = true
         return avatarImageView
     }()
@@ -157,7 +165,7 @@ class CommentTableViewCell:  UITableViewCell, Reusable {
     internal lazy var nameLabel: UILabel = {
         let nameLabel: UILabel = UILabel()
         nameLabel.font = UIFont.systemFont(ofSize: 14)
-        nameLabel.backgroundColor = UIColor.yellow
+        //nameLabel.backgroundColor = UIColor.yellow
         return nameLabel
     }()
     
@@ -165,7 +173,7 @@ class CommentTableViewCell:  UITableViewCell, Reusable {
         let timeLabel: UILabel = UILabel()
         timeLabel.font = UIFont.systemFont(ofSize: 12)
         timeLabel.textColor = UIColor.lightGray
-        timeLabel.backgroundColor = UIColor.red
+        //timeLabel.backgroundColor = UIColor.red
         return timeLabel
     }()
     
@@ -174,7 +182,7 @@ class CommentTableViewCell:  UITableViewCell, Reusable {
         contentLabel.font = UIFont.systemFont(ofSize: 14)
         contentLabel.numberOfLines = 0
         contentLabel.lineBreakMode = .byWordWrapping
-        contentLabel.backgroundColor = UIColor.green
+        //contentLabel.backgroundColor = UIColor.green
         return contentLabel
     }()
     

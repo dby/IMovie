@@ -29,15 +29,17 @@ class DetailCincismController: UIViewController {
     //MARK:--- Private Methods ---
     /// 获得影评信息
     func getCinCismData(uid: String) {
-        
+        isRefreshing = true
         IMovie.shareInstance.getDetailCineCism(target: IMovieService.movieDetailCincism(uid), successHandle: { [weak self] (data) in
             
             debugPrint("GET Detail Cincism DATA...SUCCESS")
-            self?.model = data
             
+            self?.isRefreshing = false
+            self?.model = data
             self?.updateUI()
             
             }, errorHandle: { (error) in
+                self.isRefreshing = false
                 print(error)
         })
     }
@@ -45,21 +47,31 @@ class DetailCincismController: UIViewController {
     func getCincismComments(uid: String) {
         
         if self.commentsData.comments.count != 0 && self.commentsData.comments.count >= self.commentsData.total {
-            debugPrint("已经没有数据了...")
+            self.endRefreshing()
             return
         }
-        
+        self.isRefreshing = true
         IMovie.shareInstance.getCinCismConments(target: IMovieService.cincismComment(uid, self.commentsData.comments.count, 10), successHandle: { [weak self] (data) in
             
             //debugPrint(data)
-            self?.commentsData.total = data.total
-            self?.commentsData.count = (self?.commentsData.comments.count)! + data.count
-            data.comments.forEach({ (item) in
-                self?.commentsData.comments.append(item)
-            })
-            self?.detailCincismTableView.reloadData()
+            //debugPrint("请求成功...")
             
+            if (data.total == 0) {
+                
+                self?.endRefreshing()
+                
+            } else {
+                self?.isRefreshing = false
+                self?.commentsData.total = data.total
+                self?.commentsData.count = (self?.commentsData.comments.count)! + data.count
+                data.comments.forEach({ (item) in
+                    self?.commentsData.comments.append(item)
+                })
+                self?.detailCincismTableView.reloadData()
+                
+            }
         }) { (error) in
+            self.isRefreshing = false
             print(error)
         }
     }
@@ -78,6 +90,18 @@ class DetailCincismController: UIViewController {
         }
     }
 
+    fileprivate func endRefreshing() {
+        for item in self.refreshFootView.subviews {
+            if item is ActivityIndicatorView {
+                item.alpha = 0
+            }
+            
+            if item is UILabel {
+                item.alpha = 1
+            }
+        }
+    }
+    
     func updateUI() {
         
         if let model = self.model {
@@ -105,8 +129,15 @@ class DetailCincismController: UIViewController {
     //MARK:---Getter and Setter---
     public var uid: String = ""
     
+    /// ShareViewDelegate中定义的字段
     internal var shadowView: UIView?
     internal var shareView: ShareView?
+    
+    /// 上拉加载更多触发零界点
+    var happenY: CGFloat = UIConstant.SCREEN_HEIGHT - (50) + 20
+    var differY: CGFloat = 0
+    /// 是否正在刷新
+    var isRefreshing: Bool = false
     
     fileprivate var naviTitle: String!
     fileprivate var lastPosition: CGFloat = -50
@@ -130,6 +161,28 @@ class DetailCincismController: UIViewController {
         
         return tableHeaderView
     }()
+    /// RefreshFootView
+    fileprivate lazy var refreshFootView: UIView = {
+        
+        let activityView = ActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 25, height: 25) )
+        activityView.color = UIConstant.UI_COLOR_GrayTheme
+        activityView.center = CGPoint(x: self.view.center.x, y: 25)
+        activityView.startAnimation()
+        
+        let infoLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 20, width: UIConstant.SCREEN_WIDTH, height: 25))
+        infoLabel.textAlignment = .center
+        infoLabel.text = "没有更多的评论"
+        infoLabel.font = UIFont.customFont_DINPro(fontSize: 14)
+        infoLabel.alpha = 0
+        
+        let footView = UIView()
+        footView.origin = CGPoint.zero
+        footView.size = CGSize(width: UIConstant.SCREEN_WIDTH, height: 50)
+        footView.addSubview(infoLabel)
+        footView.addSubview(activityView)
+        return footView
+        
+    }()
     /// TableView
     fileprivate lazy var detailCincismTableView: UITableView = {
         let detailCincismTableView: UITableView = UITableView(frame: self.view.frame)
@@ -139,6 +192,7 @@ class DetailCincismController: UIViewController {
         
         detailCincismTableView.contentInset = UIEdgeInsetsMake(50, 0, 50, 0)
         detailCincismTableView.tableHeaderView = self.tableHeaderView
+        detailCincismTableView.tableFooterView = self.refreshFootView
         detailCincismTableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCellIdentifier")
         
         return detailCincismTableView
@@ -172,19 +226,14 @@ class DetailCincismController: UIViewController {
     }()
 }
 
+//MARK:---HeaderViewDelegate
 extension DetailCincismController: HeaderViewDelegate {
     func backButtonDidClick() {
         _ = self.navigationController?.popViewController(animated: true)
     }
 }
 
-//MARK:---下拉刷新更多---
-extension DetailCincismController : PullToRefreshDelegate {
-    func pullToRefreshViewDidRefresh(_ pulllToRefreshView: PullToRefreshView) {
-        getCincismComments(uid: self.uid)
-    }
-}
-
+//MARK:---TableViewDelegate TableViewDataSource
 extension DetailCincismController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -215,9 +264,16 @@ extension DetailCincismController: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             // 此时加载评论
-            let cell: CommentTableViewCell = CommentTableViewCell.cellWithTableView(tableView)
-            cell.model = self.commentsData.comments[indexPath.row]
-            return cell
+            var cell: CommentTableViewCell? = nil
+            
+            if (self.commentsData.comments[indexPath.row].ref_comment == nil) {
+                cell = CommentTableViewCell.cellWithTableView(tableView, hasRefComment: false)
+            } else {
+                cell = CommentTableViewCell.cellWithTableView(tableView, hasRefComment: true)
+            }
+            
+            cell?.model = self.commentsData.comments[indexPath.row]
+            return cell!
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -303,7 +359,7 @@ extension DetailCincismController: WKNavigationDelegate, UIScrollViewDelegate {
             /// 获取html动态高度
             webView.evaluateJavaScript("document.body.offsetHeight") { (result, error) in
                 if error == nil {
-                    debugPrint("result: \(result) ratio:\(ratio)")
+                    //debugPrint("result: \(result) ratio:\(ratio)")
                     var newFrame = webView.frame
                     newFrame.size.height = (result as! CGFloat) * ratio
                     webView.frame = newFrame
@@ -319,7 +375,7 @@ extension DetailCincismController: WKNavigationDelegate, UIScrollViewDelegate {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         let newHeight = self.wkWebView.scrollView.contentSize.height
-        debugPrint("newHeight: \(newHeight)")
+        //debugPrint("newHeight: \(newHeight)")
         
         var newFrame = self.wkWebView.frame
         newFrame.size.height = newHeight
@@ -330,9 +386,22 @@ extension DetailCincismController: WKNavigationDelegate, UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentPosition: CGFloat = scrollView.contentOffset.y
-        //debugPrint(currentPosition)
-        //debugPrint(currentPosition - self.lastPosition)
-        //debugPrint("")
+        
+        // 计算contentsize与offset的差值
+        let contentSizeY = scrollView.contentSize.height
+        let contentOffsetY = scrollView.contentOffset.y
+        
+        differY = contentSizeY - contentOffsetY
+        if differY < happenY {
+            if !isRefreshing {
+                // 这里处理上拉加载更多
+                if self.model == nil {
+                    self.getCinCismData(uid: self.uid)
+                } else {
+                    self.getCincismComments(uid: self.uid)
+                }
+            }
+        }
         
         if currentPosition - self.lastPosition > 0 && currentPosition > 10 {
             self.headerTopConstraint?.update(offset: -50)

@@ -65,27 +65,27 @@ class CincismHeaderView: UIImageView {
     func headerViewLayout() {
         //
         self.moviePosterImage.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(20)
+            make.left.equalTo(self).offset(15)
             make.top.equalTo(self).offset(20)
             make.bottom.equalTo(self).offset(-20)
             make.width.equalTo(self.moviePosterImage.snp.height).multipliedBy(0.6666667)
         }
         self.movieRatingLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.moviePosterImage.snp.centerY)
-            make.left.equalTo(self.moviePosterImage.snp.right)
-            make.right.equalTo(self)
+            make.left.equalTo(self.moviePosterImage.snp.right).offset(15)
+            make.right.equalTo(self).offset(-15)
             make.height.equalTo(30)
         }
         self.movieNameLabel.snp.makeConstraints { (make) in
             make.bottom.equalTo(self.movieRatingLabel.snp.top)
-            make.left.equalTo(self.moviePosterImage.snp.right)
-            make.right.equalTo(self)
+            make.left.equalTo(self.moviePosterImage.snp.right).offset(15)
+            make.right.equalTo(self).offset(-15)
             make.height.equalTo(30)
         }
         self.movieInfoLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.movieRatingLabel.snp.bottom)
-            make.left.equalTo(self.moviePosterImage.snp.right)
-            make.right.equalTo(self)
+            make.left.equalTo(self.moviePosterImage.snp.right).offset(15)
+            make.right.equalTo(self).offset(-15)
             make.height.equalTo(30)
         }
     }
