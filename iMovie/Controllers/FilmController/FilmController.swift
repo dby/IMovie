@@ -25,6 +25,8 @@ enum CollectionViewType: Int {
     case newMovieList = 4
     // 票房榜
     case boxOfficeList = 5
+    // 推荐列表
+    case recommandList = 6
 }
 
 class FilmController: BasePageController, Reusable {
@@ -69,7 +71,7 @@ class FilmController: BasePageController, Reusable {
         }
     }
     
-    //MARK: --- Getter and Setter ---
+    //MARK:---Getter and Setter---
     var nowHotShowMovieModelArray = Array<MovieModel>()
     var soonShowMovieModelArray = Array<MovieModel>()
     var top250MovieModelArray   = Array<MovieModel>()
@@ -87,60 +89,15 @@ class FilmController: BasePageController, Reusable {
     }()
     
     // 正在热映
-    fileprivate lazy var nowHotShowMovieInfoView: MovieInfoView = {
-        let nowHotShowMovieInfoView: MovieInfoView = MovieInfoView(frame: CGRect.zero)
-        nowHotShowMovieInfoView.dataCollectionView.tag = CollectionViewType.NowHotShow.rawValue
-        nowHotShowMovieInfoView.dataCollectionView.delegate   = self
-        nowHotShowMovieInfoView.dataCollectionView.dataSource = self
-        nowHotShowMovieInfoView.backgroundColor = UIColor.red
-        
-        return nowHotShowMovieInfoView
-    }()
-    // 即将上映
-    fileprivate lazy var soonShowMovieInfoView: MovieInfoView = {
-        let soonShowMovieInfoView: MovieInfoView = MovieInfoView(frame: CGRect.zero)
-        soonShowMovieInfoView.dataCollectionView.tag = CollectionViewType.SoonShow.rawValue
-        soonShowMovieInfoView.dataCollectionView.delegate   = self
-        soonShowMovieInfoView.dataCollectionView.dataSource = self
-        
-        return soonShowMovieInfoView
-    }()
-    // 豆瓣口碑前250名
-    fileprivate lazy var top250MovieInfoView: MovieInfoView = {
-        let top250MovieInfoView: MovieInfoView = MovieInfoView(frame: CGRect.zero)
-        top250MovieInfoView.dataCollectionView.tag = CollectionViewType.Top250.rawValue
-        top250MovieInfoView.dataCollectionView.delegate   = self
-        top250MovieInfoView.dataCollectionView.dataSource = self
-        
-        return top250MovieInfoView
-    }()
-    // 本周口碑榜
-    fileprivate lazy var praiseListMovieInfoView: MovieInfoView = {
-        let praiseListMovieInfoView: MovieInfoView = MovieInfoView(frame: CGRect.zero)
-        praiseListMovieInfoView.dataCollectionView.tag = CollectionViewType.praiseList.rawValue
-        praiseListMovieInfoView.dataCollectionView.delegate   = self
-        praiseListMovieInfoView.dataCollectionView.dataSource = self
-        
-        return praiseListMovieInfoView
-    }()
-    // 新片榜
-    fileprivate lazy var newMovieInfoView: MovieInfoView = {
-        let newMovieInfoView: MovieInfoView = MovieInfoView(frame: CGRect.zero)
-        newMovieInfoView.dataCollectionView.tag = CollectionViewType.newMovieList.rawValue
-        newMovieInfoView.dataCollectionView.delegate   = self
-        newMovieInfoView.dataCollectionView.dataSource = self
-        
-        return newMovieInfoView
-    }()
-    // 本周票房榜
-    fileprivate lazy var boxOfficeListMovieInfoView: MovieInfoView = {
-        let boxOfficeListMovieInfoView: MovieInfoView = MovieInfoView(frame: CGRect.zero)
-        boxOfficeListMovieInfoView.dataCollectionView.tag = CollectionViewType.boxOfficeList.rawValue
-        boxOfficeListMovieInfoView.dataCollectionView.delegate   = self
-        boxOfficeListMovieInfoView.dataCollectionView.dataSource = self
-        
-        return boxOfficeListMovieInfoView
-    }()
+    //fileprivate lazy var nowHotShowMovieInfoView: MovieInfoView = {
+    //    let nowHotShowMovieInfoView: MovieInfoView = MovieInfoView(frame: CGRect.zero)
+    //    nowHotShowMovieInfoView.dataCollectionView.tag = CollectionViewType.NowHotShow.rawValue
+    //    nowHotShowMovieInfoView.dataCollectionView.delegate   = self
+    //    nowHotShowMovieInfoView.dataCollectionView.dataSource = self
+    //    nowHotShowMovieInfoView.backgroundColor = UIColor.red
+    //
+    //    return nowHotShowMovieInfoView
+    //}()
 }
 
 extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -173,18 +130,22 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (CollectionViewType.NowHotShow.rawValue == collectionView.tag) {
+            // 正在热映
             let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num3)
             cell.models = top250MovieModelArray
             return cell
         } else if (CollectionViewType.SoonShow.rawValue == collectionView.tag) {
+            // 即将上映
             let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num4)
             cell.models = top250MovieModelArray
             return cell
         } else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
+            // 豆瓣TOP250
             let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num6)
             cell.models = top250MovieModelArray
             return cell
         } else if (CollectionViewType.praiseList.rawValue == collectionView.tag) {
+            // 本周口碑榜
             let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num9)
             cell.models = top250MovieModelArray
             return cell
@@ -216,9 +177,11 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
 }
 
 extension FilmController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 6 {
@@ -228,71 +191,57 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
             return height
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "FilmControllerIdentifier")
+        var cell: MovieInfoTableViewCell? = nil
         
-        if (cell == nil) {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "FilmControllerIdentifier")
-        }
+        switch indexPath.row {
         
-        for item: UIView in (cell?.contentView.subviews)! {
-            if item is MovieInfoView {
-                item.removeFromSuperview()
-            }
-        }
-        
-        //switch indexPath.row {
-        switch 0 {
         case CollectionViewType.NowHotShow.rawValue:
-            self.nowHotShowMovieInfoView.titleLabel.text = "正在热映的电影"
-            cell?.contentView.addSubview(self.nowHotShowMovieInfoView)
-            self.nowHotShowMovieInfoView.frame = (cell?.frame)!
-            self.nowHotShowMovieInfoView.dataCollectionView.reloadData()
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num3)
+            cell?.titleLabel.text = "正在热映的电影"
             break
         case CollectionViewType.SoonShow.rawValue:
-            self.soonShowMovieInfoView.titleLabel.text = "即将上映的电影"
-            cell?.contentView.addSubview(self.soonShowMovieInfoView)
-            self.soonShowMovieInfoView.frame = (cell?.frame)!
-            self.soonShowMovieInfoView.dataCollectionView.reloadData()
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num4)
+            cell?.titleLabel.text = "即将上映的电影"
             break
         case CollectionViewType.Top250.rawValue:
-            self.top250MovieInfoView.titleLabel.text = "TOP250电影"
-            cell?.contentView.addSubview(self.top250MovieInfoView)
-            self.top250MovieInfoView.frame = (cell?.frame)!
-            self.top250MovieInfoView.dataCollectionView.reloadData()
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num6)
+            cell?.titleLabel.text = "TOP250电影"
             break
         case CollectionViewType.praiseList.rawValue:
-            self.praiseListMovieInfoView.titleLabel.text = "本周口碑榜"
-            cell?.contentView.addSubview(self.praiseListMovieInfoView)
-            self.praiseListMovieInfoView.frame = (cell?.frame)!
-            self.praiseListMovieInfoView.dataCollectionView.reloadData()
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num9)
+            cell?.titleLabel.text = "本周口碑榜"
             break
         case CollectionViewType.newMovieList.rawValue:
-            self.newMovieInfoView.titleLabel.text = "新片榜"
-            cell?.contentView.addSubview(self.newMovieInfoView)
-            self.newMovieInfoView.frame = (cell?.frame)!
-            self.newMovieInfoView.dataCollectionView.reloadData()
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
+            cell?.titleLabel.text = "新片榜"
             break
         case CollectionViewType.boxOfficeList.rawValue:
-            self.boxOfficeListMovieInfoView.titleLabel.text = "本周票房榜"
-            cell?.contentView.addSubview(self.boxOfficeListMovieInfoView)
-            self.boxOfficeListMovieInfoView.frame = (cell?.frame)!
-            self.boxOfficeListMovieInfoView.dataCollectionView.reloadData()
-
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
+            cell?.titleLabel.text = "本周票房榜"
             break
-        case 6:
+        case CollectionViewType.recommandList.rawValue:
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
+            cell?.titleLabel.text = "推荐"
             break
         default:
             break
         }
         cell?.selectionStyle = .none
-        
+        cell?.dataCollectionView.tag = indexPath.row
+        cell?.dataCollectionView.delegate = self
+        cell?.dataCollectionView.dataSource = self
+        cell?.dataCollectionView.reloadData()
+
         return cell!
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 7
     }

@@ -8,18 +8,53 @@
 
 import Foundation
 
-class MovieInfoView: UIView {
+class MovieInfoTableViewCell: UITableViewCell, Reusable {
     
-    override init(frame: CGRect) {
-        
-        super.init(frame: frame)
-        
-        self.addSubview(titleLabel)
-        self.addSubview(moreButton)
-        self.addSubview(dataCollectionView)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        // 添加控件
+        self.contentView.addSubview(titleLabel)
+        self.contentView.addSubview(moreButton)
+        self.contentView.addSubview(dataCollectionView)
         
         setupLayout()
     }
+    
+    class func cellWithTableView(_ tableView : UITableView, type: ImageCollCellType) -> MovieInfoTableViewCell {
+        
+        var identifier: String = self.reuseIdentifier
+        switch type {
+        case .Num3:
+            identifier = identifier.appending("NUM3")
+            break
+        case .Num4:
+            identifier = identifier.appending("NUM4")
+            break
+        case .Num6:
+            identifier = identifier.appending("NUM6")
+            break
+        case .Num9:
+            identifier = identifier.appending("NUM9")
+            break
+        case .None:
+            break
+        }
+        
+        var cell = tableView.dequeueReusableCell() as MovieInfoTableViewCell?
+        if cell == nil {
+            cell = MovieInfoTableViewCell(style: .default, reuseIdentifier: identifier)
+            cell?.selectionStyle = .none
+            cell?.imageCellType  = type
+        }
+        return cell!
+    }
+    
+    // 计算内容的高度
+    //class func estimateCellHeight() -> CGFloat {
+        
+    //}
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -47,6 +82,8 @@ class MovieInfoView: UIView {
     }
     
     //MARK: --- Getter and Setter ---
+    fileprivate var imageCellType: ImageCollCellType = ImageCollCellType.None
+    
     public var titleLabel: UILabel = {
         let titleLabel: UILabel = UILabel()
         //titleLabel.backgroundColor = UIColor.green
@@ -73,8 +110,13 @@ class MovieInfoView: UIView {
         let dataCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         dataCollectionView.bounces = false
         dataCollectionView.isPagingEnabled = false
+        
         dataCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: String(describing: MovieViewCell.self))
-        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self))
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self).appending("NUM3"))
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self).appending("NUM4"))
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self).appending("NUM6"))
+        dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self).appending("NUM9"))
+        
         dataCollectionView.backgroundColor = UIColor.white
 
         return dataCollectionView

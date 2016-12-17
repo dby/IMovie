@@ -27,7 +27,7 @@
 		433F06E91DFEDDD80055EF02 /* ShareResuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433F06E81DFEDDD80055EF02 /* ShareResuable.swift */; };
 		433F06EB1DFEDEDD0055EF02 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433F06EA1DFEDEDD0055EF02 /* ShareView.swift */; };
 		433F06ED1DFEE0460055EF02 /* UIViewController+iM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433F06EC1DFEE0460055EF02 /* UIViewController+iM.swift */; };
-		434027DA1DF8FB0C00C2D733 /* MovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027D91DF8FB0C00C2D733 /* MovieInfoView.swift */; };
+		434027DA1DF8FB0C00C2D733 /* MovieInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027D91DF8FB0C00C2D733 /* MovieInfoTableViewCell.swift */; };
 		434027DC1DF9327000C2D733 /* ControllerResuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027DB1DF9327000C2D733 /* ControllerResuable.swift */; };
 		434027DF1DF932EB00C2D733 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027DE1DF932EB00C2D733 /* MainHeaderView.swift */; };
 		434027E11DF9334200C2D733 /* UIFont+iMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434027E01DF9334200C2D733 /* UIFont+iMovie.swift */; };
@@ -153,7 +153,7 @@
 		433F06E81DFEDDD80055EF02 /* ShareResuable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareResuable.swift; path = Extension/ShareResuable.swift; sourceTree = "<group>"; };
 		433F06EA1DFEDEDD0055EF02 /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareView.swift; path = Views/ShareView.swift; sourceTree = "<group>"; };
 		433F06EC1DFEE0460055EF02 /* UIViewController+iM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+iM.swift"; path = "Extension/UIViewController+iM.swift"; sourceTree = "<group>"; };
-		434027D91DF8FB0C00C2D733 /* MovieInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieInfoView.swift; path = Views/FilmController/MovieInfoView.swift; sourceTree = "<group>"; };
+		434027D91DF8FB0C00C2D733 /* MovieInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieInfoTableViewCell.swift; path = Views/FilmController/MovieInfoTableViewCell.swift; sourceTree = "<group>"; };
 		434027DB1DF9327000C2D733 /* ControllerResuable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllerResuable.swift; path = Extension/ControllerResuable.swift; sourceTree = "<group>"; };
 		434027DE1DF932EB00C2D733 /* MainHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainHeaderView.swift; path = Views/MainView/MainHeaderView.swift; sourceTree = "<group>"; };
 		434027E01DF9334200C2D733 /* UIFont+iMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+iMovie.swift"; path = "Extension/UIFont+iMovie.swift"; sourceTree = "<group>"; };
@@ -620,7 +620,7 @@
 			isa = PBXGroup;
 			children = (
 				43AA926C1DF70DAE00102486 /* MovieViewCell.swift */,
-				434027D91DF8FB0C00C2D733 /* MovieInfoView.swift */,
+				434027D91DF8FB0C00C2D733 /* MovieInfoTableViewCell.swift */,
 				433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */,
 			);
 			name = FilmController;
@@ -897,7 +897,7 @@
 				434028061DF93DD000C2D733 /* YYFPSLabel.m in Sources */,
 				434027DF1DF932EB00C2D733 /* MainHeaderView.swift in Sources */,
 				43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */,
-				434027DA1DF8FB0C00C2D733 /* MovieInfoView.swift in Sources */,
+				434027DA1DF8FB0C00C2D733 /* MovieInfoTableViewCell.swift in Sources */,
 				434027ED1DF9362F00C2D733 /* MenuViewController.swift in Sources */,
 				433F06E91DFEDDD80055EF02 /* ShareResuable.swift in Sources */,
 				433A854D1DFC345100B33AFC /* CinecismTableViewCell.swift in Sources */,

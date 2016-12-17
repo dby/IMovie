@@ -15,13 +15,32 @@ enum ImageCollCellType {
     case Num4
     case Num6
     case Num9
+    case None
 }
 
 class ImageCollectionCell: UICollectionViewCell, Reusable {
     
     class func cellWithCollectionView(_ collectionView: UICollectionView, indexPath: IndexPath, type: ImageCollCellType) -> ImageCollectionCell {
         
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.reuseIdentifier, for: indexPath) as? ImageCollectionCell
+        var identifier = self.reuseIdentifier
+        switch type {
+        case .Num3:
+            identifier = identifier.appending("NUM3")
+            break
+        case .Num4:
+            identifier = identifier.appending("NUM4")
+            break
+        case .Num6:
+            identifier = identifier.appending("NUM6")
+            break
+        case .Num9:
+            identifier = identifier.appending("NUM9")
+            break
+        default:
+            break
+        }
+        
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? ImageCollectionCell
         if cell == nil {
             cell = ImageCollectionCell()
         }
@@ -217,6 +236,9 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
             })
             
             break
+        default:
+            break
+
         }
     }
     
