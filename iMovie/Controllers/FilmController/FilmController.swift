@@ -9,9 +9,6 @@
 import UIKit
 import SnapKit
 
-let BUBBLE_DIAMETER: CGFloat = 60.0
-let BUBBLE_PADDING: CGFloat = 10.0
-
 enum CollectionViewType: Int {
     // 正在热映
     case NowHotShow = 0
@@ -39,26 +36,25 @@ class FilmController: BasePageController, Reusable {
         self.view.addSubview(filmTableView)
         
         setupLayout()
-        
-        getData(num: 0)
+        getData()
     }
     
     //MARK: --- Private Methods ---
-    func getData(num: NSInteger) {
+    func getData() {
         
-        IMovie.shareInstance.getMovieTop250(target: IMovieService.movieTop250(num), successHandle: { [weak self] (data) in
-            
-            for item in data.subject_collection_items {
-                self?.newMovieListMovieModelArray.append(item)
-                self?.soonShowMovieModelArray.append(item)
-                self?.top250MovieModelArray.append(item)
-                self?.praiseListMovieModelArray.append(item)
-                self?.newMovieListMovieModelArray.append(item)
-                self?.boxOfficeListMovieModelArray.append(item)
-            }
+        IMovie.shareInstance.getMovieModules(target: IMovieService.movieModules(), successHandle: { [weak self] (data) in
             
             debugPrint("GETDATA...SUCCESS")
-            self?.filmTableView.reloadData()
+            debugPrint(data.nowHotShowData)
+            debugPrint("=================")
+            debugPrint(data.soonShowData)
+            debugPrint("=================")
+            debugPrint(data.rankListData)
+            debugPrint("=================")
+            debugPrint(data.bestReviewsData)
+            debugPrint("=================")
+            debugPrint(data.douListData)
+            //self?.filmTableView.reloadData()
             
             }, errorHandle: { (error) in
                 
@@ -87,17 +83,6 @@ class FilmController: BasePageController, Reusable {
         
         return filmTableView
     }()
-    
-    // 正在热映
-    //fileprivate lazy var nowHotShowMovieInfoView: MovieInfoView = {
-    //    let nowHotShowMovieInfoView: MovieInfoView = MovieInfoView(frame: CGRect.zero)
-    //    nowHotShowMovieInfoView.dataCollectionView.tag = CollectionViewType.NowHotShow.rawValue
-    //    nowHotShowMovieInfoView.dataCollectionView.delegate   = self
-    //    nowHotShowMovieInfoView.dataCollectionView.dataSource = self
-    //    nowHotShowMovieInfoView.backgroundColor = UIColor.red
-    //
-    //    return nowHotShowMovieInfoView
-    //}()
 }
 
 extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

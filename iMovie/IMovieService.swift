@@ -19,6 +19,8 @@ public enum IMovieService {
     case movieDetailCincism(String)
     /// 获得某一影评的评价 uid-start-count
     case cincismComment(String, Int, Int)
+    /// 电影首页信息
+    case movieModules()
     
 }
 
@@ -112,6 +114,8 @@ extension IMovieService: TargetType {
             return URL(string: "https://frodo.douban.com/api/v2/")!
         case .cincismComment(_):
             return URL(string: "https://frodo.douban.com/api/v2/")!
+        case .movieModules():
+            return URL(string: "https://frodo.douban.com/api/v2/")!
         }
     }
     
@@ -125,6 +129,8 @@ extension IMovieService: TargetType {
             return "review/\(uid)/"
         case let .cincismComment(uid, _, _):
             return "review/\(uid)/comments/"
+        case .movieModules():
+            return "movie/modules"
         }
     }
 
@@ -162,6 +168,10 @@ extension IMovieService: TargetType {
                     "apikey": apikey as AnyObject,
                     "_need_webp": _need_webp as AnyObject,
                     "start": start as AnyObject]
+        case .movieModules():
+            return ["loc_id": loc_id as AnyObject,
+                    "_need_webp": _need_webp as AnyObject,
+                    "apikey": apikey as AnyObject]
         }
     }
 

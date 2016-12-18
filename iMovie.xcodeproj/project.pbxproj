@@ -46,6 +46,7 @@
 		434028021DF93DA700C2D733 /* FZLTZCHJW--GB1-0.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 434027FF1DF93DA700C2D733 /* FZLTZCHJW--GB1-0.TTF */; };
 		434028061DF93DD000C2D733 /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 434028051DF93DD000C2D733 /* YYFPSLabel.m */; };
 		43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43480B691DF4101A00169DD7 /* MainViewController.swift */; };
+		436D54631E062A3300EFBB40 /* ModulesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436D54621E062A3300EFBB40 /* ModulesModel.swift */; };
 		4392AF711E0248CF007A9177 /* base.html in Resources */ = {isa = PBXBuildFile; fileRef = 4392AF6D1E0248CF007A9177 /* base.html */; };
 		4392AFEB1E02DFD9007A9177 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 4392AFEA1E02DFD9007A9177 /* html */; };
 		4392B0081E02E018007A9177 /* shAutoloader.js in Resources */ = {isa = PBXBuildFile; fileRef = 4392AFEC1E02E018007A9177 /* shAutoloader.js */; };
@@ -173,6 +174,7 @@
 		434028041DF93DD000C2D733 /* YYFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YYFPSLabel.h; path = Other/Lib/YYFPSLabel/YYFPSLabel.h; sourceTree = "<group>"; };
 		434028051DF93DD000C2D733 /* YYFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YYFPSLabel.m; path = Other/Lib/YYFPSLabel/YYFPSLabel.m; sourceTree = "<group>"; };
 		43480B691DF4101A00169DD7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainController/MainViewController.swift; sourceTree = "<group>"; };
+		436D54621E062A3300EFBB40 /* ModulesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModulesModel.swift; path = Models/ModulesModel.swift; sourceTree = "<group>"; };
 		4392AF6D1E0248CF007A9177 /* base.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = base.html; sourceTree = "<group>"; };
 		4392AFEA1E02DFD9007A9177 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = Resources/html; sourceTree = "<group>"; };
 		4392AFEC1E02E018007A9177 /* shAutoloader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = shAutoloader.js; path = Resources/js/shAutoloader.js; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 				434027F31DF9379800C2D733 /* MenuTabModel.swift */,
 				433A854E1DFC3CDC00B33AFC /* CincismModel.swift */,
 				431E0CDA1E03EA5600D0332D /* CommentModel.swift */,
+				436D54621E062A3300EFBB40 /* ModulesModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -907,6 +910,7 @@
 				434027F01DF936C300C2D733 /* MenuHeaaderView.swift in Sources */,
 				433A854F1DFC3CDC00B33AFC /* CincismModel.swift in Sources */,
 				43B3D6181DF862EF00789A9E /* UIImageView+iMovie.swift in Sources */,
+				436D54631E062A3300EFBB40 /* ModulesModel.swift in Sources */,
 				43AA92611DF6E00D00102486 /* SearchController.swift in Sources */,
 				43CBC2D11E014A560060515F /* String+iMovie.swift in Sources */,
 				434027E31DF9338900C2D733 /* UIView+Frame.swift in Sources */,
