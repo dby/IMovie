@@ -344,12 +344,24 @@ struct ModulesModel {
     init(dict: NSDictionary?) {
         if let dict = dict {
             if let modulesArr: Array<NSDictionary> = dict["modules"] as? Array<NSDictionary> {
-                if modulesArr.count == 9 {
-                    self.nowHotShowData = NowHotShowModel(dict: modulesArr[0])
-                    self.soonShowData = NowHotShowModel(dict: modulesArr[2])
-                    self.rankListData = RankListModel(dict: modulesArr[4])
-                    self.bestReviewsData = BestReviewsModel(dict: modulesArr[6])
-                    self.douListData = DouListModel(dict: modulesArr[8])
+                if modulesArr.count > 5 {
+                    for itemDic in modulesArr {
+                        if let str: String = itemDic["key"] as? String {
+                            if str.compare("subject_collection_boards") == .orderedSame {
+                                if self.nowHotShowData == nil {
+                                    self.nowHotShowData = NowHotShowModel(dict: itemDic)
+                                } else {
+                                    self.soonShowData = NowHotShowModel(dict: modulesArr[2])
+                                }
+                            } else if str.compare("selected_collections") == .orderedSame {
+                                self.rankListData = RankListModel(dict: itemDic)
+                            } else if str.compare("best_reviews") == .orderedSame {
+                                self.bestReviewsData = BestReviewsModel(dict: itemDic)
+                            } else if str.compare("related_doulists") == .orderedSame {
+                                self.douListData = DouListModel(dict: itemDic)
+                            }
+                        }
+                    }
                 }
             }
         }

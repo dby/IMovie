@@ -54,6 +54,7 @@ class IMovie {
                     // 获取json数据
                     let json = try response.mapJSON() as? Dictionary<String, AnyObject>
                     if let json = json {
+                        //debugPrint(json)
                         let data: CincismModel = CincismModel(dic: json as NSDictionary?)
                         if let success = successHandle {
                             success(data)

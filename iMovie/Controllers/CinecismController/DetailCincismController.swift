@@ -23,7 +23,7 @@ class DetailCincismController: UIViewController {
         setupLayout()
         
         getCinCismData(uid: self.uid)
-        getCincismComments(uid: self.uid)
+        //getCincismComments(uid: self.uid)
     }
     
     //MARK:--- Private Methods ---
@@ -347,11 +347,11 @@ extension DetailCincismController: WKNavigationDelegate, UIScrollViewDelegate {
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.showProgress()
+        //self.showProgress()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.hiddenProgress()
+        //self.hiddenProgress()
         
         webView.evaluateJavaScript("document.body.scrollWidth") { (result, error) in
             let ratio: CGFloat = webView.frame.width / (result as! CGFloat)

@@ -25,6 +25,7 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
         
         self.headerView.addSubview(self.movieNameLabel)
         self.headerView.addSubview(self.moviePosterImage)
+        self.headerView.addSubview(self.movieRatingBar)
         self.headerView.addSubview(self.movieRatingLabel)
         self.headerView.addSubview(self.movieInfoLabel)
         
@@ -50,9 +51,15 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
             make.bottom.equalTo(self.headerView).offset(-20)
             make.width.equalTo(self.moviePosterImage.snp.height).multipliedBy(0.6666667)
         }
-        self.movieRatingLabel.snp.makeConstraints { (make) in
+        self.movieRatingBar.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.moviePosterImage.snp.centerY)
             make.left.equalTo(self.moviePosterImage.snp.right).offset(10)
+            make.width.equalTo(80)
+            make.height.equalTo(30)
+        }
+        self.movieRatingLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.moviePosterImage.snp.centerY)
+            make.left.equalTo(self.movieRatingBar.snp.right).offset(5)
             make.right.equalTo(self.headerView).offset(-20)
             make.height.equalTo(30)
         }
@@ -159,11 +166,14 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
     //MARK:---Getter and Setter---
     var model: ReviewModel! {
         didSet {
-            self.movieNameLabel.text = model.subject.title
-            self.movieRatingLabel.text = String(model.rating.value)
-            self.movieInfoLabel.text = getMovieActorsInfo(model: model)
+            let ratingNum: CGFloat = CGFloat(model.subject.rating.value * Double(10) / Double(model.subject.rating.max))
+
+            self.movieNameLabel.text   = model.subject.title
+            self.movieRatingBar.rating = ratingNum/2.0
+            self.movieRatingLabel.text = String(format: "%.2f", ratingNum)
+            self.movieInfoLabel.text   = getMovieActorsInfo(model: model)
             
-            self.cincismInfoLabel.text = model.user.name.appending(" 评论 《").appending(model.subject.title).appending("》")
+            self.cincismInfoLabel.text  = model.user.name.appending(" 评论 《").appending(model.subject.title).appending("》")
             self.cincismTitleLabel.text = model.title
             self.cincismBriefLabel.attributedText = UILabel.setAttributText(model.abstract, lineSpcae: 5.0)
             
@@ -187,6 +197,12 @@ class CinecismTableViewCell: UITableViewCell, Reusable {
         //movieNameLabel.backgroundColor = UIColor.red
         movieNameLabel.font = UIFont.customFont_FZLTZCHJW(fontSize: 18)
         return movieNameLabel
+    }()
+    // 电影RatingBar
+    internal lazy var movieRatingBar: RatingBar = {
+        let movieRatingBar: RatingBar = RatingBar()
+        
+        return movieRatingBar
     }()
     // 电影评分
     internal lazy var movieRatingLabel: UILabel = {

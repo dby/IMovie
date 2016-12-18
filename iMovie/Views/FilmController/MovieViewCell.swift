@@ -26,6 +26,7 @@ class MovieViewCell: UICollectionViewCell, Reusable {
         addSubview(moviePoster)
         addSubview(movieLabel)
         addSubview(ratingLabel)
+        addSubview(ratingBar)
         
         setupLayout()
     }
@@ -49,17 +50,28 @@ class MovieViewCell: UICollectionViewCell, Reusable {
             make.height.equalTo(MovieConstant.TitleHeight)
         }
         
-        ratingLabel.snp.makeConstraints { (make) in
-            make.left.right.equalTo(self.contentView)
+        ratingBar.snp.makeConstraints { (make) in
+            make.left.equalTo(self.contentView)
             make.top.equalTo(self.movieLabel.snp.bottom)
             make.height.equalTo(MovieConstant.RatingHeight)
+            make.width.equalTo(80)
+        }
+        ratingLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.ratingBar.snp.right).offset(2)
+            make.right.equalTo(self.contentView)
+            make.top.equalTo(self.movieLabel.snp.bottom)
+            make.height.equalTo(20)
         }
     }
     
     //MARK:--- Getter or Setter ---
     var model: MovieModel! {
         didSet {
-            self.ratingLabel.text = String(model.rating.value)
+            if model.rating != nil {
+                self.ratingLabel.text = String(format: "%.2f", model.rating.value)
+                self.ratingBar.rating = CGFloat(model.rating.value/2.0)
+            }
+            
             self.movieLabel.text  = model.title
                 
             let strs:[String] = model.cover.url.components(separatedBy: "?")
@@ -71,6 +83,7 @@ class MovieViewCell: UICollectionViewCell, Reusable {
     fileprivate lazy var moviePoster: UIImageView = {
         let moviePoster: UIImageView = UIImageView()
         moviePoster.contentMode = .scaleAspectFill
+        moviePoster.clipsToBounds = true;
         return moviePoster
     }()
     
@@ -79,6 +92,11 @@ class MovieViewCell: UICollectionViewCell, Reusable {
         movieLabel.font = FontConstant.SYS_16
         //movieLabel.backgroundColor = UIColor.red
         return movieLabel
+    }()
+    
+    fileprivate lazy var ratingBar: RatingBar = {
+        let ratingBar: RatingBar = RatingBar()
+        return ratingBar
     }()
     
     fileprivate lazy var ratingLabel: UILabel = {

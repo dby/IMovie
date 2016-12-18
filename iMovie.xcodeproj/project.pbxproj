@@ -47,6 +47,7 @@
 		434028061DF93DD000C2D733 /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 434028051DF93DD000C2D733 /* YYFPSLabel.m */; };
 		43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43480B691DF4101A00169DD7 /* MainViewController.swift */; };
 		436D54631E062A3300EFBB40 /* ModulesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436D54621E062A3300EFBB40 /* ModulesModel.swift */; };
+		436D54651E0693FF00EFBB40 /* RatingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436D54641E0693FF00EFBB40 /* RatingBar.swift */; };
 		4392AF711E0248CF007A9177 /* base.html in Resources */ = {isa = PBXBuildFile; fileRef = 4392AF6D1E0248CF007A9177 /* base.html */; };
 		4392AFEB1E02DFD9007A9177 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 4392AFEA1E02DFD9007A9177 /* html */; };
 		4392B0081E02E018007A9177 /* shAutoloader.js in Resources */ = {isa = PBXBuildFile; fileRef = 4392AFEC1E02E018007A9177 /* shAutoloader.js */; };
@@ -175,6 +176,7 @@
 		434028051DF93DD000C2D733 /* YYFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YYFPSLabel.m; path = Other/Lib/YYFPSLabel/YYFPSLabel.m; sourceTree = "<group>"; };
 		43480B691DF4101A00169DD7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainController/MainViewController.swift; sourceTree = "<group>"; };
 		436D54621E062A3300EFBB40 /* ModulesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModulesModel.swift; path = Models/ModulesModel.swift; sourceTree = "<group>"; };
+		436D54641E0693FF00EFBB40 /* RatingBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingBar.swift; path = Views/RatingBar.swift; sourceTree = "<group>"; };
 		4392AF6D1E0248CF007A9177 /* base.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = base.html; sourceTree = "<group>"; };
 		4392AFEA1E02DFD9007A9177 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = Resources/html; sourceTree = "<group>"; };
 		4392AFEC1E02E018007A9177 /* shAutoloader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = shAutoloader.js; path = Resources/js/shAutoloader.js; sourceTree = "<group>"; };
@@ -503,8 +505,9 @@
 				434027E61DF9348300C2D733 /* PullToRefresh */,
 				434027DD1DF932C000C2D733 /* MainView */,
 				43AA926B1DF6F54600102486 /* FilmController */,
-				433F06E41DFED9890055EF02 /* HeaderBackView.swift */,
 				433F06E61DFEDCA40055EF02 /* BottomToolsBar.swift */,
+				433F06E41DFED9890055EF02 /* HeaderBackView.swift */,
+				436D54641E0693FF00EFBB40 /* RatingBar.swift */,
 				433F06EA1DFEDEDD0055EF02 /* ShareView.swift */,
 			);
 			name = Views;
@@ -880,6 +883,7 @@
 				431E0CD71E0397F800D0332D /* CincismHeaderView.swift in Sources */,
 				43AD2ECD1DF460D90073C26E /* IMovieService.swift in Sources */,
 				434027F21DF9371400C2D733 /* MenuTableViewCell.swift in Sources */,
+				436D54651E0693FF00EFBB40 /* RatingBar.swift in Sources */,
 				43AA926A1DF6E5A700102486 /* BoxOfficeController.swift in Sources */,
 				433F06E71DFEDCA40055EF02 /* BottomToolsBar.swift in Sources */,
 				433F06ED1DFEE0460055EF02 /* UIViewController+iM.swift in Sources */,

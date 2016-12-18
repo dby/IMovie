@@ -33,9 +33,10 @@ class FilmController: BasePageController, Reusable {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.white
-        self.view.addSubview(filmTableView)
         
-        setupLayout()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
         getData()
     }
     
@@ -45,61 +46,45 @@ class FilmController: BasePageController, Reusable {
         IMovie.shareInstance.getMovieModules(target: IMovieService.movieModules(), successHandle: { [weak self] (data) in
             
             debugPrint("GETDATA...SUCCESS")
-            debugPrint(data.nowHotShowData)
-            debugPrint("=================")
-            debugPrint(data.soonShowData)
-            debugPrint("=================")
-            debugPrint(data.rankListData)
-            debugPrint("=================")
-            debugPrint(data.bestReviewsData)
-            debugPrint("=================")
-            debugPrint(data.douListData)
-            //self?.filmTableView.reloadData()
+            //debugPrint(data.nowHotShowData)
+            //debugPrint("=================")
+            //debugPrint(data.soonShowData)
+            //debugPrint("=================")
+            //debugPrint(data.rankListData)
+            //debugPrint("=================")
+            //debugPrint(data.bestReviewsData)
+            //debugPrint("=================")
+            //debugPrint(data.douListData)
+            
+            self?.data = data
+            self?.tableView.reloadData()
             
             }, errorHandle: { (error) in
-                
+                print(error)
         })
     }
     
-    func setupLayout() {
-        filmTableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.view)
-        }
-    }
-    
     //MARK:---Getter and Setter---
-    var nowHotShowMovieModelArray = Array<MovieModel>()
-    var soonShowMovieModelArray = Array<MovieModel>()
-    var top250MovieModelArray   = Array<MovieModel>()
-    var praiseListMovieModelArray = Array<MovieModel>()
-    var newMovieListMovieModelArray  = Array<MovieModel>()
-    var boxOfficeListMovieModelArray = Array<MovieModel>()
-    
-    fileprivate lazy var filmTableView: UITableView = {
-        let filmTableView: UITableView = UITableView()
-        filmTableView.delegate = self
-        filmTableView.dataSource = self
-        //filmTableView.separatorStyle = .none
-        
-        return filmTableView
-    }()
+    var data: ModulesModel? = nil
+
 }
 
 extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if (collectionView.tag == CollectionViewType.NowHotShow.rawValue) {
-            return newMovieListMovieModelArray.count > 6 ? 6 : newMovieListMovieModelArray.count
+            return 6
         } else if (collectionView.tag == CollectionViewType.SoonShow.rawValue) {
-            return soonShowMovieModelArray.count / 3
+            return 6
         } else if (collectionView.tag == CollectionViewType.Top250.rawValue) {
-            return top250MovieModelArray.count > 6 ? 6 : top250MovieModelArray.count
+            return 6
         } else if (collectionView.tag == CollectionViewType.praiseList.rawValue) {
-            return praiseListMovieModelArray.count > 6 ? 6 : praiseListMovieModelArray.count
+            return 6
         } else if (collectionView.tag == CollectionViewType.newMovieList.rawValue) {
-            return newMovieListMovieModelArray.count > 6 ? 6 : newMovieListMovieModelArray.count
+            return 6
         } else if (collectionView.tag == CollectionViewType.boxOfficeList.rawValue) {
-            return boxOfficeListMovieModelArray.count > 6 ? 6 : boxOfficeListMovieModelArray.count
+            return 6
         } else {
             return 0
         }
@@ -115,29 +100,49 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (CollectionViewType.NowHotShow.rawValue == collectionView.tag) {
+            
             // 正在热映
-            let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num3)
-            cell.models = top250MovieModelArray
+            let cell = MovieViewCell.cellWithCollectionView(collectionView, indexPath: indexPath)
+            if self.data != nil && self.data?.nowHotShowData != nil {
+                cell.model = self.data?.nowHotShowData.data.subject_collection_boards[0].items[indexPath.row]
+            }
             return cell
+            
         } else if (CollectionViewType.SoonShow.rawValue == collectionView.tag) {
+            
             // 即将上映
-            let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num4)
-            cell.models = top250MovieModelArray
+            let cell = MovieViewCell.cellWithCollectionView(collectionView, indexPath: indexPath)
+            if self.data != nil && self.data?.soonShowData != nil {
+                cell.model = self.data?.soonShowData.data.subject_collection_boards[0].items[indexPath.row]
+            }
             return cell
+            
         } else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
+            
             // 豆瓣TOP250
             let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num6)
-            cell.models = top250MovieModelArray
+            if self.data != nil && self.data?.soonShowData != nil {
+                cell.models = self.data?.soonShowData.data.subject_collection_boards[0].items
+            }
             return cell
+            
         } else if (CollectionViewType.praiseList.rawValue == collectionView.tag) {
+            
             // 本周口碑榜
             let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num9)
-            cell.models = top250MovieModelArray
+            if self.data != nil && self.data?.soonShowData != nil {
+                cell.models = self.data?.soonShowData.data.subject_collection_boards[0].items
+            }
             return cell
+            
         } else {
+            
             let cell   = MovieViewCell.cellWithCollectionView(collectionView, indexPath: indexPath)
-            cell.model = top250MovieModelArray[indexPath.row]
+            if self.data != nil && self.data?.nowHotShowData != nil {
+                cell.model = self.data?.nowHotShowData.data.subject_collection_boards[0].items[indexPath.row]
+            }
             return cell
+            
         }
     }
     
@@ -184,11 +189,11 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         
         case CollectionViewType.NowHotShow.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num3)
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
             cell?.titleLabel.text = "正在热映的电影"
             break
         case CollectionViewType.SoonShow.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num4)
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
             cell?.titleLabel.text = "即将上映的电影"
             break
         case CollectionViewType.Top250.rawValue:
@@ -214,6 +219,7 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
+        
         cell?.selectionStyle = .none
         cell?.dataCollectionView.tag = indexPath.row
         cell?.dataCollectionView.delegate = self
@@ -231,30 +237,3 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
         return 7
     }
 }
-/*
-extension FilmController: UIScrollViewDelegate {
-    
-    func nearestTargetOffsetForOffset(offset: CGPoint) -> CGPoint {
-        let pageSize: CGFloat = BUBBLE_DIAMETER + BUBBLE_PADDING
-        let page: NSInteger   = NSInteger(roundf(Float(offset.x) / Float(pageSize)))
-        let targetX: CGFloat  = CGFloat(Float(pageSize) * Float(page))
-        
-        return CGPoint.init(x: targetX, y: offset.y)
-    }
-    
-    func snapToNearestItem() {
-        //let targetOffset: CGPoint = self.nearestTargetOffsetForOffset(offset: self.top250CollectionView.contentOffset)
-        //self.top250CollectionView.setContentOffset(targetOffset, animated: true)
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            //self.snapToNearestItem()
-        }
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //self.snapToNearestItem()
-    }
-}
-*/

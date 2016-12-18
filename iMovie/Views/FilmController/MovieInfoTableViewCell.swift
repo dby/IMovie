@@ -8,6 +8,9 @@
 
 import Foundation
 
+let BUBBLE_DIAMETER: CGFloat = 60.0
+let BUBBLE_PADDING: CGFloat = 10.0
+
 class MovieInfoTableViewCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -121,4 +124,31 @@ class MovieInfoTableViewCell: UITableViewCell, Reusable {
 
         return dataCollectionView
     }()
+}
+
+extension MovieInfoTableViewCell {
+    
+    func nearestTargetOffsetForOffset(offset: CGPoint) -> CGPoint {
+        let pageSize: CGFloat = BUBBLE_DIAMETER + BUBBLE_PADDING
+        let page: NSInteger   = NSInteger(roundf(Float(offset.x) / Float(pageSize)))
+        let targetX: CGFloat  = CGFloat(Float(pageSize) * Float(page))
+        
+        return CGPoint.init(x: targetX, y: offset.y)
+    }
+    
+    func snapToNearestItem() {
+        let targetOffset: CGPoint = self.nearestTargetOffsetForOffset(offset: self.dataCollectionView.contentOffset)
+        debugPrint("targetOffset: \(targetOffset)")
+        self.dataCollectionView.setContentOffset(targetOffset, animated: true)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.snapToNearestItem()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.snapToNearestItem()
+    }
 }

@@ -19,6 +19,7 @@ class CincismHeaderView: UIImageView {
         
         self.addSubview(self.moviePosterImage)
         self.addSubview(self.movieNameLabel)
+        self.addSubview(self.movieRatingBar)
         self.addSubview(self.movieRatingLabel)
         self.addSubview(self.movieInfoLabel)
         
@@ -33,8 +34,12 @@ class CincismHeaderView: UIImageView {
     //MARK:---Getter and Setter---
     var model: DetailCincismModel! {
         didSet {
+            
+            let ratingNum: CGFloat = CGFloat(model.subject.rating.value * Double(10) / Double(model.subject.rating.max))
+            
             self.movieNameLabel.text = model.subject.title
-            self.movieRatingLabel.text = String(model.rating.value)
+            self.movieRatingBar.rating = ratingNum/2.0
+            self.movieRatingLabel.text = String(format: "%.2f", ratingNum).appending(" ").appending(String(model.subject.rating.count)).appending("人评价")
             self.movieInfoLabel.text = getMovieActorsInfo(model: model)
                         
             let strs:[String] = model.subject.pic.normal.components(separatedBy: "?")
@@ -70,16 +75,22 @@ class CincismHeaderView: UIImageView {
             make.bottom.equalTo(self).offset(-20)
             make.width.equalTo(self.moviePosterImage.snp.height).multipliedBy(0.6666667)
         }
-        self.movieRatingLabel.snp.makeConstraints { (make) in
+        self.movieRatingBar.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.moviePosterImage.snp.centerY)
             make.left.equalTo(self.moviePosterImage.snp.right).offset(15)
+            make.width.equalTo(80)
+            make.height.equalTo(30)
+        }
+        self.movieRatingLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.moviePosterImage.snp.centerY)
+            make.left.equalTo(self.movieRatingBar.snp.right).offset(5)
             make.right.equalTo(self).offset(-15)
             make.height.equalTo(30)
         }
         self.movieNameLabel.snp.makeConstraints { (make) in
             make.bottom.equalTo(self.movieRatingLabel.snp.top)
             make.left.equalTo(self.moviePosterImage.snp.right).offset(15)
-            make.right.equalTo(self).offset(-15)
+            make.right.equalTo(self).offset(-10)
             make.height.equalTo(30)
         }
         self.movieInfoLabel.snp.makeConstraints { (make) in
@@ -112,8 +123,14 @@ class CincismHeaderView: UIImageView {
         let movieRatingLabel: UILabel = UILabel()
         movieRatingLabel.textColor = UIColor.white
         //movieRatingLabel.backgroundColor = UIColor.orange
-        movieRatingLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 15)
+        movieRatingLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 14)
         return movieRatingLabel
+    }()
+    // 电影RatingBar
+    internal lazy var movieRatingBar: RatingBar = {
+        let movieRatingBar: RatingBar = RatingBar()
+        
+        return movieRatingBar
     }()
     // movieInfoLabel 导演/演员信息
     internal lazy var movieInfoLabel: UILabel = {
