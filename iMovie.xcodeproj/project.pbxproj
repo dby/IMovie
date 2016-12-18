@@ -48,6 +48,7 @@
 		43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43480B691DF4101A00169DD7 /* MainViewController.swift */; };
 		436D54631E062A3300EFBB40 /* ModulesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436D54621E062A3300EFBB40 /* ModulesModel.swift */; };
 		436D54651E0693FF00EFBB40 /* RatingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436D54641E0693FF00EFBB40 /* RatingBar.swift */; };
+		436D54671E06D90000EFBB40 /* RankListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436D54661E06D90000EFBB40 /* RankListViewCell.swift */; };
 		4392AF711E0248CF007A9177 /* base.html in Resources */ = {isa = PBXBuildFile; fileRef = 4392AF6D1E0248CF007A9177 /* base.html */; };
 		4392AFEB1E02DFD9007A9177 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 4392AFEA1E02DFD9007A9177 /* html */; };
 		4392B0081E02E018007A9177 /* shAutoloader.js in Resources */ = {isa = PBXBuildFile; fileRef = 4392AFEC1E02E018007A9177 /* shAutoloader.js */; };
@@ -177,6 +178,7 @@
 		43480B691DF4101A00169DD7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainController/MainViewController.swift; sourceTree = "<group>"; };
 		436D54621E062A3300EFBB40 /* ModulesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModulesModel.swift; path = Models/ModulesModel.swift; sourceTree = "<group>"; };
 		436D54641E0693FF00EFBB40 /* RatingBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingBar.swift; path = Views/RatingBar.swift; sourceTree = "<group>"; };
+		436D54661E06D90000EFBB40 /* RankListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankListViewCell.swift; path = Views/FilmController/RankListViewCell.swift; sourceTree = "<group>"; };
 		4392AF6D1E0248CF007A9177 /* base.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = base.html; sourceTree = "<group>"; };
 		4392AFEA1E02DFD9007A9177 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = Resources/html; sourceTree = "<group>"; };
 		4392AFEC1E02E018007A9177 /* shAutoloader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = shAutoloader.js; path = Resources/js/shAutoloader.js; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 				43AA926C1DF70DAE00102486 /* MovieViewCell.swift */,
 				434027D91DF8FB0C00C2D733 /* MovieInfoTableViewCell.swift */,
 				433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */,
+				436D54661E06D90000EFBB40 /* RankListViewCell.swift */,
 			);
 			name = FilmController;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				43CBC2D11E014A560060515F /* String+iMovie.swift in Sources */,
 				434027E31DF9338900C2D733 /* UIView+Frame.swift in Sources */,
 				43480B6A1DF4101A00169DD7 /* MainViewController.swift in Sources */,
+				436D54671E06D90000EFBB40 /* RankListViewCell.swift in Sources */,
 				43AD2ECB1DF460B90073C26E /* Constant.swift in Sources */,
 				434027F71DF93AB800C2D733 /* BasePageController.swift in Sources */,
 				43AD2ED11DF469900073C26E /* IMovie.swift in Sources */,

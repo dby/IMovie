@@ -105,8 +105,8 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
     fileprivate func setupLayout() {
         switch type {
         case .Num3:
-            let smallWidth: CGFloat = (self.width - GapConstant) / 3
-            let bigWidth: CGFloat = self.width - smallWidth - GapConstant
+            let smallWidth: CGFloat = self.width / 3.0
+            let bigWidth: CGFloat   = self.width - smallWidth
             
             image1.snp.makeConstraints({ (make) in
                 make.left.top.equalTo(self.contentView)
@@ -114,14 +114,14 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
             })
             
             image2.snp.makeConstraints({ (make) in
-                make.left.equalTo(image1.snp.right).offset(5)
+                make.left.equalTo(image1.snp.right)
                 make.top.equalTo(self.contentView)
                 make.height.width.equalTo(smallWidth)
             })
             
             image3.snp.makeConstraints({ (make) in
                 make.right.equalTo(self.contentView)
-                make.top.equalTo(image2.snp.bottom).offset(GapConstant)
+                make.top.equalTo(image2.snp.bottom)
                 make.width.height.equalTo(smallWidth)
             })
             break

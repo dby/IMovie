@@ -8,9 +8,6 @@
 
 import Foundation
 
-let BUBBLE_DIAMETER: CGFloat = 60.0
-let BUBBLE_PADDING: CGFloat = 10.0
-
 class MovieInfoTableViewCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -52,12 +49,6 @@ class MovieInfoTableViewCell: UITableViewCell, Reusable {
         }
         return cell!
     }
-    
-    // 计算内容的高度
-    //class func estimateCellHeight() -> CGFloat {
-        
-    //}
-
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -112,43 +103,16 @@ class MovieInfoTableViewCell: UITableViewCell, Reusable {
         
         let dataCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         dataCollectionView.bounces = false
-        dataCollectionView.isPagingEnabled = false
         
         dataCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: String(describing: MovieViewCell.self))
         dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self).appending("NUM3"))
         dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self).appending("NUM4"))
         dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self).appending("NUM6"))
         dataCollectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: String(describing: ImageCollectionCell.self).appending("NUM9"))
+        dataCollectionView.register(RankListViewCell.self, forCellWithReuseIdentifier: String(describing: RankListViewCell.self))
         
         dataCollectionView.backgroundColor = UIColor.white
 
         return dataCollectionView
     }()
-}
-
-extension MovieInfoTableViewCell {
-    
-    func nearestTargetOffsetForOffset(offset: CGPoint) -> CGPoint {
-        let pageSize: CGFloat = BUBBLE_DIAMETER + BUBBLE_PADDING
-        let page: NSInteger   = NSInteger(roundf(Float(offset.x) / Float(pageSize)))
-        let targetX: CGFloat  = CGFloat(Float(pageSize) * Float(page))
-        
-        return CGPoint.init(x: targetX, y: offset.y)
-    }
-    
-    func snapToNearestItem() {
-        let targetOffset: CGPoint = self.nearestTargetOffsetForOffset(offset: self.dataCollectionView.contentOffset)
-        debugPrint("targetOffset: \(targetOffset)")
-        self.dataCollectionView.setContentOffset(targetOffset, animated: true)
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            self.snapToNearestItem()
-        }
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.snapToNearestItem()
-    }
 }

@@ -24,7 +24,7 @@
                   moduleName = "Alamofire"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503757188.84802"
+                  timestampString = "503767862.641052"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
@@ -39,7 +39,7 @@
                   moduleName = "Alamofire"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503757188.84953"
+                  timestampString = "503767862.642571"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
@@ -70,7 +70,7 @@
                   moduleName = "Alamofire"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503757188.852632"
+                  timestampString = "503767862.645698"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
@@ -85,76 +85,12 @@
                   moduleName = "Alamofire"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dby/Documents/code/iOS/iMovie/Pods/Alamofire/Source/ServerTrustPolicy.swift"
-                  timestampString = "503757188.854073"
+                  timestampString = "503767862.647201"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
                   endingLineNumber = "123"
                   offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iMovie/Controllers/FilmController/FilmController.swift"
-            timestampString = "503748607.521888"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "getData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iMovie/Services/IMovie.swift"
-            timestampString = "503755934.7156"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "getBestCineCism(target:successHandle:errorHandle:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iMovie.IMovie.(getBestCineCism (target : iMovie.IMovieService, successHandle : Swift.Optional&lt;(iMovie.CincismModel) -&gt; ()&gt;, errorHandle : Swift.Optional&lt;(Swift.Error) -&gt; ()&gt;) -&gt; ()).(closure #1)"
-                  moduleName = "iMovie"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dby/Documents/code/iOS/iMovie/iMovie/Services/IMovie.swift"
-                  timestampString = "503755846.419282"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "348">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iMovie.IMovie.(getBestCineCism (target : iMovie.IMovieService, successHandle : Swift.Optional&lt;(iMovie.CincismModel) -&gt; ()&gt;, errorHandle : Swift.Optional&lt;(Swift.Error) -&gt; ()&gt;) -&gt; ()).(closure #1)"
-                  moduleName = "iMovie"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dby/Documents/code/iOS/iMovie/iMovie/Services/IMovie.swift"
-                  timestampString = "503755846.420761"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "452">
                </Location>
             </Locations>
          </BreakpointContent>

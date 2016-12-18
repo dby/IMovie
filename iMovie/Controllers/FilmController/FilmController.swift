@@ -9,6 +9,9 @@
 import UIKit
 import SnapKit
 
+let BUBBLE_DIAMETER: CGFloat = UIConstant.SCREEN_WIDTH - 70
+let BUBBLE_PADDING: CGFloat = 10.0
+
 enum CollectionViewType: Int {
     // 正在热映
     case NowHotShow = 0
@@ -36,13 +39,14 @@ class FilmController: BasePageController, Reusable {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        pullToRefresh.delegate = self
         
         getData()
     }
     
     //MARK: --- Private Methods ---
     func getData() {
-        
+        isRefreshing = true
         IMovie.shareInstance.getMovieModules(target: IMovieService.movieModules(), successHandle: { [weak self] (data) in
             
             debugPrint("GETDATA...SUCCESS")
@@ -55,9 +59,11 @@ class FilmController: BasePageController, Reusable {
             //debugPrint(data.bestReviewsData)
             //debugPrint("=================")
             //debugPrint(data.douListData)
-            
             self?.data = data
             self?.tableView.reloadData()
+
+            self?.isRefreshing = false
+            self?.pullToRefresh.endRefresh()
             
             }, errorHandle: { (error) in
                 print(error)
@@ -69,6 +75,13 @@ class FilmController: BasePageController, Reusable {
 
 }
 
+//MARK:---下拉刷新更多---
+extension FilmController : PullToRefreshDelegate {
+    func pullToRefreshViewDidRefresh(_ pulllToRefreshView: PullToRefreshView) {
+        getData()
+    }
+}
+//MARK:---UICollectionViewDelegate UICollectionViewDataSource---
 extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -78,7 +91,7 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
         } else if (collectionView.tag == CollectionViewType.SoonShow.rawValue) {
             return 6
         } else if (collectionView.tag == CollectionViewType.Top250.rawValue) {
-            return 6
+            return 4
         } else if (collectionView.tag == CollectionViewType.praiseList.rawValue) {
             return 6
         } else if (collectionView.tag == CollectionViewType.newMovieList.rawValue) {
@@ -119,10 +132,27 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
             
         } else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
             
-            // 豆瓣TOP250
-            let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num6)
-            if self.data != nil && self.data?.soonShowData != nil {
-                cell.models = self.data?.soonShowData.data.subject_collection_boards[0].items
+            // 榜单
+            let cell = RankListViewCell.cellWithCollectionView(collectionView, indexPath: indexPath)
+            if self.data != nil && self.data?.rankListData != nil {
+                cell.model = self.data?.rankListData.data.selected_collections[indexPath.row]
+                switch indexPath.row {
+                case 0:
+                    cell.titleLabel.text = "Top250电影"
+                    break
+                case 1:
+                    cell.titleLabel.text = "本周口碑榜"
+                    break
+                case 2:
+                    cell.titleLabel.text = "新片榜"
+                    break
+                case 3:
+                    cell.titleLabel.text = "票房榜"
+                    break
+                default:
+                    break
+                }
+                
             }
             return cell
             
@@ -147,25 +177,25 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //if (CollectionViewType.NowHotShow.rawValue == collectionView.tag) {
-          //  let height = UIConstant.SCREEN_WIDTH * 2 / 3
-            //return CGSize(width: UIConstant.SCREEN_WIDTH, height: height)
-        //} else if (CollectionViewType.SoonShow.rawValue == collectionView.tag) {
-         //   let height = UIConstant.SCREEN_WIDTH * 2 / 5
-           // return CGSize(width: UIConstant.SCREEN_WIDTH, height: height)
-        //} else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
-        //    let height = UIConstant.SCREEN_WIDTH * 2 / 3
-        //    return CGSize(width: height, height: height)
+        if (CollectionViewType.NowHotShow.rawValue == collectionView.tag) {
+            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
+            return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
+        } else if (CollectionViewType.SoonShow.rawValue == collectionView.tag) {
+            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
+            return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
+        } else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
+            let height = (UIConstant.SCREEN_WIDTH - 70) * 2.0 / 3.0
+            return CGSize(width: (UIConstant.SCREEN_WIDTH - 70), height: height)
         //} else if (CollectionViewType.praiseList.rawValue == collectionView.tag) {
         //    let height = UIConstant.SCREEN_WIDTH * 3 / 6
         //    return CGSize (width: height, height: height)
-        //} else {
+        } else {
             let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
             return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
-        //}
+        }
     }
 }
-
+//MARK:---UITableViewDelegate UITableViewDataSource---
 extension FilmController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -197,7 +227,7 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
             cell?.titleLabel.text = "即将上映的电影"
             break
         case CollectionViewType.Top250.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num6)
+            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num3)
             cell?.titleLabel.text = "TOP250电影"
             break
         case CollectionViewType.praiseList.rawValue:
@@ -235,5 +265,22 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 7
+    }
+}
+
+extension FilmController {
+    
+    func nearestTargetOffsetForOffset(offset: CGPoint) -> CGPoint {
+        let pageSize: CGFloat = BUBBLE_DIAMETER + BUBBLE_PADDING
+        let page: Int = Int(roundf(Float(offset.x) / Float(pageSize)))
+        let targetX: CGFloat = CGFloat(Float(pageSize) * Float(page))
+        return CGPoint(x: targetX, y: offset.y)
+    }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        debugPrint("scrollViewWillEndDragging")
+        let targetOffset: CGPoint = self.nearestTargetOffsetForOffset(offset: targetContentOffset.pointee)
+        targetContentOffset.pointee.x = targetOffset.x
+        targetContentOffset.pointee.y = targetOffset.y
     }
 }
