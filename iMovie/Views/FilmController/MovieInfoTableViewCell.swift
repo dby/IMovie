@@ -8,6 +8,16 @@
 
 import Foundation
 
+// DataCollectionView Cell的类型
+enum DataCollectionViewCellType {
+    case ImageCellNum3
+    case ImageCellNum4
+    case ImageCellNum6
+    case ImageCellNum9
+    case MovieViewCell
+    case RankListViewCell
+}
+
 class MovieInfoTableViewCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -18,26 +28,29 @@ class MovieInfoTableViewCell: UITableViewCell, Reusable {
         self.contentView.addSubview(moreButton)
         self.contentView.addSubview(dataCollectionView)
         
-        setupLayout()
     }
     
-    class func cellWithTableView(_ tableView : UITableView, type: ImageCollCellType) -> MovieInfoTableViewCell {
+    class func cellWithTableView(_ tableView : UITableView, type: DataCollectionViewCellType) -> MovieInfoTableViewCell {
         
         var identifier: String = self.reuseIdentifier
         switch type {
-        case .Num3:
+        case .ImageCellNum3:
             identifier = identifier.appending("NUM3")
             break
-        case .Num4:
+        case .ImageCellNum4:
             identifier = identifier.appending("NUM4")
             break
-        case .Num6:
+        case .ImageCellNum6:
             identifier = identifier.appending("NUM6")
             break
-        case .Num9:
+        case .ImageCellNum9:
             identifier = identifier.appending("NUM9")
             break
-        case .None:
+        case .MovieViewCell:
+            identifier = identifier.appending("MovieViewCell")
+            break
+        case .RankListViewCell:
+            identifier = identifier.appending("RankListViewCell")
             break
         }
         
@@ -45,7 +58,9 @@ class MovieInfoTableViewCell: UITableViewCell, Reusable {
         if cell == nil {
             cell = MovieInfoTableViewCell(style: .default, reuseIdentifier: identifier)
             cell?.selectionStyle = .none
-            cell?.imageCellType  = type
+            cell?.dataCollectionViewCellType  = type
+            
+            cell?.setupLayout()
         }
         return cell!
     }
@@ -58,25 +73,37 @@ class MovieInfoTableViewCell: UITableViewCell, Reusable {
     func setupLayout() {
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self)
-            make.left.equalTo(self).offset(MovieConstant.LeftEdge)
-            make.height.equalTo(MovieConstant.BarHeight)
+            make.left.equalTo(self).offset(MovieInfoConstant.LeftEdge)
+            make.height.equalTo(MovieInfoConstant.BarHeight)
             make.width.equalTo(150)
         }
         moreButton.snp.makeConstraints { (make) in
             make.top.equalTo(self)
-            make.right.equalTo(self).offset(-1 * MovieConstant.LeftEdge)
-            make.height.equalTo(MovieConstant.BarHeight)
+            make.right.equalTo(self).offset(-1 * MovieInfoConstant.LeftEdge)
+            make.height.equalTo(MovieInfoConstant.BarHeight)
             make.width.equalTo(100)
         }
-        dataCollectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.left.right.equalTo(self)
-            make.height.equalTo(MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight)
+        
+        switch self.dataCollectionViewCellType {
+        case .RankListViewCell:
+            dataCollectionView.snp.makeConstraints({ (make) in
+                make.top.equalTo(titleLabel.snp.bottom)
+                make.left.right.equalTo(self)
+                make.height.equalTo(RankListConstant.ItemSize)
+            })
+            break
+        default:
+            dataCollectionView.snp.makeConstraints { (make) in
+                make.top.equalTo(titleLabel.snp.bottom)
+                make.left.right.equalTo(self)
+                make.height.equalTo(MovieViewConstant.IMAGE_HEIGHT + MovieInfoConstant.TitleHeight + MovieInfoConstant.RatingHeight)
+            }
+            break
         }
     }
     
     //MARK: --- Getter and Setter ---
-    fileprivate var imageCellType: ImageCollCellType = ImageCollCellType.None
+    fileprivate var dataCollectionViewCellType: DataCollectionViewCellType = DataCollectionViewCellType.ImageCellNum3
     
     public var titleLabel: UILabel = {
         let titleLabel: UILabel = UILabel()
@@ -99,7 +126,7 @@ class MovieInfoTableViewCell: UITableViewCell, Reusable {
         
         var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsetsMake(0, MovieConstant.LeftEdge, 0, MovieConstant.LeftEdge)
+        layout.sectionInset = UIEdgeInsetsMake(0, MovieInfoConstant.LeftEdge, 0, MovieInfoConstant.LeftEdge)
         
         let dataCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         dataCollectionView.bounces = false

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		38B82DE71277BBC01CF2C229 /* Pods_iMovie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCE2CC35F35FE9B74E0F4FE /* Pods_iMovie.framework */; };
+		4314CFC61E0782FF0060B594 /* UIColor+iMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314CFC51E0782FF0060B594 /* UIColor+iMovie.swift */; };
+		4314CFC81E07AE580060B594 /* DouListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314CFC71E07AE580060B594 /* DouListTableViewCell.swift */; };
 		431E0CD71E0397F800D0332D /* CincismHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E0CD61E0397F800D0332D /* CincismHeaderView.swift */; };
 		431E0CD91E03EA0E00D0332D /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E0CD81E03EA0E00D0332D /* CommentTableViewCell.swift */; };
 		431E0CDB1E03EA5600D0332D /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E0CDA1E03EA5600D0332D /* CommentModel.swift */; };
@@ -131,6 +133,8 @@
 /* Begin PBXFileReference section */
 		1C41A368BF90047E16353DD7 /* Pods-iMovie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMovie.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMovie/Pods-iMovie.release.xcconfig"; sourceTree = "<group>"; };
 		33245A8CD45427BE5AAA5CC9 /* Pods-iMovie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMovie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMovie/Pods-iMovie.debug.xcconfig"; sourceTree = "<group>"; };
+		4314CFC51E0782FF0060B594 /* UIColor+iMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+iMovie.swift"; path = "Extension/UIColor+iMovie.swift"; sourceTree = "<group>"; };
+		4314CFC71E07AE580060B594 /* DouListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DouListTableViewCell.swift; path = Views/FilmController/DouListTableViewCell.swift; sourceTree = "<group>"; };
 		431E0CD61E0397F800D0332D /* CincismHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CincismHeaderView.swift; path = Views/Cinecism/CincismHeaderView.swift; sourceTree = "<group>"; };
 		431E0CD81E03EA0E00D0332D /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentTableViewCell.swift; path = Views/Cinecism/CommentTableViewCell.swift; sourceTree = "<group>"; };
 		431E0CDA1E03EA5600D0332D /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentModel.swift; path = Models/CommentModel.swift; sourceTree = "<group>"; };
@@ -463,6 +467,7 @@
 				433F06EC1DFEE0460055EF02 /* UIViewController+iM.swift */,
 				43CBC2D01E014A560060515F /* String+iMovie.swift */,
 				431E0CDC1E041BE300D0332D /* UILabel+iMovie.swift */,
+				4314CFC51E0782FF0060B594 /* UIColor+iMovie.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -627,9 +632,10 @@
 		43AA926B1DF6F54600102486 /* FilmController */ = {
 			isa = PBXGroup;
 			children = (
-				43AA926C1DF70DAE00102486 /* MovieViewCell.swift */,
-				434027D91DF8FB0C00C2D733 /* MovieInfoTableViewCell.swift */,
+				4314CFC71E07AE580060B594 /* DouListTableViewCell.swift */,
 				433E1E351DFA505000D8E190 /* ImageCollectionCell.swift */,
+				434027D91DF8FB0C00C2D733 /* MovieInfoTableViewCell.swift */,
+				43AA926C1DF70DAE00102486 /* MovieViewCell.swift */,
 				436D54661E06D90000EFBB40 /* RankListViewCell.swift */,
 			);
 			name = FilmController;
@@ -709,7 +715,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = sys;
 				TargetAttributes = {
 					433864961DF3F8D7000F58E3 = {
@@ -889,6 +895,7 @@
 				436D54651E0693FF00EFBB40 /* RatingBar.swift in Sources */,
 				43AA926A1DF6E5A700102486 /* BoxOfficeController.swift in Sources */,
 				433F06E71DFEDCA40055EF02 /* BottomToolsBar.swift in Sources */,
+				4314CFC81E07AE580060B594 /* DouListTableViewCell.swift in Sources */,
 				433F06ED1DFEE0460055EF02 /* UIViewController+iM.swift in Sources */,
 				433F06E51DFED9890055EF02 /* HeaderBackView.swift in Sources */,
 				434027F91DF93AF500C2D733 /* BaseNavController.swift in Sources */,
@@ -908,6 +915,7 @@
 				434027DF1DF932EB00C2D733 /* MainHeaderView.swift in Sources */,
 				43AA926D1DF70DAE00102486 /* MovieViewCell.swift in Sources */,
 				434027DA1DF8FB0C00C2D733 /* MovieInfoTableViewCell.swift in Sources */,
+				4314CFC61E0782FF0060B594 /* UIColor+iMovie.swift in Sources */,
 				434027ED1DF9362F00C2D733 /* MenuViewController.swift in Sources */,
 				433F06E91DFEDDD80055EF02 /* ShareResuable.swift in Sources */,
 				433A854D1DFC345100B33AFC /* CinecismTableViewCell.swift in Sources */,

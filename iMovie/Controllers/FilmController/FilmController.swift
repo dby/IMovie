@@ -17,16 +17,10 @@ enum CollectionViewType: Int {
     case NowHotShow = 0
     // 即将上映
     case SoonShow = 1
-    // 豆瓣口碑榜前250
-    case Top250  = 2
-    // 本周口碑榜
-    case praiseList = 3
-    // 新片榜
-    case newMovieList = 4
-    // 票房榜
-    case boxOfficeList = 5
+    // 精选榜单
+    case RankList = 2
     // 推荐列表
-    case recommandList = 6
+    case RecommandList = 3
 }
 
 class FilmController: BasePageController, Reusable {
@@ -90,13 +84,9 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return 6
         } else if (collectionView.tag == CollectionViewType.SoonShow.rawValue) {
             return 6
-        } else if (collectionView.tag == CollectionViewType.Top250.rawValue) {
+        } else if (collectionView.tag == CollectionViewType.RankList.rawValue) {
             return 4
-        } else if (collectionView.tag == CollectionViewType.praiseList.rawValue) {
-            return 6
-        } else if (collectionView.tag == CollectionViewType.newMovieList.rawValue) {
-            return 6
-        } else if (collectionView.tag == CollectionViewType.boxOfficeList.rawValue) {
+        } else if (collectionView.tag == CollectionViewType.RecommandList.rawValue) {
             return 6
         } else {
             return 0
@@ -130,7 +120,7 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
             }
             return cell
             
-        } else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
+        } else if (CollectionViewType.RankList.rawValue == collectionView.tag) {
             
             // 榜单
             let cell = RankListViewCell.cellWithCollectionView(collectionView, indexPath: indexPath)
@@ -152,14 +142,13 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 default:
                     break
                 }
-                
             }
             return cell
             
-        } else if (CollectionViewType.praiseList.rawValue == collectionView.tag) {
+        } else if (CollectionViewType.RecommandList.rawValue == collectionView.tag) {
             
             // 本周口碑榜
-            let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: ImageCollCellType.Num9)
+            let cell = ImageCollectionCell.cellWithCollectionView(collectionView, indexPath: indexPath, type: DataCollectionViewCellType.ImageCellNum3)
             if self.data != nil && self.data?.soonShowData != nil {
                 cell.models = self.data?.soonShowData.data.subject_collection_boards[0].items
             }
@@ -172,26 +161,26 @@ extension FilmController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 cell.model = self.data?.nowHotShowData.data.subject_collection_boards[0].items[indexPath.row]
             }
             return cell
-            
+        
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if (CollectionViewType.NowHotShow.rawValue == collectionView.tag) {
-            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
-            return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
+            let height = MovieViewConstant.IMAGE_HEIGHT + MovieInfoConstant.TitleHeight + MovieInfoConstant.RatingHeight
+            return CGSize(width: MovieViewConstant.IMAGE_WIDTH, height: height)
         } else if (CollectionViewType.SoonShow.rawValue == collectionView.tag) {
-            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
-            return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
-        } else if (CollectionViewType.Top250.rawValue == collectionView.tag) {
-            let height = (UIConstant.SCREEN_WIDTH - 70) * 2.0 / 3.0
-            return CGSize(width: (UIConstant.SCREEN_WIDTH - 70), height: height)
+            let height = MovieViewConstant.IMAGE_HEIGHT + MovieInfoConstant.TitleHeight + MovieInfoConstant.RatingHeight
+            return CGSize(width: MovieViewConstant.IMAGE_WIDTH, height: height)
+        } else if (CollectionViewType.RankList.rawValue == collectionView.tag) {
+            let height = (UIConstant.SCREEN_WIDTH - 70)/1.5
+            return CGSize(width: height-10, height: height-10)
         //} else if (CollectionViewType.praiseList.rawValue == collectionView.tag) {
         //    let height = UIConstant.SCREEN_WIDTH * 3 / 6
         //    return CGSize (width: height, height: height)
         } else {
-            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight
-            return CGSize(width: MovieConstant.IMAGE_WIDTH, height: height)
+            let height = MovieViewConstant.IMAGE_HEIGHT + MovieInfoConstant.TitleHeight + MovieInfoConstant.RatingHeight
+            return CGSize(width: MovieViewConstant.IMAGE_WIDTH, height: height)
         }
     }
 }
@@ -204,67 +193,145 @@ extension FilmController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 6 {
-            return 0
+        if indexPath.section == 0 {
+            if indexPath.row == CollectionViewType.NowHotShow.rawValue {
+                
+                // 正在热映Cell
+                let height = MovieViewConstant.IMAGE_HEIGHT + MovieInfoConstant.TitleHeight + MovieInfoConstant.RatingHeight + MovieInfoConstant.BarHeight + MovieInfoConstant.BottomSpace
+                return height
+            
+            } else if indexPath.row == CollectionViewType.SoonShow.rawValue {
+                
+                // 即将上映Cell
+                let height = MovieViewConstant.IMAGE_HEIGHT + MovieInfoConstant.TitleHeight + MovieInfoConstant.RatingHeight + MovieInfoConstant.BarHeight + MovieInfoConstant.BottomSpace
+                return height
+                
+            } else if indexPath.row == CollectionViewType.RankList.rawValue {
+                
+                // 榜单
+                let height = RankListConstant.ItemSize + MovieInfoConstant.BarHeight + MovieInfoConstant.BottomSpace
+                return height
+                
+            } else if indexPath.row == CollectionViewType.RecommandList.rawValue {
+                
+                // 推荐列表
+                let height = MovieViewConstant.IMAGE_HEIGHT + MovieInfoConstant.TitleHeight + MovieInfoConstant.RatingHeight + MovieInfoConstant.BarHeight + MovieInfoConstant.BottomSpace
+                return height
+                
+            } else {
+                return 0
+            }
         } else {
-            let height = MovieConstant.IMAGE_HEIGHT + MovieConstant.TitleHeight + MovieConstant.RatingHeight + MovieConstant.BarHeight + MovieConstant.BottomSpace
-            return height
+            
+            return DouListViewConstant.ImageSize * 1.5
+            
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell: MovieInfoTableViewCell? = nil
+        if indexPath.section == 0 {
+            
+            var cell: MovieInfoTableViewCell? = nil
+            
+            switch indexPath.row {
         
-        switch indexPath.row {
+            case CollectionViewType.NowHotShow.rawValue:
+                cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .MovieViewCell)
+                cell?.titleLabel.text = "正在热映的电影"
+                break
+            case CollectionViewType.SoonShow.rawValue:
+                cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .MovieViewCell)
+                cell?.titleLabel.text = "即将上映的电影"
+                break
+            case CollectionViewType.RankList.rawValue:
+                cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .RankListViewCell)
+                cell?.titleLabel.text = "精选榜单"
+                break
+            case CollectionViewType.RecommandList.rawValue:
+                cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .ImageCellNum3)
+                cell?.titleLabel.text = "推荐列表"
+                break
+            default:
+                break
+            }
         
-        case CollectionViewType.NowHotShow.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
-            cell?.titleLabel.text = "正在热映的电影"
-            break
-        case CollectionViewType.SoonShow.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
-            cell?.titleLabel.text = "即将上映的电影"
-            break
-        case CollectionViewType.Top250.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num3)
-            cell?.titleLabel.text = "TOP250电影"
-            break
-        case CollectionViewType.praiseList.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .Num9)
-            cell?.titleLabel.text = "本周口碑榜"
-            break
-        case CollectionViewType.newMovieList.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
-            cell?.titleLabel.text = "新片榜"
-            break
-        case CollectionViewType.boxOfficeList.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
-            cell?.titleLabel.text = "本周票房榜"
-            break
-        case CollectionViewType.recommandList.rawValue:
-            cell = MovieInfoTableViewCell.cellWithTableView(tableView, type: .None)
-            cell?.titleLabel.text = "推荐"
-            break
-        default:
-            break
-        }
-        
-        cell?.selectionStyle = .none
-        cell?.dataCollectionView.tag = indexPath.row
-        cell?.dataCollectionView.delegate = self
-        cell?.dataCollectionView.dataSource = self
-        cell?.dataCollectionView.reloadData()
+            cell?.selectionStyle = .none
+            cell?.dataCollectionView.tag = indexPath.row
+            cell?.dataCollectionView.delegate = self
+            cell?.dataCollectionView.dataSource = self
+            cell?.dataCollectionView.reloadData()
+            
+            return cell!
+            
+        } else {
+            
+            var cell: DouListTableViewCell? = nil
 
-        return cell!
+            cell = DouListTableViewCell.cellWithTableView(tableView)
+            cell?.model = (self.data?.douListData.data.doulists[indexPath.row])!
+
+            return cell!
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        if section == 0 {
+            return 4
+        } else {
+            return 3
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if (section == 0) {
+            return nil
+        } else {
+            
+            let titleLabel: UILabel = UILabel()
+            //titleLabel.backgroundColor = UIColor.green
+            titleLabel.text = "发现好电影"
+            titleLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 20)
+            
+            let moreButton: UIButton = UIButton()
+            moreButton.setTitle("查看全部>", for: .normal)
+            moreButton.setTitleColor(UIColor.darkGray, for: .normal)
+            moreButton.contentHorizontalAlignment = .right
+            //moreButton.backgroundColor = UIColor.brown
+            moreButton.titleLabel?.font = FontConstant.SYS_14
+            
+            let view: UIView = UIView(frame: CGRect(x: 0, y: 0, width: UIConstant.SCREEN_WIDTH, height: 35))
+            view.addSubview(titleLabel)
+            view.addSubview(moreButton)
+            
+            titleLabel.snp.makeConstraints { (make) in
+                make.top.equalTo(view)
+                make.left.equalTo(view).offset(MovieInfoConstant.LeftEdge)
+                make.height.equalTo(MovieInfoConstant.BarHeight)
+                make.width.equalTo(150)
+            }
+            moreButton.snp.makeConstraints { (make) in
+                make.top.equalTo(view)
+                make.right.equalTo(view).offset(-1 * MovieInfoConstant.LeftEdge)
+                make.height.equalTo(MovieInfoConstant.BarHeight)
+                make.width.equalTo(100)
+            }
+
+            return view
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 0) {
+            return 0
+        } else {
+            return 35
+        }
     }
 }
 

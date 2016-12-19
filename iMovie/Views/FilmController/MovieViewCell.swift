@@ -40,22 +40,23 @@ class MovieViewCell: UICollectionViewCell, Reusable {
         moviePoster.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView)
             make.left.equalTo(self.contentView)
-            make.height.equalTo(MovieConstant.IMAGE_HEIGHT)
-            make.width.equalTo(MovieConstant.IMAGE_WIDTH)
+            make.height.equalTo(MovieViewConstant.IMAGE_HEIGHT)
+            make.width.equalTo(MovieViewConstant.IMAGE_WIDTH)
         }
         
         movieLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.contentView)
             make.top.equalTo(self.moviePoster.snp.bottom)
-            make.height.equalTo(MovieConstant.TitleHeight)
+            make.height.equalTo(MovieInfoConstant.TitleHeight)
         }
         
         ratingBar.snp.makeConstraints { (make) in
             make.left.equalTo(self.contentView)
             make.top.equalTo(self.movieLabel.snp.bottom)
-            make.height.equalTo(MovieConstant.RatingHeight)
+            make.height.equalTo(MovieInfoConstant.RatingHeight)
             make.width.equalTo(80)
         }
+        
         ratingLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.ratingBar.snp.right).offset(2)
             make.right.equalTo(self.contentView)

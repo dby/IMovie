@@ -42,10 +42,25 @@ struct FontConstant {
     static let SYS_22 : UIFont = UIFont.systemFont(ofSize: 22)
 }
 
-struct MovieConstant {
+// 正在热映的电影/即将上映的电影 常量
+struct MovieViewConstant {
     // 海报宽、高
     static let IMAGE_WIDTH = (UIConstant.SCREEN_WIDTH - 75) / 2
     static let IMAGE_HEIGHT = IMAGE_WIDTH * 2993.0 / 2000.0
+}
+
+// 精选榜单 常量
+struct RankListConstant {
+    static let ItemSize = (UIConstant.SCREEN_WIDTH - 70) / 1.5
+}
+
+struct DouListViewConstant {
+    // 
+    static let ImageSize = UIConstant.SCREEN_WIDTH / 4.0
+    
+}
+
+struct MovieInfoConstant {
     // 电影名字
     static let TitleHeight: CGFloat  = 30
     // 电影评分

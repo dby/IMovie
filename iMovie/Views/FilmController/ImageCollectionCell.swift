@@ -10,30 +10,22 @@ import Foundation
 
 let GapConstant: CGFloat = 5
 
-enum ImageCollCellType {
-    case Num3
-    case Num4
-    case Num6
-    case Num9
-    case None
-}
-
 class ImageCollectionCell: UICollectionViewCell, Reusable {
     
-    class func cellWithCollectionView(_ collectionView: UICollectionView, indexPath: IndexPath, type: ImageCollCellType) -> ImageCollectionCell {
+    class func cellWithCollectionView(_ collectionView: UICollectionView, indexPath: IndexPath, type: DataCollectionViewCellType) -> ImageCollectionCell {
         
         var identifier = self.reuseIdentifier
         switch type {
-        case .Num3:
+        case .ImageCellNum3:
             identifier = identifier.appending("NUM3")
             break
-        case .Num4:
+        case .ImageCellNum4:
             identifier = identifier.appending("NUM4")
             break
-        case .Num6:
+        case .ImageCellNum6:
             identifier = identifier.appending("NUM6")
             break
-        case .Num9:
+        case .ImageCellNum9:
             identifier = identifier.appending("NUM9")
             break
         default:
@@ -61,11 +53,11 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
         images.append(image3)
         
         switch type {
-        case .Num4:
+        case .ImageCellNum4:
             self.contentView.addSubview(image4)
             images.append(image4)
             break
-        case .Num6:
+        case .ImageCellNum6:
             self.contentView.addSubview(image4)
             self.contentView.addSubview(image5)
             self.contentView.addSubview(image6)
@@ -73,7 +65,7 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
             images.append(image5)
             images.append(image6)
             break
-        case .Num9:
+        case .ImageCellNum9:
             self.contentView.addSubview(image4)
             self.contentView.addSubview(image5)
             self.contentView.addSubview(image6)
@@ -104,7 +96,7 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
     //MARK: --- Private Methods ---
     fileprivate func setupLayout() {
         switch type {
-        case .Num3:
+        case .ImageCellNum3:
             let smallWidth: CGFloat = self.width / 3.0
             let bigWidth: CGFloat   = self.width - smallWidth
             
@@ -126,7 +118,7 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
             })
             break
             
-        case .Num4:
+        case .ImageCellNum4:
             let smallWidth: CGFloat = (self.width - GapConstant * 2) / 5
             let bigWidth: CGFloat = (self.width - smallWidth - GapConstant * 2)/2
 
@@ -152,7 +144,7 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
             
             break
             
-        case .Num6:
+        case .ImageCellNum6:
             let smallWidth: CGFloat = (self.width - GapConstant * 2) / 3
             let bigWidth: CGFloat = self.width - GapConstant - smallWidth
             image1.snp.makeConstraints({ (make) in
@@ -187,7 +179,7 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
             
             break
             
-        case .Num9:
+        case .ImageCellNum9:
             let smallWidth: CGFloat = (self.width - 4 * GapConstant) / 5
             let bigWidth: CGFloat = (self.width - 2 * GapConstant - smallWidth) / 2
             
@@ -243,7 +235,7 @@ class ImageCollectionCell: UICollectionViewCell, Reusable {
     }
     
     //MARK: --- Getter and Setter ---
-    fileprivate lazy var type: ImageCollCellType = ImageCollCellType.Num3
+    fileprivate lazy var type: DataCollectionViewCellType = DataCollectionViewCellType.ImageCellNum3
     fileprivate var images: [UIImageView] = [UIImageView]()
     
     //MARK:--- Getter or Setter ---

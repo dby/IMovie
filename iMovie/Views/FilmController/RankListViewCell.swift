@@ -24,40 +24,52 @@ class RankListViewCell: UICollectionViewCell, Reusable {
     //MARK:---Private Method---
     func initUI() {
         self.contentView.addSubview(titleLabel)
+        self.contentView.addSubview(subtileLabel)
         self.contentView.addSubview(image1)
         self.contentView.addSubview(image2)
         self.contentView.addSubview(image3)
         
+        self.contentView.layer.cornerRadius = 5
         setupLayout()
     }
     
     fileprivate func setupLayout() {
         
-        let smallWidth: CGFloat = self.width / 3.0
-        let bigWidth: CGFloat   = self.width - smallWidth
+        let image1Width: CGFloat  = self.width/3.0
+        let image1Height: CGFloat = image1Width * 2993.0 / 2000.0
+        let image2Width: CGFloat  = image1Width - 10
+        let image2Height: CGFloat = image2Width * 2993.0 / 2000.0
         
-        titleLabel.snp.makeConstraints { (make) in
-            make.left.right.top.equalTo(self.contentView)
-            make.height.equalTo(30)
+        self.image1.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.contentView.snp.centerX)
+            make.bottom.equalTo(self.contentView).offset(-5)
+            make.width.equalTo(image1Width)
+            make.height.equalTo(image1Height)
         }
         
-        image1.snp.makeConstraints({ (make) in
-            make.top.equalTo(self.titleLabel.snp.bottom)
-            make.left.equalTo(self.contentView)
-            make.width.height.equalTo(bigWidth)
-        })
-            
-        image2.snp.makeConstraints({ (make) in
-            make.left.equalTo(image1.snp.right)
-            make.top.equalTo(self.titleLabel.snp.bottom)
-            make.height.width.equalTo(smallWidth)
-        })
-            
-        image3.snp.makeConstraints({ (make) in
-            make.right.equalTo(self.contentView)
-            make.top.equalTo(image2.snp.bottom)
-            make.width.height.equalTo(smallWidth)
-        })
+        self.image2.snp.makeConstraints { (make) in
+            make.right.equalTo(self.image1.snp.left)
+            make.width.equalTo(image2Width)
+            make.height.equalTo(image2Height)
+            make.bottom.equalTo(self.contentView).offset(-10)
+        }
+        
+        self.image3.snp.makeConstraints { (make) in
+            make.left.equalTo(self.image1.snp.right)
+            make.width.equalTo(image2Width)
+            make.height.equalTo(image2Height)
+            make.bottom.equalTo(self.contentView).offset(-10)
+        }
+        self.subtileLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self.image1.snp.top).offset(-5)
+            make.left.right.equalTo(self.contentView)
+            make.height.equalTo(20)
+        }
+        self.titleLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self.subtileLabel.snp.top).offset(-5)
+            make.left.right.equalTo(self.contentView)
+            make.bottom.equalTo(self.subtileLabel.snp.top).offset(-5)
+        }
     }
     
     //MARK:---Getter or Setter---
@@ -72,6 +84,11 @@ class RankListViewCell: UICollectionViewCell, Reusable {
 
                 let str2s:[String] = model.covers[2].components(separatedBy: "?")
                 image3.if_setImage(URL(string: str2s[0]))
+                
+                titleLabel.text = model.name
+                subtileLabel.text = model.description
+                
+                self.contentView.backgroundColor = UIColor.colorWithHexString(hex: model.background_color)
             }
         }
     }
@@ -79,8 +96,19 @@ class RankListViewCell: UICollectionViewCell, Reusable {
     public lazy var titleLabel: UILabel = {
         let titleLabel: UILabel = UILabel()
         //titleLabel.backgroundColor = UIColor.green
-        titleLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 20)
+        titleLabel.font = UIFont.customFont_FZLTZCHJW(fontSize: 20)
+        titleLabel.textColor = UIColor.white
+        titleLabel.textAlignment = .center
         return titleLabel
+    }()
+    
+    public lazy var subtileLabel: UILabel = {
+        let subtitleLabel: UILabel = UILabel()
+        //subtitleLabel.backgroundColor = UIColor.red
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.textColor = UIColor.white
+        subtitleLabel.font = UIFont.customFont_FZLTXIHJW(fontSize: 12)
+        return subtitleLabel
     }()
     
     fileprivate lazy var image1: UIImageView = {
